@@ -1,7 +1,7 @@
 require "ruby_gkv_billing/edifact/segment"
 
 module RubyGkvBilling
-  module Editfact
+  module Edifact
     ELEMENT_DIVIDE_CHAR = '+'
     DATA_DIVIDE_CHAR = ':'
     DECIMAL_CHAR = ','
