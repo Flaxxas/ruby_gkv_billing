@@ -12,5 +12,7 @@ module RubyGkvBilling
 
     MESSAGE_VERSION = 12
     VERSION = 3
+    ENCODING = 'UNOC'
+    SEGMENT_JOIN = "\n"
   end
 end

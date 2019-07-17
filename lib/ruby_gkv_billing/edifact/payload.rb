@@ -40,8 +40,8 @@ module RubyGkvBilling
         header_segment = RubyGkvBilling::Edifact::Segment.new("UNB")
         header_segment.add_splitted_element(
           [
-            "UNOC",
-            3
+            RubyGkvBilling::Edifact::ENCODING,
+            RubyGkvBilling::Edifact::VERSION
           ]
         )
         header_segment << @sender_file
@@ -70,12 +70,12 @@ module RubyGkvBilling
         footer_segment
       end
 
-      def to_edifact
+      def to_edifact(join: RubyGkvBilling::Edifact::SEGMENT_JOIN)
         rows = [header_segment]
         rows += @messages
         rows << footer_segment
 
-        rows.map(&:to_edifact).join("\n")
+        rows.map(&:to_edifact).join(join)
       end
     end
   end
