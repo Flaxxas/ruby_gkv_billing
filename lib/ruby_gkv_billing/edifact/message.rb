@@ -23,7 +23,14 @@ module RubyGkvBilling
       def header_segment
         header_segment = RubyGkvBilling::Edifact::Segment.new("UNH")
         header_segment << @nachrichten_ref_nummer
-        header_segment << @nachricht_kennung + " #{RubyGkvBilling::Edifact::MESSAGE_VERSION} 0 0"
+        header_segment.add_splitted_element(
+          [
+            @nachricht_kennung,
+            RubyGkvBilling::Edifact::MESSAGE_VERSION,
+            0,
+            0
+          ]
+        )
 
         header_segment
       end
