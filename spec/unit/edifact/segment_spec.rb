@@ -5,6 +5,7 @@ RSpec.describe RubyGkvBilling::Edifact::Segment do
     subject.<<(-3.14)
     subject.<<("D'Angelo")
     subject.<<("Test?")
+    subject.add_splitted_element(["Version 3", "0", "0"])
   end
 
   it {
@@ -12,10 +13,10 @@ RSpec.describe RubyGkvBilling::Edifact::Segment do
   }
 
   it {
-    expect(subject.elements.size).to eq(5)
+    expect(subject.elements.size).to eq(6)
   }
 
   it {
-    expect(subject.to_edifact).to eq("UNB+Test:123+-3,14+D?'Angelo+Test??'")
+    expect(subject.to_edifact).to eq("UNB+Test 123+-3,14+D?'Angelo+Test??+Version 3:0:0'")
   }
 end

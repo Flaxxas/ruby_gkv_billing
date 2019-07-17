@@ -16,6 +16,10 @@ module RubyGkvBilling
         @elements << convert(element)
       end
 
+      def add_splitted_element(values)
+        @elements << values.map {|c| convert(c)}.join(":")
+      end
+
       def convert(element)
         string = element.to_s
 
@@ -28,8 +32,8 @@ module RubyGkvBilling
         if element.is_a?(Float)
           string.gsub!(".", ",")
         end
-        
-        string.gsub!(" ", ":")
+
+        #string.gsub!(" ", ":")
 
         string
       end
