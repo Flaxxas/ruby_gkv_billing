@@ -17,7 +17,7 @@ module RubyGkvBilling
       end
 
       def add_splitted_element(values)
-        @elements << values.map {|c| convert(c)}.join(":")
+        @elements << values.map {|c| convert(c)}.join(RubyGkvBilling::Edifact::DATA_DIVIDE_CHAR)
       end
 
       def convert(element)

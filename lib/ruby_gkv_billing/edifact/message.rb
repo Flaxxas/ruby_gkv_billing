@@ -1,7 +1,8 @@
 module RubyGkvBilling
   module Edifact
     class Message
-
+      #nachrichten_ref_nummer: fortlaufende Nummer der UNH-segmente
+      #zwischen UNB und UNZ
       def initialize(nachrichten_ref_nummer, nachricht_kennung, segments: [])
         @segments = segments
         self.nachrichten_ref_nummer = nachrichten_ref_nummer
