@@ -59,6 +59,10 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       it {
         expect(crt.public_key.to_s).to eq(key.public_key.to_s)
       }
+
+      it {
+        expect(crt.verify(crt.public_key)).to be_truthy
+      }
     end
 
     context "with new key" do
@@ -93,6 +97,10 @@ RSpec.describe RubyGkvBilling::Security::Certification do
 
       it {
         expect(crt.public_key).not_to be_nil
+      }
+
+      it {
+        expect(crt.verify(crt.public_key)).to be_truthy
       }
 
       after do
