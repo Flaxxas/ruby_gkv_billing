@@ -1,4 +1,5 @@
 require "ruby_gkv_billing/edifact/message/slga"
+require "ruby_gkv_billing/edifact/message/slla"
 
 module RubyGkvBilling
   module Edifact
