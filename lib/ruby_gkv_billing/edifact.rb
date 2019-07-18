@@ -1,6 +1,6 @@
 require "ruby_gkv_billing/edifact/segment"
-require "ruby_gkv_billing/edifact/message"
 require "ruby_gkv_billing/edifact/payload"
+require "ruby_gkv_billing/edifact/message"
 
 module RubyGkvBilling
   module Edifact
