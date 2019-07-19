@@ -42,5 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 
+  spec.add_dependency "openssl", ">= 2.1"
+
   spec.required_ruby_version = '>= 2.0.0'
 end
