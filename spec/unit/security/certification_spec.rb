@@ -123,4 +123,15 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       expect(subject.size).to eq(2)
     }
   end
+
+  describe "opening crt" do
+    let(:crt) { File.join(RubyGkvBilling.root, "spec/examples/certificate_1234567.pem") }
+    subject { RubyGkvBilling::Security::Certification.open_crt(crt) }
+    let(:private_key) { File.join(RubyGkvBilling.root, "spec/examples/private_1234567_key.pem") }
+    let(:key) { RubyGkvBilling::Security::Certification.open_key(private_key) }
+
+    it {
+      expect(subject.public_key.to_s).to eq(key.public_key.to_s)
+    }
+  end
 end
