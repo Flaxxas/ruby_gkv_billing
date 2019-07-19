@@ -27,11 +27,11 @@ module RubyGkvBilling
     end
 
     #data_type: "E" => Echtdaten, "T" => Testdaten
-    def self.physical_filename(data_type, transfer_number, sol: "SOL", version: "0")
+    def self.physical_filename(data_type, transfer_number, leistung_erbringer_gruppe: "SOL", version: "0")
       [
-        data_type[0],
-        sol[0..2],
-        version[0],
+        data_type.to_s[0],
+        leistung_erbringer_gruppe.to_s[0..2],
+        version.to_s[0],
         transfer_number.to_s.rjust(3, "0")[0..2]
       ].join("")
     end
