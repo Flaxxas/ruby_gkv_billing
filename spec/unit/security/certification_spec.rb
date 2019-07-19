@@ -1,8 +1,10 @@
 RSpec.describe RubyGkvBilling::Security::Certification do
+  require 'tmpdir'
+
   describe "creating key" do
-    let(:key) { RubyGkvBilling::Security::Certification.create_key!("1234567", RubyGkvBilling.root)}
-    let(:private_key) { File.join(RubyGkvBilling.root, "private_1234567_key.pem") }
-    let(:public_key) { File.join(RubyGkvBilling.root, "public_1234567_key.pem") }
+    let(:key) { RubyGkvBilling::Security::Certification.create_key!("1234567", Dir.tmpdir)}
+    let(:private_key) { File.join(Dir.tmpdir, "private_1234567_key.pem") }
+    let(:public_key) { File.join(Dir.tmpdir, "public_1234567_key.pem") }
 
     before do
       key
@@ -37,7 +39,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
   describe "creating certificate request" do
     context "with existing key" do
       let(:crt) { RubyGkvBilling::Security::Certification.create_certificate_request!(
-        RubyGkvBilling.root,
+        Dir.tmpdir,
         "1234567",
         "OrgaName",
         "Ansprechpartner",
@@ -46,7 +48,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       }
       let(:private_key) { File.join(RubyGkvBilling.root, "spec/examples/private_1234567_key.pem") }
       let(:key) { RubyGkvBilling::Security::Certification.open_key(private_key) }
-      let(:crt_path) { File.join(RubyGkvBilling.root, "1234567.p10") }
+      let(:crt_path) { File.join(Dir.tmpdir, "1234567.p10") }
 
       before do
         crt
@@ -67,16 +69,16 @@ RSpec.describe RubyGkvBilling::Security::Certification do
 
     context "with new key" do
       let(:crt) { RubyGkvBilling::Security::Certification.create_certificate_request!(
-        RubyGkvBilling.root,
+        Dir.tmpdir,
         "1234567",
         "OrgaName",
         "Ansprechpartner"
         )
       }
-      let(:private_key) { File.join(RubyGkvBilling.root, "private_1234567_key.pem") }
-      let(:public_key) { File.join(RubyGkvBilling.root, "public_1234567_key.pem") }
+      let(:private_key) { File.join(Dir.tmpdir, "private_1234567_key.pem") }
+      let(:public_key) { File.join(Dir.tmpdir, "public_1234567_key.pem") }
       let(:crt_path) {
-        File.join(RubyGkvBilling.root, "1234567.p10")
+        File.join(Dir.tmpdir, "1234567.p10")
       }
 
       before do
