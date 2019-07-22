@@ -7,14 +7,13 @@ module RubyGkvBilling
       require 'base64'
 
       def self.encrypt(key, data)
-        #code
       end
 
       def self.decrypt(key, encrypted_data)
         #code
       end
 
-      # 2.1.2 RSA-PSS
+      # 2.1.2 RSA-PSS + 3.2.1
       def self.sign(private_key, data, encode: true)
         signature =
           private_key.sign_pss(
@@ -40,8 +39,9 @@ module RubyGkvBilling
         )
       end
 
+      # 2.1.3
       def self.cipher
-        OpenSSL::Cipher::AES256.new
+        OpenSSL::Cipher::AES256.new(:CBC)
       end
 
       # 3.2.1.2
