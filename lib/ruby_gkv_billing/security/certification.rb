@@ -69,7 +69,7 @@ module RubyGkvBilling
 
         csr.subject = OpenSSL::X509::Name.new(cert_name)
         csr.public_key = key.public_key
-        csr.sign key, OpenSSL::Digest::SHA1.new
+        csr.sign key, OpenSSL::Digest::SHA256.new
 
         File.open(File.join(path, "#{key_name}.p10"), 'w') do |io|
           io.write csr.to_pem

@@ -18,10 +18,10 @@ module RubyGkvBilling
       def self.sign(private_key, data, encode: true)
         signature =
           private_key.sign_pss(
-            'SHA1',
+            'SHA256',
             data,
             salt_length: 20,
-            mgf1_hash: 'SHA1'
+            mgf1_hash: 'SHA256'
           )
 
         signature = Base64.encode64(signature) if encode
@@ -32,11 +32,11 @@ module RubyGkvBilling
       def self.verify(key, signature, data, decode: true)
         signature = Base64.decode64(signature) if decode
         key.verify_pss(
-          'SHA1',
+          'SHA256',
           signature,
           data,
           salt_length: 20,
-          mgf1_hash: 'SHA1'
+          mgf1_hash: 'SHA256'
         )
       end
 
