@@ -25,7 +25,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Create an certification request (with keys)
+
+    $ RubyGkvBilling::Security::Certification.create_certificate_request!(
+         target_folder,
+         "123456789", # IK-Nummer
+         "OrgansiationsName",
+         "Ansprechpartner"
+      )
+      
+This command will generate a private and the public key in the `target_folder`. In addition an certification-requeset with **.p10**-ending will be placed in the same folder.
 
 ## Development
 
