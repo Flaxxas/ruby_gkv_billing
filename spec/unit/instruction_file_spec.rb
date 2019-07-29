@@ -1,11 +1,11 @@
 RSpec.describe RubyGkvBilling::InstructionFile do
   subject{ RubyGkvBilling::InstructionFile.new(
     "1",
-    "absender_eigner",
+    "600300080",
     "absender_phys",
     "empf_nutzer",
     "empf_phys",
-    "typ",
+    "S",
     "T",
     "nutzdaten",
     "übertragung",
@@ -14,6 +14,27 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     "datei_bezeichnung"
     ) }
 
+  describe "contents" do
+    it {
+      expect(subject.content.size).to eq(348)
+    }
+
+    it {
+      expect(subject.basic_fields).to include("600300080")
+    }
+
+    it {
+      expect(subject.rz_fields).to include("datei_bezeichnung")
+    }
+  end
+
+  it {
+    expect(subject.instruction_filename).to eq("TSOL0001")
+  }
+
+  it {
+    expect(subject.payload_filename).to eq("SL030008S07")
+  }
 
   describe "file generation" do
     let(:path) { RubyGkvBilling.root }
@@ -33,5 +54,19 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     after do
       File.delete(file) if File.exists?(file)
     end
+  end
+
+  describe "helper methods" do
+    it {
+      expect(subject.numeric(4, 4)).to eq("0004")
+    }
+
+    it {
+      expect(subject.alpha(4, 4)).to eq("4   ")
+    }
+
+    it {
+      expect(subject.alphanumeric(4, 4)).to eq("4   ")
+    }
   end
 end

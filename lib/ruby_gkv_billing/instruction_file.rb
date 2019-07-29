@@ -20,9 +20,9 @@ module RubyGkvBilling
     def initialize(
       transfer_nummer,
       absender_eigner, # Identifikation des Absenders
-      absender_physikalisch, # Tatsächlicher Absender
-      empfaenger_nutzer, # Empänger, der die Daten nutzen soll
-      empfaenger_physikalisch, # Tatsächlicher Empfänger
+      absender_physikalisch, # Tatsaechlicher Absender
+      empfaenger_nutzer, # Empfaenger, der die Daten nutzen soll
+      empfaenger_physikalisch, # Tatsaechlicher Empfaenger
       abrechnungs_typ,
       dateityp,
       dateigroesse_nutzdaten,
@@ -102,7 +102,7 @@ module RubyGkvBilling
         alphanumeric(@empfaenger_physikalisch, 15),
         numeric(FEHLER_NR, 6),
         numeric(FEHLER_MASSNAHME, 6),
-        alphanumeric(dateiname, 11),
+        alphanumeric(payload_filename, 11),
         numeric(@datum_erstellt.strftime("%Y%m%e%H%M%S"), 14),
         numeric(@datum_gesendet.strftime("%Y%m%e%H%M%S"), 14),
         numeric(@datum_empf_start.strftime("%Y%m%e%H%M%S"), 14),
@@ -119,7 +119,7 @@ module RubyGkvBilling
     end
 
     # der Nutzdatendatei
-    def dateiname
+    def payload_filename
       RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
     end
 
