@@ -15,17 +15,19 @@ module RubyGkvBilling
     ENCODING = 'UNOC'
     SEGMENT_JOIN = "\n"
 
+    # 4.2
     #type: "S" => Selbstabrechner, "A" => Abrechnungsstelle
-    def self.logical_filename(region_key, serial_number, type, month, classification: "SL")
+    def self.logical_filename(ik_number, type, month, classification: "SL")
       [
         classification,
-        region_key[0..1],
-        serial_number[0..3],
+        ik_number[2..3],
+        ik_number[4..7],
         type[0],
         month.to_s.rjust(2, "0")[0..1]
       ].join("")
     end
 
+    # 4.3
     #data_type: "E" => Echtdaten, "T" => Testdaten
     def self.physical_filename(data_type, transfer_number, leistung_erbringer_gruppe: "SOL", version: "0")
       [
