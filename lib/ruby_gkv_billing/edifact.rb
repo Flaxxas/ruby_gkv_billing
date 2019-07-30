@@ -1,3 +1,4 @@
+# https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anlage_1_TP5_V12_20190207.pdf
 require "ruby_gkv_billing/edifact/segment"
 require "ruby_gkv_billing/edifact/payload"
 require "ruby_gkv_billing/edifact/message"
