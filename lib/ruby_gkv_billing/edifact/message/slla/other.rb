@@ -89,6 +89,127 @@ module RubyGkvBilling
 
           end
 
+          def add_enf_segment(
+            #ENF_SEGMENT
+            identifikationsnummer,
+            abrechnungscode,
+            tarifkennzeichen,
+            leistungs_art,
+            menge,
+            einzelbetrag,
+            zuzahlung,
+            #SUT_SEGMENT
+            kilometer,
+            dauer,
+            #TXT_SEGMENT
+            text,
+            #MWS_SEGMENT
+            kennzeichen_mws,
+            betrag_mws,
+            #OPTIONAL ENF_SEGMENT
+            datum_leistungserbringung: Time.now,
+            #OPTIONAL SUT_SEGMENT
+            uhrzeit: Time.now,
+            uhrzeit_bis: Time.now,
+            versorgung_von: Time.now,
+            versorgung_bis: Time.now
+          )
+
+            self.<< enf_segment(
+              identifikationsnummer,
+              abrechnungscode,
+              tarifkennzeichen,
+              leistungs_art,
+              menge,
+              einzelbetrag,
+              datum_leistungserbringung,
+              zuzahlung
+            )
+
+            self.<< sut_segment(
+              kilometer,
+              uhrzeit,
+              uhrzeit_bis,
+              dauer,
+              versorgung_von,
+              versorgung_bis
+            )
+
+            self.<< txt_segment(
+              text
+            )
+
+            self.<< mws_segment(
+              kennzeichen_mws,
+              betrag_mws
+            )
+          end
+
+          def enf_segment(
+            identifikationsnummer,
+            abrechnungscode,
+            tarifkennzeichen,
+            leistungs_art,
+            menge,
+            einzelbetrag,
+            datum_leistungserbringung,
+            zuzahlung
+          )
+
+            enf_segment = RubyGkvBilling::Edifact::Segment.new("ENF")
+            enf_segment << identifikationsnummer
+            enf_segment.add_splitted_element([
+                abrechnungscode,
+                tarifkennzeichen
+              ])
+            enf_segment << leistungs_art
+            enf_segment << menge
+            enf_segment << einzelbetrag
+            enf_segment << datum_leistungserbringung.strftime("%Y%m%e")
+            enf_segment << zuzahlung
+
+            enf_segment
+          end
+
+          def sut_segment(
+            kilometer,
+            uhrzeit,
+            uhrzeit_bis,
+            dauer,
+            versorgung_von,
+            versorgung_bis
+          )
+
+            sut_segment = RubyGkvBilling::Edifact::Segment.new("SUT")
+            sut_segment << kilometer
+            sut_segment << uhrzeit.strftime("%H%M")
+            sut_segment << uhrzeit_bis.strftime("%H%M")
+            sut_segment << dauer
+            sut_segment << versorgung_von.strftime("%Y%m%e")
+            sut_segment << versorgung_bis.strftime("%Y%m%e")
+
+            sut_segment
+          end
+
+          def txt_segment(text)
+            txt_segment = RubyGkvBilling::Edifact::Segment.new("TXT")
+            txt_segment << text
+
+            txt_segment
+          end
+
+          def mws_segment(
+            kennzeichen_mws,
+            betrag_mws
+          )
+
+            mws_segment = RubyGkvBilling::Edifact::Segment.new("MWS")
+            mws_segment << kennzeichen_mws
+            mws_segment << betrag_mws
+
+            mws_segment
+          end
+
           def add_diagnose(diagnoseschlüssel,
                            diagnosetext)
             self.<< dia_segment(diagnoseschlüssel,
