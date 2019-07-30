@@ -1,8 +1,8 @@
 require "ruby_gkv_billing/edifact/message/slga"
 require "ruby_gkv_billing/edifact/message/slla"
 require "ruby_gkv_billing/edifact/message/slla/other"
-require "ruby_gkv_billing/edifact/message/slla/medicine"
 require "ruby_gkv_billing/edifact/message/slla/inv"
+require "ruby_gkv_billing/edifact/message/slla/medicine"
 
 module RubyGkvBilling
   module Edifact

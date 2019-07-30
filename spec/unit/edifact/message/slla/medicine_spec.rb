@@ -1,17 +1,5 @@
 RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
   subject { RubyGkvBilling::Edifact::Message::Slla::Medicine.new(
-    "123",
-    #FKT_SEGMENT
-    "01",
-    "IK5430684",
-    "IK8234568",
-    "IK8643456",
-    "IK5924783",
-    #REC_SEGMENT
-    "rechungsnummer",
-    "sammel_nummer",
-    "001",
-    "0",
     #INV_SEGMENT
     "versicherten_nr",
     "18",
@@ -31,42 +19,49 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
     #IMG_SEGMENT
     Time.now.strftime("%Y"),
     Time.now.strftime("%m"),
-    "merkmal"
-  ) }
+    "merkmal",
+    #ZHE_SEGMENT
+    "1",
+    "11",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    #BES_SEGMENT
+    "123",
+    "432",
+    "65",
+    "345",
+    #GZF_SEGMENT
+    "567",
+    "43",
+    "765",
+    #OPTIONAL ZHE_SEGMENT
+    behandlungsbeginn: Time.new(2010,10,10),
+    verordnungs_datum: Time.new(2011,11,11),
+    #OPTIONAL SKZ_SEGMENT
+    genehmigungskennzeichen: "4567643",
+    genehmigungsart: "01",
+    datum_genehmigung: Time.new(2012,12,12)
+    ) }
 
-  it { expect(subject.fkt_segment.to_edifact).to eq(
-    "FKT+01+IK5430684+IK8234568+IK8643456+IK5924783'"
-  ) }
+  it { expect(subject.zhe_segment.to_edifact).to eq("ZHE+999999999+999999999+20111111+1+9999+11+1+1+1+20101010+1+1'") }
 
-  it { expect(subject.rec_segment.to_edifact).to eq(
-    "REC+rechungsnummer+sammel_nummer+001+#{Time.now.strftime("%Y%m%e")}+0'"
-  ) }
+  it { expect(subject.skz_segment.to_edifact).to eq("SKZ+4567643+20121212+01'") }
 
-  it { expect(subject.inv_segment.to_edifact).to eq(
-    "INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'"
-  ) }
+  it { expect(subject.bes_segment.to_edifact).to eq("BES+123+432+65+345'") }
 
-  it { expect(subject.uri_segment.to_edifact).to eq(
-    "URI+zuzhalung'"
-  ) }
+  it { expect(subject.gzf_segment.to_edifact).to eq("GZF+567+43+765'") }
 
-  it { expect(subject.nad_segment.to_edifact).to eq(
-    "NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'"
-  ) }
+  it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
 
-  it { expect(subject.img_segment.to_edifact).to eq(
-    "IMG+2019+07+merkmal'"
-  ) }
+  it { expect(subject.uri_segment.to_edifact).to eq("URI+zuzhalung'") }
 
-  it { expect(subject.to_edifact).to include(
-    "UNH+00123+SLLA:12:0:0'",
-    "FKT+01+IK5430684+IK8234568+IK8643456+IK5924783'",
-    "REC+rechungsnummer+sammel_nummer+001+#{Time.now.strftime("%Y%m%e")}+0'",
-    "INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'",
-    "URI+zuzhalung'",
-    "NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'",
-    "IMG+2019+07+merkmal'",
-    "UNT+8+00123'"
-  ) }
+  it { expect(subject.nad_segment.to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
+
+  it { expect(subject.img_segment.to_edifact).to eq("IMG+2019+07+merkmal'") }
+
+  it { expect(subject.segments.count).to eq(8) }
 
 end
