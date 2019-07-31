@@ -59,6 +59,10 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       }
 
       it {
+        expect(RubyGkvBilling::Security::Certification.hash_code(crt.public_key)).to eq("e9cdbad10a20ab821a83faed82da50f405a70a998d267212dd689da2f158d18e")
+      }
+
+      it {
         expect(crt.public_key.to_s).to eq(key.public_key.to_s)
       }
 

@@ -24,6 +24,21 @@ module RubyGkvBilling
         key
       end
 
+      # https://github.com/ruby/openssl/issues/163
+      def self.hash_code(public_key)
+        der = public_key.to_der
+        asn1 = OpenSSL::ASN1.decode(der)
+        rawpubkey = nil
+
+        asn1.value.each {|v|
+          if v.tag == 3
+            rawpubkey = v.value
+          end
+        }
+
+        Digest::SHA256.digest(rawpubkey).unpack("H*").first
+      end
+
       def self.open_key(path)
         private_key = File.read(path)
         OpenSSL::PKey::RSA.new(private_key)
