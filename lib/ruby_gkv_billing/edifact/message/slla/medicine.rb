@@ -109,6 +109,88 @@ module RubyGkvBilling
             self.<< gzf_segment
           end
 
+          def add_ehe_segment(
+            #EHE_SEGMENT
+            abrechnungscode,
+            tarifkennzeichen,
+            leistungs_art,
+            menge,
+            einzelbetrag,
+            zuzahlung,
+            kilometer,
+            #TXT_SEGMENT
+            text: nil,
+            #MWS_SEGMENT
+            kennzeichen_mws: nil,
+            betrag_mws: nil,
+            #OPTIONAL EHE_SEGMENT
+            datum_leistungserbringung: Time.now
+          )
+
+            self.<< ehe_segment(
+              abrechnungscode,
+              tarifkennzeichen,
+              leistungs_art,
+              menge,
+              einzelbetrag,
+              datum_leistungserbringung,
+              zuzahlung,
+              kilometer
+            )
+
+            self.<< txt_segment(
+              text
+            ) if text
+
+            self.<< mws_segment(
+              kennzeichen_mws,
+              betrag_mws
+            ) if kennzeichen_mws && betrag_mws
+          end
+
+          def ehe_segment(
+            abrechnungscode,
+            tarifkennzeichen,
+            leistungs_art,
+            menge,
+            einzelbetrag,
+            datum_leistungserbringung,
+            zuzahlung,
+            kilometer
+          )
+
+            ehe_segment = RubyGkvBilling::Edifact::Segment.new("EHE")
+            ehe_segment << abrechnungscode
+            ehe_segment << tarifkennzeichen
+            ehe_segment << leistungs_art
+            ehe_segment << menge
+            ehe_segment << einzelbetrag
+            ehe_segment << datum_leistungserbringung.strftime("%Y%m%e")
+            ehe_segment << zuzahlung
+            ehe_segment << kilometer
+
+            ehe_segment
+          end
+
+          def txt_segment(text)
+            txt_segment = RubyGkvBilling::Edifact::Segment.new("TXT")
+            txt_segment << text
+
+            txt_segment
+          end
+
+          def mws_segment(
+            kennzeichen_mws,
+            betrag_mws
+          )
+
+            mws_segment = RubyGkvBilling::Edifact::Segment.new("MWS")
+            mws_segment << kennzeichen_mws
+            mws_segment << betrag_mws
+
+            mws_segment
+          end
+
           def zhe_segment
 
             zhe_segment = RubyGkvBilling::Edifact::Segment.new("ZHE")

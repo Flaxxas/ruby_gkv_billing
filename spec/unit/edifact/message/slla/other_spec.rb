@@ -60,7 +60,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
     )
   end
 
-  describe "add_enf_segment" do
+  describe "add_enf_segments" do
     it { expect(subject.enf_segment(
       "123",
       "01",

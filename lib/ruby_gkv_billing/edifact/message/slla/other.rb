@@ -98,8 +98,6 @@ module RubyGkvBilling
             menge,
             einzelbetrag,
             zuzahlung,
-            #OPTIONAL ENF_SEGMENT
-            datum_leistungserbringung: Time.now,
             #SUT_SEGMENT
             kilometer: nil,
             uhrzeit: Time.now,
@@ -111,7 +109,9 @@ module RubyGkvBilling
             text: nil,
             #MWS_SEGMENT
             kennzeichen_mws: nil,
-            betrag_mws: nil
+            betrag_mws: nil,
+            #OPTIONAL ENF_SEGMENT
+            datum_leistungserbringung: Time.now
           )
 
             self.<< enf_segment(
@@ -141,7 +141,7 @@ module RubyGkvBilling
             self.<< mws_segment(
               kennzeichen_mws,
               betrag_mws
-            ) if kennzeichen_mws
+            ) if kennzeichen_mws && betrag_mws
           end
 
           def enf_segment(
