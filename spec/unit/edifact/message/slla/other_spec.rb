@@ -17,8 +17,8 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
     "vers_ort",
     "vers_kennzeichen",
     #IMG_SEGMENT
-    Time.now.strftime("%Y"),
-    Time.now.strftime("%m"),
+    Time.new(2010,01,01).strftime("%Y"),
+    Time.new(2010,01,01).strftime("%m"),
     "merkmal",
     #BES_SEGMENT
     "1234",
@@ -31,11 +31,11 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
     unfallkennzeichen: "1",
     kennzeichen_bvg: "1",
     kennzeichen_verordnungsbesonderheiten: "1",
-    verordnungs_datum: Time.now,
+    verordnungs_datum: Time.new(2010,01,01),
     #OPTIONAL SKZ_SEGMENT
     genehmigungskennzeichen: "01",
     genehmigungsart: "02",
-    datum_genehmigung: Time.now
+    datum_genehmigung: Time.new(2010,01,01)
     ) }
 
   before do
@@ -50,13 +50,13 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
       "34565",
       "63445",
       #SUT_SEGMENT
-      "234",
-      "45",
+      kilometer: "234",
+      dauer: "45",
       #TXT_SEGMENT
-      "text",
+      text: "text",
       #MWS_SEGMENT
-      "1",
-      "23454"
+      kennzeichen_mws: "1",
+      betrag_mws: "23454"
     )
   end
 
@@ -86,9 +86,9 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
 
   it { expect(subject.dia_segment("01", "Test").to_edifact).to eq("DIA+01+Test'") }
 
-  it { expect(subject.zuv_segment.to_edifact).to eq("ZUV+999999999+999999999+20190730+1+1+1+1'") }
+  it { expect(subject.zuv_segment.to_edifact).to eq("ZUV+999999999+999999999+201001 1+1+1+1+1'") }
 
-  it { expect(subject.skz_segment.to_edifact).to eq("SKZ+01+20190730+02'") }
+  it { expect(subject.skz_segment.to_edifact).to eq("SKZ+01+201001 1+02'") }
 
   it { expect(subject.bes_segment.to_edifact).to eq("BES+1234+765+45+7854+456'") }
 
@@ -98,7 +98,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
 
   it { expect(subject.nad_segment.to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
 
-  it { expect(subject.img_segment.to_edifact).to eq("IMG+2019+07+merkmal'") }
+  it { expect(subject.img_segment.to_edifact).to eq("IMG+2010+01+merkmal'") }
 
   it { expect(subject.segments.count).to eq(12) }
 
