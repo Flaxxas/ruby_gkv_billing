@@ -11,7 +11,11 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     "übertragung",
     "I1",
     "test@test.de",
-    "datei_bezeichnung"
+    "datei_bezeichnung",
+    datum_erstellt: Time.new(2010,10,10),
+    datum_gesendet: Time.new(2010,10,10),
+    datum_empf_start: Time.new(2010,10,10),
+    datum_empf_ende: Time.new(2010,10,10)
     ) }
 
   describe "contents" do
@@ -33,7 +37,7 @@ RSpec.describe RubyGkvBilling::InstructionFile do
   }
 
   it {
-    expect(subject.payload_filename).to eq("SL030008S07")
+    expect(subject.payload_filename).to eq("SL030008S10")
   }
 
   describe "file generation" do
