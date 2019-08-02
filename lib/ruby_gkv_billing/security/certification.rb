@@ -71,11 +71,11 @@ module RubyGkvBilling
         csr = OpenSSL::X509::Request.new
         csr.version = 0
         cert_name = [ # 4.2
-          ['C', country],
-          ['O', organisation_name],
-          ['OU', organisation_unit_name], # Name der Institution (Firmenname des Leistungserbringers oder des Arbeitgebers)
-          ['OU', "#{prefix}#{ik_number}"], # Institutionskennzeichen
-          ['CN', common_name] # Ansprechpartner
+          ['C',   country,                 OpenSSL::ASN1::PRINTABLESTRING],
+          ['O',   organisation_name,       OpenSSL::ASN1::PRINTABLESTRING],
+          ['OU',  organisation_unit_name,  OpenSSL::ASN1::PRINTABLESTRING], # Name der Institution (Firmenname des Leistungserbringers oder des Arbeitgebers)
+          ['OU',  "#{prefix}#{ik_number}", OpenSSL::ASN1::PRINTABLESTRING], # Institutionskennzeichen
+          ['CN',  common_name,             OpenSSL::ASN1::PRINTABLESTRING] # Ansprechpartner
         ]
 
         extensions.each do |attr|
