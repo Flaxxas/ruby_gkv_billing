@@ -7,8 +7,8 @@ RSpec.describe RubyGkvBilling::Edifact::Payload do
     "123",
     "service_area",
     "456",
-    created_at: Time.new(2010,10,10,12,12),
-    testindicator: RubyGkvBilling::Edifact::Payload::TEST
+    erstellt_am: Time.new(2010,10,10,12,12),
+    testindikator: RubyGkvBilling::Edifact::Payload::TEST
   ) }
 
   let(:message) { RubyGkvBilling::Edifact::Message.new(123, "SLGA") }

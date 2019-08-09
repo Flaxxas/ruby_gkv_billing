@@ -6,25 +6,25 @@ module RubyGkvBilling
       PRODUCTION = 2
 
       def initialize(
-        sender_file, #IK des Absenders
-        sender_description, #IK der absendenden Stelle
-        receiver_file, # IK des Empfängers
-        receiver_description, #IK der empfangenden Stelle
+        absender_datei, #IK des Absenders
+        absender_bezeichnung, #IK der absendenden Stelle
+        empfaenger_datei, # IK des Empfängers
+        empfaenger_bezeichnung, #IK der empfangenden Stelle
         datenaustausch_ref,  #Fortlaufende Nummer, der Lieferungen zwischen absender und Empfänger.
-        service_area, #Leistungserbringer-Sammelgruppenschlüssel siehe 8.1.14.
+        leistungsbereich, #Leistungserbringer-Sammelgruppenschlüssel siehe 8.1.14.
         anwendungs_ref, #Logischer Dateiname
-        created_at: Time.now, # Erstellunszeitpunkt
-        testindicator: PRODUCTION #0 wenn Testdatei, 1 wenn Erprobungsdatei, 2 wenn Echtdatei
+        erstellt_am: Time.now, # Erstellunszeitpunkt
+        testindikator: PRODUCTION #0 wenn Testdatei, 1 wenn Erprobungsdatei, 2 wenn Echtdatei
       )
-        @sender_file = sender_file
-        @sender_description = sender_description
-        @receiver_file = receiver_file
-        @receiver_description = receiver_description
-        @created_at = created_at
+        @absender_datei = absender_datei
+        @absender_bezeichnung = absender_bezeichnung
+        @empfaenger_datei = empfaenger_datei
+        @empfaenger_bezeichnung = empfaenger_bezeichnung
+        @erstellt_am = erstellt_am
         @datenaustausch_ref = datenaustausch_ref.to_s.rjust(5, "0")[0..4]
-        @service_area = service_area
+        @leistungsbereich = leistungsbereich
         @anwendungs_ref = anwendungs_ref.to_s.rjust(5, "0")[0..4]
-        @testindicator = testindicator
+        @testindikator = testindikator
 
         @message_count = 0
         @messages = []
@@ -44,20 +44,20 @@ module RubyGkvBilling
             RubyGkvBilling::Edifact::VERSION
           ]
         )
-        header_segment << @sender_file
-        header_segment << @sender_description
-        header_segment << @receiver_file
-        header_segment << @receiver_description
+        header_segment << @absender_datei
+        header_segment << @absender_bezeichnung
+        header_segment << @empfaenger_datei
+        header_segment << @empfaenger_bezeichnung
         header_segment.add_splitted_element(
           [
-            @created_at.strftime("%Y%m%e"),
-            @created_at.strftime("%H%M")
+            @erstellt_am.strftime("%Y%m%e"),
+            @erstellt_am.strftime("%H%M")
           ]
         )
         header_segment << @datenaustausch_ref
-        header_segment << @service_area
+        header_segment << @leistungsbereich
         header_segment << @anwendungs_ref
-        header_segment << @testindicator
+        header_segment << @testindikator
 
         header_segment
       end
