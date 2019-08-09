@@ -17,6 +17,7 @@ module RubyGkvBilling
     ENCODING = 'UNOC'
     SEGMENT_JOIN = "\n"
 
+    #8.1.14
     LEISTUNGSBEREICH = {
       "A" => "Leistungserbringer von Hilfsmitteln",
       "B" => "Leistungserbringer von Heilmitteln",
@@ -39,6 +40,31 @@ module RubyGkvBilling
       0 => "Testdatei",
       1 => "Erprobungsdatei",
       2 => "Echtdatei"
+    }
+
+    #8.1.7
+    VERABEITUNGSKENNZEICHNUNG = {
+      "01" => "Abrechnung ohne Besonderheiten",
+      "02" => "Nachforderung",
+      "03" => "Zuzahlungsforderung",
+      "04" => "Korrekturrechnung"
+    }
+
+    #8.1.4
+    RECHNUNGSART = {
+      "0" => "Derzeit nicht belegt",
+      "1" => "Abrechnung von Leistungserbringer und Zahlung an IK Leistungserbringer",
+      "2" => "Abrechnung über Abrechnungsstelle (ohne Inkassovollmacht) und Zahlung an IK Leistungserbringer",
+      "3" => "Abrechnung über Abrechnungsstelle (mit Inkassovollmacht) und Zahlung an IK Abrechnungsstelle"
+    }
+
+    #8.1.6
+    STATUS = {
+      "00" => "Gesamtsumme aller Status",
+      "11" => "Mitglieder",
+      "31" => "Angehörige",
+      "51" => "Rentner",
+      "99" => "nicht zuzuordnende Status"
     }
 
     # 4.2
