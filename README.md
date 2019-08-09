@@ -1,4 +1,4 @@
-# RubyEmaw
+# RubyGkvBilling
 
 ruby_gkv_billing is a library to generate *EDITFACT*-files for the purpose of [electonic billing with "Gesetzlichen Krankenkassen (GKV)"](https://www.gkv-datenaustausch.de/)
 
