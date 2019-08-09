@@ -52,10 +52,10 @@ module RubyGkvBilling
 
     #8.1.4
     RECHNUNGSART = {
-      "0" => "Derzeit nicht belegt",
-      "1" => "Abrechnung von Leistungserbringer und Zahlung an IK Leistungserbringer",
-      "2" => "Abrechnung über Abrechnungsstelle (ohne Inkassovollmacht) und Zahlung an IK Leistungserbringer",
-      "3" => "Abrechnung über Abrechnungsstelle (mit Inkassovollmacht) und Zahlung an IK Abrechnungsstelle"
+      0 => "Derzeit nicht belegt",
+      1 => "Abrechnung von Leistungserbringer und Zahlung an IK Leistungserbringer",
+      2 => "Abrechnung über Abrechnungsstelle (ohne Inkassovollmacht) und Zahlung an IK Leistungserbringer",
+      3 => "Abrechnung über Abrechnungsstelle (mit Inkassovollmacht) und Zahlung an IK Abrechnungsstelle"
     }
 
     #8.1.6
