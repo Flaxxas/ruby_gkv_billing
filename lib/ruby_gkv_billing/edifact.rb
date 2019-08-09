@@ -1,4 +1,5 @@
 # https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anlage_1_TP5_V12_20190207.pdf
+# https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anlage_3_TP5_V12_20190213.pdf
 require "ruby_gkv_billing/edifact/segment"
 require "ruby_gkv_billing/edifact/payload"
 require "ruby_gkv_billing/edifact/message"
@@ -15,6 +16,30 @@ module RubyGkvBilling
     VERSION = 3
     ENCODING = 'UNOC'
     SEGMENT_JOIN = "\n"
+
+    LEISTUNGSBEREICH = {
+      "A" => "Leistungserbringer von Hilfsmitteln"
+      "B" => "Leistungserbringer von Heilmitteln"
+      "C" => "Leistungserbringer von häuslicher Krankenpflege"
+      "D" => "Leistungserbringer von Haushaltshilfe"
+      "E" => "Leistungserbringer von Krankentransportleistungen"
+      "F" => "Hebammen"
+      "G" => "nichtärztliche Dialysesachleistungen"
+      "H" => "Leistungserbringer von Rehabilitationssport"
+      "I" => "Leistungserbringer von Funktionstraining"
+      "J" => "Weitere Sonstige Leistungserbringer, sofern nicht unter A - I und K - O aufgeführt"
+      "K" => "Leistungserbringer von Präventions- und Gesundheitsförderungsmaßnahmen im Rahmen von ambulanten Vorsorgeleistungen"
+      "L" => "Leistungserbringer für ergänzenden Rehamaß-nahmen"
+      "M" => "Sozialpädiatrische Zentren/Frühförderstellen"
+      "N" => "Soziotherapeutischer Leistungserbringer"
+      "O" => "SAPV"
+    }
+
+    TESTINDIKATOR = {
+      0 => "Testdatei",
+      1 => "Erprobungsdatei",
+      2 => "Echtdatei"
+    }
 
     # 4.2
     #type: "S" => Selbstabrechner, "A" => Abrechnungsstelle
