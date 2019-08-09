@@ -8,7 +8,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     "IK8643456",
     "IK5924783",
     #REC_SEGMENT
-    "rechungsnummer",
+    "rechnungsnummer",
     "sammel_nummer",
     "001",
     "0",
@@ -37,7 +37,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   ) }
 
   it { expect(subject.rec_segment.to_edifact).to eq(
-    "REC+rechungsnummer+sammel_nummer+001+#{Time.now.strftime("%Y%m%e")}+0'"
+    "REC+rechnungsnummer+sammel_nummer+001+#{Time.now.strftime("%Y%m%e")}+0'"
   ) }
 
   it { expect(subject.ust_segment.to_edifact).to eq(
@@ -59,7 +59,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   it { expect(subject.to_edifact).to include(
     "UNH+00123+SLGA:12:0:0'",
     "FKT+01+N+IK5430684+IK8234568+IK8643456+IK5924783'",
-    "REC+rechungsnummer+sammel_nummer+001+#{Time.now.strftime("%Y%m%e")}+0'",
+    "REC+rechnungsnummer+sammel_nummer+001+#{Time.now.strftime("%Y%m%e")}+0'",
     "UST+steuernummer+J'",
     "SKO+0+5'",
     "GES+00+gesbetrag+brubetrag+zubetrag'",

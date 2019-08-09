@@ -14,7 +14,7 @@ module RubyGkvBilling
           #REC_SEGMENT
           rechnungsnummer,
           sammel_rechnungsnummer,
-          einzel_rechungs_nummer,
+          einzel_rechnungs_nummer,
           rechnungs_art,
           #GES_SEGMENT
           status,
@@ -49,7 +49,7 @@ module RubyGkvBilling
           #REC_SEGMENT
           @rechnungsnummer = rechnungsnummer #Rechnungsnummer des Rechnungssteller's
           @sammel_rechnungsnummer = sammel_rechnungsnummer #Zusätzlich Einzel-Rechnungsnummer angeben
-          @einzel_rechungs_nummer = einzel_rechungs_nummer
+          @einzel_rechnungs_nummer = einzel_rechnungs_nummer
           @datum = datum
           @rechnungs_art = rechnungs_art #Siehe Schlüssel Rechnungsart Anlage 3 Abschnitt 8.1.4.
           #UST_SEGMENT
@@ -97,7 +97,7 @@ module RubyGkvBilling
           rec_segment = RubyGkvBilling::Edifact::Segment.new("REC")
           rec_segment << @rechnungsnummer
           rec_segment << @sammel_rechnungsnummer
-          rec_segment << @einzel_rechungs_nummer
+          rec_segment << @einzel_rechnungs_nummer
           rec_segment << @datum.strftime("%Y%m%e")
           rec_segment << @rechnungs_art
 

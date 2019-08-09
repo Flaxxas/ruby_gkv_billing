@@ -2,6 +2,7 @@ module RubyGkvBilling
   module Edifact
     class Message
       class Slla < RubyGkvBilling::Edifact::Message
+
         def initialize(
           nachrichten_ref_nummer,
           #FKT_SEGMENT
@@ -13,7 +14,7 @@ module RubyGkvBilling
           #REC_SEGMENT
           rechnungsnummer,
           sammel_rechnungsnummer,
-          einzel_rechungs_nummer,
+          einzel_rechnungs_nummer,
           rechnungs_art,
 
           #OPTIONAL => REC_SEGMENT
@@ -29,7 +30,7 @@ module RubyGkvBilling
           #REC_SEGMENT
           @rechnungsnummer = rechnungsnummer
           @sammel_rechnungsnummer = sammel_rechnungsnummer
-          @einzel_rechungs_nummer = einzel_rechungs_nummer
+          @einzel_rechnungs_nummer = einzel_rechnungs_nummer
           @datum = datum
           @rechnungs_art = rechnungs_art
 
@@ -54,7 +55,7 @@ module RubyGkvBilling
           rec_segment = RubyGkvBilling::Edifact::Segment.new("REC")
           rec_segment << @rechnungsnummer
           rec_segment << @sammel_rechnungsnummer
-          rec_segment << @einzel_rechungs_nummer
+          rec_segment << @einzel_rechnungs_nummer
           rec_segment << @datum.strftime("%Y%m%e")
           rec_segment << @rechnungs_art
 
