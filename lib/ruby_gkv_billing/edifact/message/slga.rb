@@ -1,8 +1,9 @@
 module RubyGkvBilling
   module Edifact
     class Message
+      # 5.5.2
       class Slga < RubyGkvBilling::Edifact::Message
-  
+
         def initialize(
           nachrichten_ref_nummer,
           #FKT_SEGMENT

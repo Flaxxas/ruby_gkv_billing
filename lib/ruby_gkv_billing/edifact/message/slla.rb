@@ -1,6 +1,7 @@
 module RubyGkvBilling
   module Edifact
     class Message
+      # 5.5.3
       class Slla < RubyGkvBilling::Edifact::Message
 
         def initialize(

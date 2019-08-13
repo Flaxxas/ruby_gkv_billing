@@ -1,5 +1,6 @@
 module RubyGkvBilling
   module Edifact
+    # 5.4
     class Payload
       TEST = 0
       TRIAL = 1

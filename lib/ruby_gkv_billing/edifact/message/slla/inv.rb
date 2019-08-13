@@ -2,6 +2,7 @@ module RubyGkvBilling
   module Edifact
     class Message
       class Slla
+        # INV ist ein Abrechnungsfall
         class Inv
 
           def initialize(

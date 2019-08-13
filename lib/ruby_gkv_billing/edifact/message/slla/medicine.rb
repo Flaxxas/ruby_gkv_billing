@@ -2,6 +2,7 @@ module RubyGkvBilling
   module Edifact
     class Message
       class Slla
+        # 5.5.3.3
         class Medicine < RubyGkvBilling::Edifact::Message::Slla::Inv
           def initialize(
               #INV_SEGMENT
