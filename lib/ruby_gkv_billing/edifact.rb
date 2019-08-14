@@ -67,6 +67,25 @@ module RubyGkvBilling
       "99" => "nicht zuzuordnende Status"
     }
 
+    #8.1.18
+    BELEG_INFORMATION = {
+      "0" => "keine Belegübermittlung zum Fall",
+      "1" => "Belege zum Fall üer Post übermittelt",
+      "2" => "Belege zum Fall elektronisch (z.B. Image) übermittelt"
+    }
+
+    #8.1.17
+    #TODO ergaenzen
+    GENEHMIGUNGSART = {
+      "B1" => "Heilmittel - Genehmigung gemäß §8 Abs. 4 bzw. §7 Abs. 4",
+      "B2" => "Heilmittel - Genehmigung gemäß §8a Abs. 3 bzw. §8 Abs. 1",
+      "J1" => "Sonstige - J Sonstige Leistungserbringer - Genehmigung im Einzelfall",
+      "L1" => "Sonstige - L Ambulantes Rehazentrum - Genehmigung im Einzelfall",
+      "M1" => "Sonstige - M Sozialpädiatrische Zentren/Frühförderstellen - Genehmigung im Einzelfall",
+      "N1" => "Sonstige - N Soziotherapeutische Leistungserbringer - Genehmigung im Einzelfall"
+    }
+
+
     # 4.2
     #type: "S" => Selbstabrechner, "A" => Abrechnungsstelle
     def self.logical_filename(ik_number, type, month, classification: "SL")
