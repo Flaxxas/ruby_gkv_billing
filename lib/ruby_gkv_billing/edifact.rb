@@ -50,6 +50,28 @@ module RubyGkvBilling
       "04" => "Korrekturrechnung"
     }
 
+    #8.1.2
+    UNFALL = {
+      1 => "Arbeitsunfall / Wegeunfall / Berufskrankheit",
+      2 => "sonstige Unfallfolgen",
+      3 => "Sonstiges (BVFG, BEG, HHG, OEG, IfSG, SVG)"
+    }
+
+    #8.1.2.1
+    BVG = {
+      6 => "BVG"
+    }
+
+    #8.1.3
+    ZUZAHLUNG = {
+      0 => "keine gesetzliche Zuzahlung",
+      1 => "Zuzahlungsbefreit",
+      2 => "keine Zuzahlung trotz schriftlicher Zahlungsaufforderung",
+      3 => "Zuzahlungspflichtig",
+      4 => "Übergang zuzahlungspflichtig zu zuzahlungsfrei",
+      5 => "Übergang zuzahlungspflichtig zu zuzahlungsfrei"
+    }
+
     #8.1.4
     RECHNUNGSART = {
       0 => "Derzeit nicht belegt",
@@ -65,6 +87,16 @@ module RubyGkvBilling
       "31" => "Angehörige",
       "51" => "Rentner",
       "99" => "nicht zuzuordnende Status"
+    }
+
+    #8.1.11
+    VERORDUNG_BESONDERS = {
+      1 => "Verordnung von einem Zahnarzt/Kieferorthopäden",
+      2 => "Verordnung im Zusammenhang mit der Schwangerschaft oder der Entbindung",
+      3 => "Verordnung im Rahmen des Modellvorhabens nach
+§ 64d SGB V (Blanko-Verordnung)",
+      4 => "Verordnung im Rahmen des Entlassmanagements",
+      7 => "Verordnung im Rahmen der Terminservicestellen"
     }
 
     #8.1.18
