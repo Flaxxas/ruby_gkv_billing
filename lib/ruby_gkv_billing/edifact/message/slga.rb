@@ -9,7 +9,7 @@ module RubyGkvBilling
           #FKT_SEGMENT
           verarbeitungskennzeichnung,
           ik_rechnungssteller,
-          ik_kostenträger,
+          ik_kostentraeger,
           ik_krankenkasse,
           ik_datei_sender,
           #REC_SEGMENT
@@ -41,18 +41,18 @@ module RubyGkvBilling
         )
 
           #FKT_SEGMENT
-          @verarbeitungskennzeichnung = verarbeitungskennzeichnung #Schlüssel Verarbeitungskennzeichen Anlage 3 Abschnitt 8.1.7
+          @verarbeitungskennzeichnung = verarbeitungskennzeichnung #Schluessel Verarbeitungskennzeichen Anlage 3 Abschnitt 8.1.7
           @sammelrechnung = sammelrechnung #'N' Wenn Sammelrechnung
-          @ik_rechnungssteller = ik_rechnungssteller #IK des Leistungserbringers, wenn nicht: Abrechnung über Abrechnungsstelle mit Inkassovollmacht => IK der Abrechnungsstelle
-          @ik_kostenträger = ik_kostenträger
+          @ik_rechnungssteller = ik_rechnungssteller #IK des Leistungserbringers, wenn nicht: Abrechnung ueber Abrechnungsstelle mit Inkassovollmacht => IK der Abrechnungsstelle
+          @ik_kostentraeger = ik_kostentraeger
           @ik_krankenkasse = ik_krankenkasse
           @ik_datei_sender = ik_datei_sender
           #REC_SEGMENT
           @rechnungsnummer = rechnungsnummer #Rechnungsnummer des Rechnungssteller's
-          @sammel_rechnungsnummer = sammel_rechnungsnummer #Zusätzlich Einzel-Rechnungsnummer angeben
+          @sammel_rechnungsnummer = sammel_rechnungsnummer #Zusaetzlich Einzel-Rechnungsnummer angeben
           @einzel_rechnungs_nummer = einzel_rechnungs_nummer
           @datum = datum
-          @rechnungs_art = rechnungs_art #Siehe Schlüssel Rechnungsart Anlage 3 Abschnitt 8.1.4.
+          @rechnungs_art = rechnungs_art #Siehe Schluessel Rechnungsart Anlage 3 Abschnitt 8.1.4.
           #UST_SEGMENT
           @steuernummer = steuernummer
           @ust_befreiung = ust_befreiung #'J' wenn befreit gem. § 4 UStG
@@ -87,7 +87,7 @@ module RubyGkvBilling
           fkt_segment << @verarbeitungskennzeichnung
           fkt_segment << @sammelrechnung
           fkt_segment << @ik_rechnungssteller
-          fkt_segment << @ik_kostenträger
+          fkt_segment << @ik_kostentraeger
           fkt_segment << @ik_krankenkasse
           fkt_segment << @ik_datei_sender
 

@@ -9,10 +9,10 @@ module RubyGkvBilling
       def initialize(
         absender_datei, #IK des Absenders
         absender_bezeichnung, #IK der absendenden Stelle
-        empfaenger_datei, # IK des Empfängers
+        empfaenger_datei, # IK des Empfaengers
         empfaenger_bezeichnung, #IK der empfangenden Stelle
-        datenaustausch_ref,  #Fortlaufende Nummer, der Lieferungen zwischen absender und Empfänger.
-        leistungsbereich, #Leistungserbringer-Sammelgruppenschlüssel siehe 8.1.14.
+        datenaustausch_ref,  #Fortlaufende Nummer, der Lieferungen zwischen absender und Empfaenger.
+        leistungsbereich, #Leistungserbringer-Sammelgruppenschluessel siehe 8.1.14.
         anwendungs_ref, #Logischer Dateiname
         erstellt_am: Time.now, # Erstellunszeitpunkt
         testindikator: PRODUCTION #0 wenn Testdatei, 1 wenn Erprobungsdatei, 2 wenn Echtdatei

@@ -44,9 +44,9 @@ module RubyGkvBilling
               forderung_pauschal,
               #OPTIONAL ZHE_SEGMENT
               behandlungsbeginn: Time.now,
-              indikationsschlüssel: "9999",
+              indikationsschluessel: "9999",
               arztnummer: "999999999",
-              betriebsstätten_nr: "999999999",
+              betriebsstaetten_nr: "999999999",
               verordnungs_datum: Time.now,
               #OPTIONAL SKZ_SEGMENT
               genehmigungskennzeichen: nil,
@@ -78,11 +78,11 @@ module RubyGkvBilling
             )
 
             #ZHE_SEGMENT
-            @betriebsstätten_nr = betriebsstätten_nr
+            @betriebsstaetten_nr = betriebsstaetten_nr
             @arztnummer = arztnummer
             @verordnungs_datum = verordnungs_datum
             @zuzahlungskennzeichen = zuzahlungskennzeichen
-            @indikationsschlüssel = indikationsschlüssel
+            @indikationsschluessel = indikationsschluessel
             @kennzeichen_verordnungsart = kennzeichen_verordnungsart
             @kennzeichen_verordnungsbesonderheiten = kennzeichen_verordnungsbesonderheiten
             @unfallkennzeichen = unfallkennzeichen
@@ -195,11 +195,11 @@ module RubyGkvBilling
           def zhe_segment
 
             zhe_segment = RubyGkvBilling::Edifact::Segment.new("ZHE")
-            zhe_segment << @betriebsstätten_nr
+            zhe_segment << @betriebsstaetten_nr
             zhe_segment << @arztnummer
             zhe_segment << @verordnungs_datum.strftime("%Y%m%e")
             zhe_segment << @zuzahlungskennzeichen
-            zhe_segment << @indikationsschlüssel
+            zhe_segment << @indikationsschluessel
             zhe_segment << @kennzeichen_verordnungsart
             zhe_segment << @kennzeichen_verordnungsbesonderheiten
             zhe_segment << @unfallkennzeichen

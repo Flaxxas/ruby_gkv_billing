@@ -8,7 +8,7 @@ module RubyGkvBilling
     INSTRUCTION_LENGTH = 348
     SEQUENZ_NR = '000' # keine Segmentierung
     FEHLER_NR = '000000' # kein Fehler
-    FEHLER_MASSNAHME = '000000' # keine Maßnahme erforderlich
+    FEHLER_MASSNAHME = '000000' # keine Massnahme erforderlich
 
 
     DATEIVERSION = '000000'
@@ -26,12 +26,12 @@ module RubyGkvBilling
       abrechnungs_typ,
       dateityp,
       dateigroesse_nutzdaten,
-      dateigroesse_übertragung,
+      dateigroesse_uebertragung,
       zeichensatz,
       email_absender,
       datei_bezeichnung,
       komprimierung: "03",
-      verschlüsselungsart: "03",
+      verschluesselungsart: "03",
       elektr_unterschrift: "03",
       datum_erstellt: Time.now,
       datum_gesendet: Time.now,
@@ -49,10 +49,10 @@ module RubyGkvBilling
       @abrechnungs_typ = abrechnungs_typ
       @dateityp = dateityp
       @dateigroesse_nutzdaten = dateigroesse_nutzdaten
-      @dateigroesse_übertragung = dateigroesse_übertragung
+      @dateigroesse_uebertragung = dateigroesse_uebertragung
       @zeichensatz = zeichensatz
       @komprimierung = komprimierung
-      @verschlüsselungsart = verschlüsselungsart
+      @verschluesselungsart = verschluesselungsart
       @elektr_unterschrift = elektr_unterschrift
       @datum_erstellt = datum_erstellt
       @datum_gesendet = datum_gesendet
@@ -110,10 +110,10 @@ module RubyGkvBilling
         numeric(DATEIVERSION, 6),
         numeric(KORREKTUR, 1),
         numeric(@dateigroesse_nutzdaten, 12),
-        numeric(@dateigroesse_übertragung, 12),
+        numeric(@dateigroesse_uebertragung, 12),
         alphanumeric(@zeichensatz, 2),
         numeric(@komprimierung, 2),
-        numeric(@verschlüsselungsart, 2),
+        numeric(@verschluesselungsart, 2),
         numeric(@elektr_unterschrift, 2),
       ].join('')
     end

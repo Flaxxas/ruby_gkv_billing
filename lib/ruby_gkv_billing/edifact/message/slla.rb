@@ -9,7 +9,7 @@ module RubyGkvBilling
           #FKT_SEGMENT
           verarbeitungskennzeichnung,
           ik_leistungserbringer,
-          ik_kostenträger,
+          ik_kostentraeger,
           ik_krankenkasse,
           ik_rechnungssteller,
           #REC_SEGMENT
@@ -25,7 +25,7 @@ module RubyGkvBilling
           #FKT_SEGMENT
           @verarbeitungskennzeichnung = verarbeitungskennzeichnung
           @ik_leistungserbringer = ik_leistungserbringer
-          @ik_kostenträger = ik_kostenträger
+          @ik_kostentraeger = ik_kostentraeger
           @ik_krankenkasse = ik_krankenkasse
           @ik_rechnungssteller = ik_rechnungssteller
           #REC_SEGMENT
@@ -45,7 +45,7 @@ module RubyGkvBilling
           fkt_segment = RubyGkvBilling::Edifact::Segment.new("FKT")
           fkt_segment << @verarbeitungskennzeichnung
           fkt_segment << @ik_leistungserbringer
-          fkt_segment << @ik_kostenträger
+          fkt_segment << @ik_kostentraeger
           fkt_segment << @ik_krankenkasse
           fkt_segment << @ik_rechnungssteller
 

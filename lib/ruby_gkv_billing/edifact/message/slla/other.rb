@@ -36,7 +36,7 @@ module RubyGkvBilling
               unfallkennzeichen: nil,
               kennzeichen_bvg: nil,
               kennzeichen_verordnungsbesonderheiten: nil,
-              betriebsstätten_nr: "999999999",
+              betriebsstaetten_nr: "999999999",
               arztnummer: "999999999",
               verordnungs_datum: Time.now,
               #OPTIONAL SKZ_SEGMENT
@@ -77,14 +77,14 @@ module RubyGkvBilling
             @ges_prozentuale_zuzahlung = ges_prozentuale_zuzahlung
             @pauschale_zuzahlung = pauschale_zuzahlung
             @ges_eigenanteil = ges_eigenanteil
-            @betriebsstätten_nr = betriebsstätten_nr
+            @betriebsstaetten_nr = betriebsstaetten_nr
             @arztnummer = arztnummer
             @verordnungs_datum = verordnungs_datum
             @genehmigungskennzeichen = genehmigungskennzeichen
             @genehmigungsart = genehmigungsart
             @datum_genehmigung = datum_genehmigung
 
-            self.<< zuv_segment if @betriebsstätten_nr
+            self.<< zuv_segment if @betriebsstaetten_nr
             self.<< skz_segment if @genehmigungskennzeichen
             self.<< bes_segment
 
@@ -210,17 +210,17 @@ module RubyGkvBilling
             mws_segment
           end
 
-          def add_diagnose(diagnoseschlüssel,
+          def add_diagnose(diagnoseschluessel,
                            diagnosetext)
-            self.<< dia_segment(diagnoseschlüssel,
+            self.<< dia_segment(diagnoseschluessel,
                                 diagnosetext)
           end
 
-          def dia_segment(diagnoseschlüssel,
+          def dia_segment(diagnoseschluessel,
                           diagnosetext)
 
             dia_segment = RubyGkvBilling::Edifact::Segment.new("DIA")
-            dia_segment << diagnoseschlüssel
+            dia_segment << diagnoseschluessel
             dia_segment << diagnosetext
 
             dia_segment
@@ -229,7 +229,7 @@ module RubyGkvBilling
           def zuv_segment
 
             zuv_segment = RubyGkvBilling::Edifact::Segment.new("ZUV")
-            zuv_segment << @betriebsstätten_nr
+            zuv_segment << @betriebsstaetten_nr
             zuv_segment << @arztnummer
             zuv_segment << @verordnungs_datum.strftime("%Y%m%e")
             zuv_segment << @zuzahlungskennzeichen
