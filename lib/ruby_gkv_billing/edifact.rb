@@ -102,7 +102,7 @@ module RubyGkvBilling
     #8.1.18
     BELEG_INFORMATION = {
       "0" => "keine Belegübermittlung zum Fall",
-      "1" => "Belege zum Fall üer Post übermittelt",
+      "1" => "Belege zum Fall über Post übermittelt",
       "2" => "Belege zum Fall elektronisch (z.B. Image) übermittelt"
     }
 
