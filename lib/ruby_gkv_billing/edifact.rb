@@ -80,6 +80,20 @@ module RubyGkvBilling
       3 => "Abrechnung über Abrechnungsstelle (mit Inkassovollmacht) und Zahlung an IK Abrechnungsstelle"
     }
 
+    #8.1.5.1
+    #TODO ergaenzen
+    ABRECHNUNGSCODE = {
+      11 => "Apotheke (mit gesonderter Zulassung nach § 126 SGB V)",
+      12 => "Augenoptiker"
+    }
+
+    #8.1.5.2
+    #TODO ergaenzen
+    TARIFKENNZEICHEN = {
+      "00" => "Bundeseinheitlicher Tarif",
+      "01" => "Baden-Württemberg"
+    }
+
     #8.1.6
     STATUS = {
       "00" => "Gesamtsumme aller Status",
@@ -87,6 +101,12 @@ module RubyGkvBilling
       "31" => "Angehörige",
       "51" => "Rentner",
       "99" => "nicht zuzuordnende Status"
+    }
+
+    #8.1.8
+    MWST_KENNZEICHEN = {
+      1 => "voller Mehrwertsteuersatz, dem Einzelbetrag zuzurechnen",
+      2 => "ermäßigter Mehrwertsteuersatz, dem Einzelbetrag zuzurechnen"
     }
 
     #8.1.11
