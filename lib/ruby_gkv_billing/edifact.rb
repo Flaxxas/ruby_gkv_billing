@@ -83,8 +83,8 @@ module RubyGkvBilling
     #8.1.5.1
     #TODO ergaenzen
     ABRECHNUNGSCODE = {
-      11 => "Apotheke (mit gesonderter Zulassung nach § 126 SGB V)",
-      12 => "Augenoptiker"
+      "11" => "Apotheke (mit gesonderter Zulassung nach § 126 SGB V)",
+      "12" => "Augenoptiker"
     }
 
     #8.1.5.2
