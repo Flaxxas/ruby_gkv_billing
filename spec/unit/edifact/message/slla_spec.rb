@@ -8,7 +8,6 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
     "IK8643456",
     "IK5924783",
     #REC_SEGMENT
-    "rechnungsnummer",
     "sammel_nummer",
     "001",
     "0",
@@ -45,13 +44,13 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
   ) }
 
   it { expect(subject.rec_segment.to_edifact).to eq(
-    "REC+rechnungsnummer+sammel_nummer+001+20101010+0'"
+    "REC+sammel_nummer:001+20101010+0'"
   ) }
 
   it { expect(subject.to_edifact).to include(
     "UNH+00123+SLLA:12:0:0'",
     "FKT+01+IK5430684+IK8234568+IK8643456+IK5924783'",
-    "REC+rechnungsnummer+sammel_nummer+001+20101010+0'",
+    "REC+sammel_nummer:001+20101010+0'",
     "INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'",
     "URI+zuzhalung'",
     "NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'",

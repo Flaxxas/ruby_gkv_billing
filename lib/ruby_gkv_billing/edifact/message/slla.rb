@@ -13,7 +13,6 @@ module RubyGkvBilling
           ik_krankenkasse,
           ik_rechnungssteller,
           #REC_SEGMENT
-          rechnungsnummer,
           sammel_rechnungsnummer,
           einzel_rechnungs_nummer,
           rechnungs_art,
@@ -29,7 +28,6 @@ module RubyGkvBilling
           @ik_krankenkasse = ik_krankenkasse
           @ik_rechnungssteller = ik_rechnungssteller
           #REC_SEGMENT
-          @rechnungsnummer = rechnungsnummer
           @sammel_rechnungsnummer = sammel_rechnungsnummer
           @einzel_rechnungs_nummer = einzel_rechnungs_nummer
           @datum = datum
@@ -54,9 +52,10 @@ module RubyGkvBilling
 
         def rec_segment
           rec_segment = RubyGkvBilling::Edifact::Segment.new("REC")
-          rec_segment << @rechnungsnummer
-          rec_segment << @sammel_rechnungsnummer
-          rec_segment << @einzel_rechnungs_nummer
+          rec_segment.add_splitted_element([
+              @sammel_rechnungsnummer,
+              @einzel_rechnungs_nummer
+            ])
           rec_segment << @datum.strftime("%Y%m%e")
           rec_segment << @rechnungs_art
 
