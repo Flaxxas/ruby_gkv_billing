@@ -17,6 +17,40 @@ module RubyGkvBilling
     # https://www.gkv-datenaustausch.de/media/dokumente/standards_und_normen/technische_spezifikationen/Anlage_4_-_Verfahrenskennungen.pdf
     VERFAHREN_KENNUNG = 'SOL'
 
+    DATEITYP = {
+      "E" => "Echtdaten",
+      "T" => "Testdaten"
+    }
+
+    ZEICHENSATZ = {
+      "I1" => "ISO/IEC 8859-1: 1998(E) bzw. DIN 66303: 200-06",
+      "I5" => "ISO 8859-15",
+      "I7" => "ISO 7-Bit, Code gemäß DIN 66003 DRV(Deutsche Referenzversion)",
+      "I8" => "DIN 66303 in der Fassung von 1986-11(DRV8)",
+      "EB" => "EBCDIC(EBCDIC ist im Datenaustausch mit den Leistngserbringern gemäß §294 ff. SGB V nicht zulässig)",
+      "P8" => "IBM-CODEPAGE 850(gilt nur nach biliteraler Vereinbarung)",
+      "U8" => "UTF-8(gilt asuschließlich für den Datenaustausch mit der ZfA)",
+      "BI" => "Binär)"
+    }
+
+    KOMPRIMIERUNG = {
+      "00" => "keine",
+      "02" => "gzip",
+      "03" => "ZIP",
+      "04" => "keine Belegung",
+      "07" => "bzip2"
+    }
+
+    VERSCHLUESSELUNG = {
+      "00" => "keine",
+      "03" => "PKCS#7-Format"
+    }
+
+    ABRECHNUNGSART = {
+      "S" => "Selbstabrechner",
+      "A" => "Abrechnungsstelle"
+    }
+
     def initialize(
       transfer_nummer,
       absender_eigner, # Identifikation des Absenders
