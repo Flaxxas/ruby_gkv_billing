@@ -34,16 +34,16 @@ module RubyGkvBilling
     }
 
     KOMPRIMIERUNG = {
-      "00" => "keine",
-      "02" => "gzip",
-      "03" => "ZIP",
-      "04" => "keine Belegung",
-      "07" => "bzip2"
+      0 => "keine",
+      2 => "gzip",
+      3 => "ZIP",
+      4 => "keine Belegung",
+      7 => "bzip2"
     }
 
     VERSCHLUESSELUNG = {
-      "00" => "keine",
-      "03" => "PKCS#7-Format"
+      0 => "keine",
+      3 => "PKCS#7-Format"
     }
 
     ABRECHNUNGSART = {
