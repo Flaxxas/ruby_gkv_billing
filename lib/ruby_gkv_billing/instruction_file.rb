@@ -88,6 +88,12 @@ module RubyGkvBilling
 
     # 2.1 Allgemeine KK-Felder
     def basic_fields
+
+      datum_erstellt = @datum_erstellt.strftime("%Y%m%e%H%M%S") if @datum_erstellt
+      datum_gesendet = @datum_gesendet.strftime("%Y%m%e%H%M%S") if @datum_gesendet
+      datum_empf_start = @datum_empf_start.strftime("%Y%m%e%H%M%S") if @datum_empf_start
+      datum_empf_ende = @datum_empf_ende.strftime("%Y%m%e%H%M%S") if @datum_empf_ende
+
       [
         numeric(IDENTIFICATOR, 6),
         numeric(VERSION, 2),
@@ -103,10 +109,10 @@ module RubyGkvBilling
         numeric(FEHLER_NR, 6),
         numeric(FEHLER_MASSNAHME, 6),
         alphanumeric(payload_filename, 11),
-        numeric(@datum_erstellt.strftime("%Y%m%e%H%M%S"), 14),
-        numeric(@datum_gesendet.strftime("%Y%m%e%H%M%S"), 14),
-        numeric(@datum_empf_start.strftime("%Y%m%e%H%M%S"), 14),
-        numeric(@datum_empf_ende.strftime("%Y%m%e%H%M%S"), 14),
+        numeric(datum_erstellt, 14),
+        numeric(datum_gesendet, 14),
+        numeric(datum_empf_start, 14),
+        numeric(datum_empf_ende, 14),
         numeric(DATEIVERSION, 6),
         numeric(KORREKTUR, 1),
         numeric(@dateigroesse_nutzdaten, 12),
