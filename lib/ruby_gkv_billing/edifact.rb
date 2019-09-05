@@ -202,7 +202,7 @@ module RubyGkvBilling
       "99" => "Vetrag auf Kassenebene"
     }
 
-    #8.1.6
+    #8.1.6 + https://de.wikipedia.org/wiki/Versichertenstatus
     STATUS = {
       "00" => "Gesamtsumme aller Status",
       "11" => "Mitglieder",
