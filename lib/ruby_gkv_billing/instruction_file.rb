@@ -29,7 +29,7 @@ module RubyGkvBilling
       "I8" => "DIN 66303 in der Fassung von 1986-11(DRV8)",
       "EB" => "EBCDIC(EBCDIC ist im Datenaustausch mit den Leistngserbringern gemäß §294 ff. SGB V nicht zulässig)",
       "P8" => "IBM-CODEPAGE 850(gilt nur nach biliteraler Vereinbarung)",
-      "U8" => "UTF-8(gilt asuschließlich für den Datenaustausch mit der ZfA)",
+      "U8" => "UTF-8(gilt ausschließlich für den Datenaustausch mit der ZfA)",
       "BI" => "Binär)"
     }
 

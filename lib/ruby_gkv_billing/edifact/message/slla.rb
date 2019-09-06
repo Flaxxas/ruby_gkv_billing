@@ -5,7 +5,6 @@ module RubyGkvBilling
       class Slla < RubyGkvBilling::Edifact::Message
 
         def initialize(
-          nachrichten_ref_nummer,
           #FKT_SEGMENT
           verarbeitungskennzeichnung,
           ik_leistungserbringer,
@@ -16,7 +15,8 @@ module RubyGkvBilling
           sammel_rechnungsnummer,
           einzel_rechnungs_nummer,
           rechnungs_art,
-
+          #OPTIONAL
+          nachrichten_ref_nummer: nil,
           #OPTIONAL => REC_SEGMENT
           datum: Time.now
         )

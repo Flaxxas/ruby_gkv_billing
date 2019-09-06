@@ -5,7 +5,6 @@ module RubyGkvBilling
       class Slga < RubyGkvBilling::Edifact::Message
 
         def initialize(
-          nachrichten_ref_nummer,
           #FKT_SEGMENT
           verarbeitungskennzeichnung,
           ik_rechnungssteller,
@@ -24,6 +23,8 @@ module RubyGkvBilling
           #NAM_SEGMENT
           name1,
           name4,
+          #OPTIONAL
+          nachrichten_ref_nummer: nil,
           #OPTIONAL => FKT_SEGMENT
           sammelrechnung: "N",
           #OPTIONAL => REC_SEGMENT

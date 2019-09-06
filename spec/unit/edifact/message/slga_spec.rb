@@ -1,6 +1,5 @@
 RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   subject { RubyGkvBilling::Edifact::Message::Slga.new(
-    "123",
     #FKT_SEGMENT
     "01",
     "IK5430684",
@@ -19,6 +18,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     #NAM_SEGMENT
     "Firma",
     "E-Mail",
+    nachrichten_ref_nummer: "123",
     #OPTIONAL => FKT_SEGMENT
     sammelrechnung: "N",
     #OPTIONAL => UST_SEGMENT

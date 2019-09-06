@@ -1,6 +1,5 @@
 RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
   subject { RubyGkvBilling::Edifact::Message::Slla.new(
-    "123",
     #FKT_SEGMENT
     "01",
     "IK5430684",
@@ -11,6 +10,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
     "sammel_nummer",
     "001",
     "0",
+    nachrichten_ref_nummer: "123",
     datum: Time.new(2010,10,10)
   ) }
 
