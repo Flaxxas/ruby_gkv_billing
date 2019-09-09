@@ -10,11 +10,6 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     "sammel_nummer",
     "001",
     "0",
-    #GES_SEGMENT
-    "00",
-    "gesbetrag",
-    "brubetrag",
-    "zubetrag",
     #NAM_SEGMENT
     "Firma",
     "E-Mail",
@@ -30,6 +25,19 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     #OPTIONAL => NAM_SEGMENT
     name2: "partner tel"
   ) }
+
+  let(:ges_segment) {
+    subject.ges_segment(
+      "00",
+      "gesbetrag",
+      "brubetrag",
+      "zubetrag"
+    )
+  }
+
+  before do
+    subject.<< ges_segment
+  end
 
   it { expect(subject.fkt_segment.to_edifact).to eq(
     "FKT+01+N+IK5430684+IK8234568+IK8643456+IK5924783'"
@@ -47,7 +55,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     "SKO+0+5'"
   ) }
 
-  it { expect(subject.ges_segment.to_edifact).to eq(
+  it { expect(ges_segment.to_edifact).to eq(
     "GES+00+gesbetrag+brubetrag+zubetrag'"
   ) }
 

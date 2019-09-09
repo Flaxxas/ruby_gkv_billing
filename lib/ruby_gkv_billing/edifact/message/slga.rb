@@ -15,11 +15,6 @@ module RubyGkvBilling
           sammel_rechnungsnummer,
           einzel_rechnungs_nummer,
           rechnungs_art,
-          #GES_SEGMENT
-          status,
-          gesamt_rechnungsbetrag,
-          gesamt_bruttobetrag,
-          gesamt_zuzahlung,
           #NAM_SEGMENT
           name1,
           name4,
@@ -58,11 +53,6 @@ module RubyGkvBilling
           #SKO_SEGMENT
           @skonto_prozent = skonto_prozent
           @zahlungsziel = zahlungsziel #Zahlungsziel in Tagen
-          #GES_SEGMENT
-          @status = status #Siehe Schlüssel Summenstatus Anlage 3 Abschnitt 8.1.6
-          @gesamt_rechnungsbetrag = gesamt_rechnungsbetrag
-          @gesamt_bruttobetrag = gesamt_bruttobetrag
-          @gesamt_zuzahlung = gesamt_zuzahlung
           #NAM_SEGMENT
           @name1 = name1 #Name bzw. Firmenbezeichnung des Rechnungsstellers
           @name2 = name2 #ggf. Ansprechpartner und Telefonnummer
@@ -77,8 +67,22 @@ module RubyGkvBilling
             self.<< ust_segment
           end
           self.<< sko_segment
-          self.<< ges_segment
           self.<< nam_segment
+        end
+
+        def ges_segment(
+          status,
+          gesamt_rechnungsbetrag,
+          gesamt_bruttobetrag,
+          gesamt_zuzahlung
+        )
+          ges_segment = RubyGkvBilling::Edifact::Segment.new("GES")
+          ges_segment << status
+          ges_segment << gesamt_rechnungsbetrag
+          ges_segment << gesamt_bruttobetrag
+          ges_segment << gesamt_zuzahlung
+
+          ges_segment
         end
 
         def fkt_segment
@@ -119,16 +123,6 @@ module RubyGkvBilling
           sko_segment << @zahlungsziel
 
           sko_segment
-        end
-
-        def ges_segment
-          ges_segment = RubyGkvBilling::Edifact::Segment.new("GES")
-          ges_segment << @status
-          ges_segment << @gesamt_rechnungsbetrag
-          ges_segment << @gesamt_bruttobetrag
-          ges_segment << @gesamt_zuzahlung
-
-          ges_segment
         end
 
         def nam_segment
