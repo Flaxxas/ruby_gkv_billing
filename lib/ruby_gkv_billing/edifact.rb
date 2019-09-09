@@ -18,20 +18,20 @@ module RubyGkvBilling
     SEGMENT_JOIN = "\n"
 
     LEISTUNGSBEREICH = {
-      "A" => "Leistungserbringer von Hilfsmitteln"
-      "B" => "Leistungserbringer von Heilmitteln"
-      "C" => "Leistungserbringer von häuslicher Krankenpflege"
-      "D" => "Leistungserbringer von Haushaltshilfe"
-      "E" => "Leistungserbringer von Krankentransportleistungen"
-      "F" => "Hebammen"
-      "G" => "nichtärztliche Dialysesachleistungen"
-      "H" => "Leistungserbringer von Rehabilitationssport"
-      "I" => "Leistungserbringer von Funktionstraining"
-      "J" => "Weitere Sonstige Leistungserbringer, sofern nicht unter A - I und K - O aufgeführt"
-      "K" => "Leistungserbringer von Präventions- und Gesundheitsförderungsmaßnahmen im Rahmen von ambulanten Vorsorgeleistungen"
-      "L" => "Leistungserbringer für ergänzenden Rehamaß-nahmen"
-      "M" => "Sozialpädiatrische Zentren/Frühförderstellen"
-      "N" => "Soziotherapeutischer Leistungserbringer"
+      "A" => "Leistungserbringer von Hilfsmitteln",
+      "B" => "Leistungserbringer von Heilmitteln",
+      "C" => "Leistungserbringer von häuslicher Krankenpflege",
+      "D" => "Leistungserbringer von Haushaltshilfe",
+      "E" => "Leistungserbringer von Krankentransportleistungen",
+      "F" => "Hebammen",
+      "G" => "nichtärztliche Dialysesachleistungen",
+      "H" => "Leistungserbringer von Rehabilitationssport",
+      "I" => "Leistungserbringer von Funktionstraining",
+      "J" => "Weitere Sonstige Leistungserbringer, sofern nicht unter A - I und K - O aufgeführt",
+      "K" => "Leistungserbringer von Präventions- und Gesundheitsförderungsmaßnahmen im Rahmen von ambulanten Vorsorgeleistungen",
+      "L" => "Leistungserbringer für ergänzenden Rehamaß-nahmen",
+      "M" => "Sozialpädiatrische Zentren/Frühförderstellen",
+      "N" => "Soziotherapeutischer Leistungserbringer",
       "O" => "SAPV"
     }
 
