@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/Skulli/edifact_tools.git
+  revision: 4ae50f763e70dc13c7786be0321bccf0f62a517d
+  specs:
+    edifact_tools (0.1.0)
+
 PATH
   remote: .
   specs:
@@ -29,6 +35,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
+  edifact_tools!
   rake (~> 10.0)
   rspec (~> 3.0)
   ruby_gkv_billing!
