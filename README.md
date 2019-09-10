@@ -4,7 +4,7 @@ ruby_gkv_billing is a library to generate *EDITFACT*-files for the purpose of [e
 
 ## Documentation (german)
 
-* [wiki](https://github.com/Skulli-N/ruby_gkv_billing/wiki)
+* [wiki](https://github.com/Sektor-N/ruby_gkv_billing/wiki)
 * [Technische Standards](https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anlage_1_TP5_V12_20190207.pdf)
 
 ## Installation
@@ -33,13 +33,13 @@ Or install it yourself as:
          "OrgansiationsName",
          "Ansprechpartner"
       )
-      
+
 This command will generate a private and the public key in the `target_folder`. In addition an certification-requeset with **.p10**-ending will be placed in the same folder.
 
 ### print hash code of a key (for certification)
 
     $ RubyGkvBilling::Security::Certification.hash_code(key)
-    
+
 where `key` is a key-object opened by `RubyGkvBilling::Security::Certification.open_key`
 
 ## Development
@@ -50,7 +50,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Skulli/ruby_gkv_billing
+Bug reports and pull requests are welcome on GitHub at https://github.com/Sektor-N/ruby_gkv_billing
 
 ## License
 
