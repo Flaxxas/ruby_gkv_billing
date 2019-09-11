@@ -1,5 +1,5 @@
-# Kostentraegerdatei
-# https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anhang_03_Anlage_1_TP5_20170920.pdf
+# Auftragsdatei
+# https://www.gkv-datenaustausch.de/media/dokumente/standards_und_normen/technische_spezifikationen/Anlage_2_-_Auftragsdatei.pdf
 require 'edifact_tools'
 
 module RubyGkvBilling
@@ -8,7 +8,7 @@ module RubyGkvBilling
       load_file(provider_name)
     end
 
-    def dfu_for_client(client_idk, billing_code, tarif_nr = nil)
+    def dfu_for_client(client_idk, billing_code, all_segments = false)
       message = search_by_ik(client_idk)
       vkgs = message.data_entry("Segment_Verknüpfung") if message
 
@@ -31,7 +31,7 @@ module RubyGkvBilling
           comm_partner_with_matching_billing_code = comm_partner.select {|vkg| vkg["Abrechnungscode"] == "00"} if comm_partner_with_matching_billing_code.empty?
           if comm_partner_with_matching_billing_code.length == 1
             comm_partner_ik = comm_partner_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
-            return communications_for_ik(comm_partner_ik)
+            return communications_for_ik(comm_partner_ik, all_segments)
           end
         end
       end
@@ -39,9 +39,13 @@ module RubyGkvBilling
       return nil
     end
 
-    def communications_for_ik(nr)
+    def communications_for_ik(nr, all_segments = false)
       message = search_by_ik(nr)
-      message.data_entry("Segment_DFÜ", "Kommunikationskanal")
+      if all_segments
+        message.data_entry("Segment_DFÜ")
+      else
+        message.data_entry("Segment_DFÜ", "Kommunikationskanal")
+      end
     end
 
     def search_by_ik(nr)
