@@ -8,9 +8,7 @@ module RubyGkvBilling
 
       def initialize(
         absender_datei, #IK des Absenders
-        absender_bezeichnung, #IK der absendenden Stelle
         empfaenger_datei, # IK des Empfaengers
-        empfaenger_bezeichnung, #IK der empfangenden Stelle
         datenaustausch_ref,  #Fortlaufende Nummer, der Lieferungen zwischen absender und Empfaenger.
         leistungsbereich, #Leistungserbringer-Sammelgruppenschluessel siehe 8.1.14.
         anwendungs_ref, #Logischer Dateiname
@@ -18,9 +16,7 @@ module RubyGkvBilling
         testindikator: PRODUCTION #0 wenn Testdatei, 1 wenn Erprobungsdatei, 2 wenn Echtdatei
       )
         @absender_datei = absender_datei
-        @absender_bezeichnung = absender_bezeichnung
         @empfaenger_datei = empfaenger_datei
-        @empfaenger_bezeichnung = empfaenger_bezeichnung
         @erstellt_am = erstellt_am
         @datenaustausch_ref = datenaustausch_ref.to_s.rjust(5, "0")[0..4]
         @leistungsbereich = leistungsbereich
@@ -46,9 +42,7 @@ module RubyGkvBilling
           ]
         )
         header_segment << @absender_datei
-        header_segment << @absender_bezeichnung
         header_segment << @empfaenger_datei
-        header_segment << @empfaenger_bezeichnung
         header_segment.add_splitted_element(
           [
             @erstellt_am.strftime("%Y%m%e"),

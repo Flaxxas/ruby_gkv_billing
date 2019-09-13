@@ -1,9 +1,7 @@
 RSpec.describe RubyGkvBilling::Edifact::Payload do
   subject { RubyGkvBilling::Edifact::Payload.new(
     "sender_file",
-    "sender_description",
     "receiver_file",
-    "receiver_description",
     "123",
     "service_area",
     "456",
@@ -26,7 +24,7 @@ RSpec.describe RubyGkvBilling::Edifact::Payload do
   end
 
   it {
-    expect(subject.header_segment.to_edifact).to eq("UNB+UNOC:3+sender_file+sender_description+receiver_file+receiver_description+20101010:1212+00123+service_area+00456+0'")
+    expect(subject.header_segment.to_edifact).to eq("UNB+UNOC:3+sender_file+receiver_file+20101010:1212+00123+service_area+00456+0'")
   }
 
   it {
@@ -34,7 +32,7 @@ RSpec.describe RubyGkvBilling::Edifact::Payload do
   }
 
   it {
-    expect(subject.to_edifact).to include("UNB+UNOC:3+sender_file+sender_description+receiver_file+receiver_description+20101010:1212+00123+service_area+00456+0'",
+    expect(subject.to_edifact).to include("UNB+UNOC:3+sender_file+receiver_file+20101010:1212+00123+service_area+00456+0'",
                                           "UNH+00001+SLGA:12:0:0'",
                                           "UNB+Test 123+-3,14+D?'Angelo+Test??'",
                                           "UNT+3+00001'",
