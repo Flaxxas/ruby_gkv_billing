@@ -28,7 +28,7 @@ RSpec.describe RubyGkvBilling::ProviderFile do
     it { expect(subject.dfu_for_client("101538012", "99")).to be_nil}
   end
 
-  context "AOK Südlicher Oberrhein", focus:true do
+  context "AOK Südlicher Oberrhein" do
     subject {RubyGkvBilling::ProviderFile.new("AOK")}
 
     it {expect(subject.dataname).to eq("AO05Q319ke1")}
