@@ -82,9 +82,9 @@ module RubyGkvBilling
       references_to_data_recipient = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "03" && vkg["Art_der_Datenlieferung"] == "07"} if vkgs
       dfü_segments = provider_message.data_entry("Segment_DFÜ", "Kommunikationskanal") if provider_message
       if references_to_data_recipient && !references_to_data_recipient.empty?
-        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code}
-        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_recipient_with_matching_billing_code.empty?
-        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_recipient_with_matching_billing_code.empty? || billing_code.nil?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code} if billing_code && !billing_code.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_recipient_with_matching_billing_code && data_recipient_with_matching_billing_code.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_recipient_with_matching_billing_code && data_recipient_with_matching_billing_code.empty? || billing_code.nil? || (billing_code && billing_code.empty?)
         if data_recipient_with_matching_billing_code.length == 1
           data_recipient_ik = data_recipient_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
           data_recipient_message = search_by_ik(data_recipient_ik) if data_recipient_ik

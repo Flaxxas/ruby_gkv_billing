@@ -1,5 +1,5 @@
 RSpec.describe RubyGkvBilling::Provider do
-  subject {RubyGkvBilling::Provider.new("AOK", "107415518", "34")}
+  subject {RubyGkvBilling::Provider.new("AOK", "107415518", "")}
 
   it { expect(subject.provider_message).not_to be_nil}
   it { expect(subject.data_recipient_message).not_to be_nil}
@@ -45,7 +45,7 @@ RSpec.describe RubyGkvBilling::Provider do
 
   context "invalid provider type" do
     it "no nullpointer exception" do
-      provider = RubyGkvBilling::Provider.new("BKK_old", "103411401", "00")
+      provider = RubyGkvBilling::Provider.new("BKK_old", "103411401", "")
       expect(provider.provider_full_name).to be_nil
       expect(provider.provider_ik).to be_nil
       expect(provider.provider_short_name).to be_nil
@@ -61,7 +61,7 @@ RSpec.describe RubyGkvBilling::Provider do
     end
 
     it "no nullpointer exception" do
-      provider = RubyGkvBilling::Provider.new("BKK_old", "99999", "0")
+      provider = RubyGkvBilling::Provider.new("BKK_old", "99999", "")
       expect(provider.provider_full_name).to be_nil
       expect(provider.provider_ik).to be_nil
       expect(provider.provider_short_name).to be_nil
