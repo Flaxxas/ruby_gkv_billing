@@ -69,7 +69,7 @@ module RubyGkvBilling
 
     def data_receipient_transmissions
       transmissions = []
-      transmission_segments = @data_receipient_message.data_entry("Segment_DFÜ")
+      transmission_segments = @data_receipient_message.data_entry("Segment_DFÜ") if @data_receipient_message
       if transmission_segments
         transmission_segments.each do |s|
           transmission = {}
@@ -105,28 +105,37 @@ module RubyGkvBilling
     private
 
     def ik(message_type)
-      self.send("#{message_type}_message").data_entry("Segment_Identifikation", "Institutionskennzeichen")
+      message = self.send("#{message_type}_message")
+      message.data_entry("Segment_Identifikation", "Institutionskennzeichen") if message
     end
 
     def short_name(message_type)
-      self.send("#{message_type}_message").data_entry("Segment_Identifikation", "Kurzbezeichnung")
+      message = self.send("#{message_type}_message")
+      message.data_entry("Segment_Identifikation", "Kurzbezeichnung") if message
     end
 
     def full_name(message_type)
       full_name = ""
       ["Name-1", "Name-2", "Name-3", "Name-4"].each_with_index do |n, i|
-        name = self.send("#{message_type}_message").data_entry("Segment_Name", n)
+        message = self.send("#{message_type}_message")
+        name = message.data_entry("Segment_Name", n) if message
         if name
           full_name.concat(" ") if i != 0
           full_name.concat(name)
         end
       end
-      full_name
+
+      if !full_name.empty?
+        full_name
+      else
+        nil
+      end
     end
 
     def addresses(message_type)
       addresses = []
-      address_segments = self.send("#{message_type}_message").data_entry("Segment_Anschrift")
+      message = self.send("#{message_type}_message")
+      address_segments = message.data_entry("Segment_Anschrift") if message
       if address_segments
         address_segments.each do |s|
           address = {}
@@ -141,7 +150,8 @@ module RubyGkvBilling
 
     def contact_persons(message_type)
       contact_persons = []
-      contact_person_segments = self.send("#{message_type}_message").data_entry("Segment_Ansprechpartner")
+      message = self.send("#{message_type}_message")
+      contact_person_segments = message.data_entry("Segment_Ansprechpartner") if message
       if contact_person_segments
         contact_person_segments.each do |p|
           contact_person = {}
