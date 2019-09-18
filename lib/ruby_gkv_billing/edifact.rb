@@ -245,6 +245,16 @@ module RubyGkvBilling
       "N1" => "Sonstige - N Soziotherapeutische Leistungserbringer - Genehmigung im Einzelfall"
     }
 
+    # 8.1.12
+    VERORDNUNGSART = {
+      "01" => "Erstverordnung (Regelfall)",
+      "02" => "Folgeverordnung (Regelfall)",
+      "03" => "nicht besetzt",
+      "04" => "nicht besetzt",
+      "10" => "Verordnung außerhalb des Regelfalles (Folgeverordnung, auch längerfristige Verordnung)",
+      "11" => "nicht besetzt"
+    }
+
 
     # 4.2
     #type: "S" => Selbstabrechner, "A" => Abrechnungsstelle

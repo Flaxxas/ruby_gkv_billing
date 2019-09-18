@@ -57,8 +57,8 @@ module RubyGkvBilling
       absender_physikalisch, # Tatsaechlicher Absender
       empfaenger_nutzer, # Empfaenger, der die Daten nutzen soll
       empfaenger_physikalisch, # Tatsaechlicher Empfaenger
-      abrechnungs_typ,
-      dateityp,
+      abrechnungs_typ, # "S" => Selbstabrechner, "A" => Abrechnungsstelle
+      dateityp, # Echt- und Testdaten
       dateigroesse_nutzdaten,
       dateigroesse_uebertragung,
       zeichensatz,
