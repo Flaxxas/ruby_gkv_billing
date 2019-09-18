@@ -43,9 +43,25 @@ RSpec.describe RubyGkvBilling::Provider do
   it { expect(subject.data_receipient_transmissions.last[:transmission_to]).to eq("24:00")}
   it { expect(subject.data_receipient_transmissions.last[:transmission_days]).to eq("Übertragung an allen Tagen")}
 
-  context "invalid provider type", focus:true do
+  context "invalid provider type" do
     it "no nullpointer exception" do
       provider = RubyGkvBilling::Provider.new("BKK_old", "103411401", "00")
+      expect(provider.provider_full_name).to be_nil
+      expect(provider.provider_ik).to be_nil
+      expect(provider.provider_short_name).to be_nil
+      expect(provider.provider_addresses).to be_empty
+      expect(provider.provider_contact_persons).to be_empty
+
+      expect(provider.data_receipient_full_name).to be_nil
+      expect(provider.data_receipient_ik).to be_nil
+      expect(provider.data_receipient_short_name).to be_nil
+      expect(provider.data_receipient_addresses).to be_empty
+      expect(provider.data_receipient_contact_persons).to be_empty
+      expect(provider.data_receipient_transmissions).to be_empty
+    end
+
+    it "no nullpointer exception" do
+      provider = RubyGkvBilling::Provider.new("BKK_old", "99999", "0")
       expect(provider.provider_full_name).to be_nil
       expect(provider.provider_ik).to be_nil
       expect(provider.provider_short_name).to be_nil
