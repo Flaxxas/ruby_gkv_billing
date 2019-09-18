@@ -13,7 +13,7 @@ module RubyGkvBilling
       pm = provider_message(client_idk)
       if pm
         contact_messages[:provider_message] = pm
-        contact_messages[:data_receipient_message] = data_receipient_message(pm, billing_code)
+        contact_messages[:data_recipient_message] = data_recipient_message(pm, billing_code)
       end
       contact_messages
     end
@@ -52,13 +52,13 @@ module RubyGkvBilling
       message = search_by_ik(client_idk)
       vkgs = message.data_entry("Segment_Verknüpfung") if message
       reference_to_other_provider = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "01" && vkg["IK_des_Verknüpfungspartners"] != client_idk} if vkgs
-      references_to_data_receipient = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "03" && vkg["Art_der_Datenlieferung"] == "07"} if vkgs
+      references_to_data_recipient = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "03" && vkg["Art_der_Datenlieferung"] == "07"} if vkgs
       dfü_segments = message.data_entry("Segment_DFÜ", "Kommunikationskanal") if message
       if vkgs && reference_to_other_provider && reference_to_other_provider.length == 1
         ik = reference_to_other_provider.first["IK_des_Verknüpfungspartners"]
-        potential_data_receipient = search_by_ik(ik)
-        potential_data_receipient_dfüs = potential_data_receipient.data_entry("Segment_DFÜ", "Kommunikationskanal") if potential_data_receipient
-        if potential_data_receipient_dfüs && !potential_data_receipient_dfüs.empty?
+        potential_data_recipient = search_by_ik(ik)
+        potential_data_recipient_dfüs = potential_data_recipient.data_entry("Segment_DFÜ", "Kommunikationskanal") if potential_data_recipient
+        if potential_data_recipient_dfüs && !potential_data_recipient_dfüs.empty?
           return message
         else
           return provider_message(ik)
@@ -68,7 +68,7 @@ module RubyGkvBilling
         return message
       end
 
-      if reference_to_other_provider && reference_to_other_provider.empty? && !references_to_data_receipient.empty?
+      if reference_to_other_provider && reference_to_other_provider.empty? && !references_to_data_recipient.empty?
         return message
       end
 
@@ -76,30 +76,30 @@ module RubyGkvBilling
       return nil
     end
 
-    def data_receipient_message(provider_message, billing_code = nil)
+    def data_recipient_message(provider_message, billing_code = nil)
       vkgs = provider_message.data_entry("Segment_Verknüpfung") if provider_message
       reference_to_other_provider = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "01" && vkg["IK_des_Verknüpfungspartners"] != provider_message.data_entry("Segment_Identifikation", "Institutionskennzeichen")} if vkgs
-      references_to_data_receipient = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "03" && vkg["Art_der_Datenlieferung"] == "07"} if vkgs
+      references_to_data_recipient = vkgs.select {|vkg| vkg["Art_der_Verknüpfung"] == "03" && vkg["Art_der_Datenlieferung"] == "07"} if vkgs
       dfü_segments = provider_message.data_entry("Segment_DFÜ", "Kommunikationskanal") if provider_message
-      if references_to_data_receipient && !references_to_data_receipient.empty?
-        data_receipient_with_matching_billing_code = references_to_data_receipient.select {|vkg| vkg["Abrechnungscode"] == billing_code}
-        data_receipient_with_matching_billing_code = references_to_data_receipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_receipient_with_matching_billing_code.empty?
-        data_receipient_with_matching_billing_code = references_to_data_receipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_receipient_with_matching_billing_code.empty? || billing_code.nil?
-        if data_receipient_with_matching_billing_code.length == 1
-          data_receipient_ik = data_receipient_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
-          data_receipient_message = search_by_ik(data_receipient_ik) if data_receipient_ik
-          return data_receipient_message if !data_receipient_message.data_entry("Segment_DFÜ", "Kommunikationskanal").empty?
+      if references_to_data_recipient && !references_to_data_recipient.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code}
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_recipient_with_matching_billing_code.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_recipient_with_matching_billing_code.empty? || billing_code.nil?
+        if data_recipient_with_matching_billing_code.length == 1
+          data_recipient_ik = data_recipient_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
+          data_recipient_message = search_by_ik(data_recipient_ik) if data_recipient_ik
+          return data_recipient_message if !data_recipient_message.data_entry("Segment_DFÜ", "Kommunikationskanal").empty?
         end
       # TODO: Wegen Sonderfall bei AOK Plus erforderliche Prüfung? Siehe provider_spec.rb #46..
       elsif reference_to_other_provider
-        references_to_data_receipient = reference_to_other_provider
-        data_receipient_with_matching_billing_code = references_to_data_receipient.select {|vkg| vkg["Abrechnungscode"] == billing_code}
-        data_receipient_with_matching_billing_code = references_to_data_receipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_receipient_with_matching_billing_code.empty?
-        data_receipient_with_matching_billing_code = references_to_data_receipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_receipient_with_matching_billing_code.empty? || billing_code.nil?
-        if data_receipient_with_matching_billing_code.length == 1
-          data_receipient_ik = data_receipient_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
-          data_receipient_message = search_by_ik(data_receipient_ik) if data_receipient_ik
-          return data_receipient_message if !data_receipient_message.data_entry("Segment_DFÜ", "Kommunikationskanal").empty?
+        references_to_data_recipient = reference_to_other_provider
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code}
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_recipient_with_matching_billing_code.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_recipient_with_matching_billing_code.empty? || billing_code.nil?
+        if data_recipient_with_matching_billing_code.length == 1
+          data_recipient_ik = data_recipient_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
+          data_recipient_message = search_by_ik(data_recipient_ik) if data_recipient_ik
+          return data_recipient_message if !data_recipient_message.data_entry("Segment_DFÜ", "Kommunikationskanal").empty?
         end
       elsif dfü_segments && !dfü_segments.empty?
         return provider_message

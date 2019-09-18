@@ -14,7 +14,7 @@ module RubyGkvBilling
       "3" => "Übertragung nur an Arbeitstagen (Montag bis Freitag außer Feiertag)"
     }
 
-    attr_accessor :provider_message, :data_receipient_message
+    attr_accessor :provider_message, :data_recipient_message
 
     def initialize(provider_category, client_idk, billing_code)
       load_provider_file(provider_category, client_idk, billing_code)
@@ -24,7 +24,7 @@ module RubyGkvBilling
       provider_file = RubyGkvBilling::ProviderFile.new(provider_category)
       contact_messages = provider_file.contact_messages(client_idk, billing_code)
       @provider_message = contact_messages[:provider_message]
-      @data_receipient_message = contact_messages[:data_receipient_message]
+      @data_recipient_message = contact_messages[:data_recipient_message]
     end
 
     def provider_ik
@@ -47,29 +47,29 @@ module RubyGkvBilling
       contact_persons("provider")
     end
 
-    def data_receipient_ik
-      ik("data_receipient")
+    def data_recipient_ik
+      ik("data_recipient")
     end
 
-    def data_receipient_short_name
-      short_name("data_receipient")
+    def data_recipient_short_name
+      short_name("data_recipient")
     end
 
-    def data_receipient_full_name
-      full_name("data_receipient")
+    def data_recipient_full_name
+      full_name("data_recipient")
     end
 
-    def data_receipient_addresses
-      addresses("data_receipient")
+    def data_recipient_addresses
+      addresses("data_recipient")
     end
 
-    def data_receipient_contact_persons
-      contact_persons("data_receipient")
+    def data_recipient_contact_persons
+      contact_persons("data_recipient")
     end
 
-    def data_receipient_transmissions
+    def data_recipient_transmissions
       transmissions = []
-      transmission_segments = @data_receipient_message.data_entry("Segment_DFÜ") if @data_receipient_message
+      transmission_segments = @data_recipient_message.data_entry("Segment_DFÜ") if @data_recipient_message
       if transmission_segments
         transmission_segments.each do |s|
           transmission = {}
