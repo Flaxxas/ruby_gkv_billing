@@ -47,15 +47,15 @@ module RubyGkvBilling
       contact_persons("provider")
     end
 
-    def data_recipient_ik
+    def data_receipient_ik
       ik("data_receipient")
     end
 
-    def data_recipient_short_name
+    def data_receipient_short_name
       short_name("data_receipient")
     end
 
-    def data_recipient_full_name
+    def data_receipient_full_name
       full_name("data_receipient")
     end
 
@@ -63,39 +63,41 @@ module RubyGkvBilling
       addresses("data_receipient")
     end
 
-    def data_recipient_contact_persons
+    def data_receipient_contact_persons
       contact_persons("data_receipient")
     end
 
-    def data_recipient_transmissions
+    def data_receipient_transmissions
       transmissions = []
       transmission_segments = @data_receipient_message.data_entry("Segment_DFÜ")
-      transmission_segments.each do |s|
-        transmission = {}
+      if transmission_segments
+        transmission_segments.each do |s|
+          transmission = {}
 
-        protocol = s["Übertragungsprotokoll"]
-        if TRANSMISSION_PROTOCOLS[protocol]
-          protocol = TRANSMISSION_PROTOCOLS[protocol]
+          protocol = s["Übertragungsprotokoll"]
+          if TRANSMISSION_PROTOCOLS[protocol]
+            protocol = TRANSMISSION_PROTOCOLS[protocol]
+          end
+          transmission[:protocol] = protocol
+
+          transmission[:user_id] = s["Benutzerkennung"]
+
+          t_from = s["Übertragung_von"]
+          t_from = t_from.insert(2, ":") if t_from && t_from.length == 4
+          transmission[:transmission_from] = t_from
+
+          t_to = s["Übertragung_bis"]
+          t_to = t_to.insert(2, ":") if t_to && t_to.length == 4
+          transmission[:transmission_to] = t_to
+
+          days = s["Übertragungstage"]
+          if TRANSMISSION_DAYS[days]
+            days = TRANSMISSION_DAYS[days]
+          end
+          transmission[:transmission_days] = days
+          transmission[:communication_channel] = s["Kommunikationskanal"]
+          transmissions.push(transmission)
         end
-        transmission[:protocol] = protocol
-
-        transmission[:user_id] = s["Benutzerkennung"]
-
-        t_from = s["Übertragung_von"]
-        t_from = t_from.insert(2, ":") if t_from && t_from.length == 4
-        transmission[:transmission_from] = t_from
-
-        t_to = s["Übertragung_bis"]
-        t_to = t_to.insert(2, ":") if t_to && t_to.length == 4
-        transmission[:transmission_to] = t_to
-
-        days = s["Übertragungstage"]
-        if TRANSMISSION_DAYS[days]
-          days = TRANSMISSION_DAYS[days]
-        end
-        transmission[:transmission_days] = days
-        transmission[:communication_channel] = s["Kommunikationskanal"]
-        transmissions.push(transmission)
       end
       transmissions
     end
@@ -125,12 +127,14 @@ module RubyGkvBilling
     def addresses(message_type)
       addresses = []
       address_segments = self.send("#{message_type}_message").data_entry("Segment_Anschrift")
-      address_segments.each do |s|
-        address = {}
-        address[:code] = s["Postleitzahl"]
-        address[:city] = s["Ort"]
-        address[:street] = s["Straße,Hausnr/Postfach"]
-        addresses.push(address)
+      if address_segments
+        address_segments.each do |s|
+          address = {}
+          address[:code] = s["Postleitzahl"]
+          address[:city] = s["Ort"]
+          address[:street] = s["Straße,Hausnr/Postfach"]
+          addresses.push(address)
+        end
       end
       addresses
     end
@@ -138,13 +142,15 @@ module RubyGkvBilling
     def contact_persons(message_type)
       contact_persons = []
       contact_person_segments = self.send("#{message_type}_message").data_entry("Segment_Ansprechpartner")
-      contact_person_segments.each do |p|
-        contact_person = {}
-        contact_person[:phone] = p["Telefon"]
-        contact_person[:fax] = p["Fax"]
-        contact_person[:name] = p["Name"]
-        contact_person[:working_area] = p["Arbeitsgebiet_des_Ansprechpartners"]
-        contact_persons.push(contact_person)
+      if contact_person_segments
+        contact_person_segments.each do |p|
+          contact_person = {}
+          contact_person[:phone] = p["Telefon"]
+          contact_person[:fax] = p["Fax"]
+          contact_person[:name] = p["Name"]
+          contact_person[:working_area] = p["Arbeitsgebiet_des_Ansprechpartners"]
+          contact_persons.push(contact_person)
+        end
       end
       contact_persons
     end
