@@ -80,7 +80,7 @@ RSpec.describe RubyGkvBilling::Provider do
   context "Lookup for 2 messages" do
     it "has correct provider and data recipient" do
       # TODO: Ist das ein Spezialfall? Die erste gefundene Nachricht enthält sowohl Verweis auf Datenempfänger in einer anderen Nachricht, aber hat selber trotzdem DFÜ-Segmente..
-      provider = RubyGkvBilling::Provider.new("AOK", "105998018", "21")
+      provider = RubyGkvBilling::Provider.new("AOK", "105998018", "")
       expect(provider.provider_ik).to eq("105998018")
       expect(provider.provider_short_name).to eq("AOK Plus")
       expect(provider.provider_full_name).to eq("AOK Plus")

@@ -93,9 +93,9 @@ module RubyGkvBilling
       # TODO: Wegen Sonderfall bei AOK Plus erforderliche Prüfung? Siehe provider_spec.rb #46..
       elsif reference_to_other_provider
         references_to_data_recipient = reference_to_other_provider
-        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code}
-        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_recipient_with_matching_billing_code.empty?
-        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_recipient_with_matching_billing_code.empty? || billing_code.nil?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code} if billing_code && !billing_code.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == billing_code[0].concat("0")} if data_recipient_with_matching_billing_code && data_recipient_with_matching_billing_code.empty?
+        data_recipient_with_matching_billing_code = references_to_data_recipient.select {|vkg| vkg["Abrechnungscode"] == "00"} if data_recipient_with_matching_billing_code && data_recipient_with_matching_billing_code.empty? || billing_code.nil? || (billing_code && billing_code.empty?)
         if data_recipient_with_matching_billing_code.length == 1
           data_recipient_ik = data_recipient_with_matching_billing_code.first["IK_des_Verknüpfungspartners"]
           data_recipient_message = search_by_ik(data_recipient_ik) if data_recipient_ik
