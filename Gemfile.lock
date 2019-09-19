@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Skulli/edifact_tools.git
-  revision: 99d3f3439f33d4526b416d05a1e200eacad26930
+  revision: a763bc09f64038d0016cb23748551a3ff6efd10f
   specs:
     edifact_tools (0.1.0)
 
