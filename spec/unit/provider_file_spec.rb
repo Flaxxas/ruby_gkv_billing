@@ -1,5 +1,5 @@
 RSpec.describe RubyGkvBilling::ProviderFile do
-  subject {RubyGkvBilling::ProviderFile.new("BKK")}
+  subject {RubyGkvBilling::ProviderFile.new("BKK_2019_Q4_Standard")}
 
   let(:message){subject.search_by_ik("101391700")}
   let(:message2){subject.search_by_ik("101520147")}
@@ -34,7 +34,7 @@ RSpec.describe RubyGkvBilling::ProviderFile do
   end
 
   context "AOK Südlicher Oberrhein" do
-    subject {RubyGkvBilling::ProviderFile.new("AOK")}
+    subject {RubyGkvBilling::ProviderFile.new("AOK_2019_Q3_Nachtrag1")}
 
     it {expect(subject.dataname).to eq("AO05Q319ke1")}
 
@@ -65,7 +65,7 @@ RSpec.describe RubyGkvBilling::ProviderFile do
 
   # TODO: Sonderfall?
   context "AOK NORDWEST" do
-    subject {RubyGkvBilling::ProviderFile.new("AOK")}
+    subject {RubyGkvBilling::ProviderFile.new("AOK_2019_Q3_Nachtrag1")}
 
     it { expect(subject.provider_message("103511264")).not_to be_nil}
 
