@@ -4,7 +4,7 @@ RSpec.describe RubyGkvBilling::ProviderFile do
   let(:message){subject.search_by_ik("101391700")}
   let(:message2){subject.search_by_ik("101520147")}
 
-  it { expect(RubyGkvBilling::ProviderFile.billing_category("14")).to eq("Hörgeräteakustiker")}
+  it { expect(RubyGkvBilling::ProviderFile.billing_category("14")).to eq("14 - Hörgeräteakustiker")}
 
   it {expect(subject.dataname).to eq("BK05Q419ke0")}
 
