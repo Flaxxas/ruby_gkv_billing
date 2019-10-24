@@ -52,6 +52,10 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     }
 
     it {
+      expect(File.size?(file)).to eq(348)
+    }
+
+    it {
       expect(file).to include("SOL")
     }
 

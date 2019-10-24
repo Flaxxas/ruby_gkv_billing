@@ -111,7 +111,7 @@ module RubyGkvBilling
     def store(path)
       file_path = File.join(path, instruction_filename)
       file = File.open(file_path, "w:#{ENCODING}")
-      file.puts(content)
+      file.write(content)
       file.close
     end
 
