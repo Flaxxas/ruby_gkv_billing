@@ -97,6 +97,6 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   it { expect(subject.img_segment.to_edifact).to eq("IMG+2010+10+merkmal'") }
 
-  it { expect(subject.segments.count).to eq(11) }
+  it { expect(subject.segments.count).to eq(10) }
 
 end

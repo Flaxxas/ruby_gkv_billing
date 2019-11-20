@@ -106,8 +106,13 @@ module RubyGkvBilling
 
             self.<< zhe_segment
             self.<< skz_segment if @genehmigungskennzeichen
-            self.<< bes_segment
-            self.<< gzf_segment
+
+            #TODO lese verarbeitungskennzeichen aus
+            if @forderung_gesetzlich.to_s != ""
+              self.<< gzf_segment
+            else
+              self.<< bes_segment
+            end
           end
 
           def add_ehe_segment(
@@ -232,8 +237,8 @@ module RubyGkvBilling
             bes_segment
           end
 
-          def gzf_segment
 
+          def gzf_segment
             gzf_segment = RubyGkvBilling::Edifact::Segment.new("GZF")
             gzf_segment << @forderung_gesetzlich
             gzf_segment << @forderung_prozentual
