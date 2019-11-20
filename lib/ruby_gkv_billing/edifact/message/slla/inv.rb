@@ -103,6 +103,22 @@ module RubyGkvBilling
 
             img_segment
           end
+
+          def add_diagnose(diagnoseschluessel,
+                           diagnosetext)
+            self.<< dia_segment(diagnoseschluessel,
+                                diagnosetext)
+          end
+
+          def dia_segment(diagnoseschluessel,
+                          diagnosetext)
+
+            dia_segment = RubyGkvBilling::Edifact::Segment.new("DIA")
+            dia_segment << diagnoseschluessel
+            dia_segment << diagnosetext
+
+            dia_segment
+          end
         end
       end
     end
