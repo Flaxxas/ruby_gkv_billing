@@ -77,8 +77,16 @@ module RubyGkvBilling
             @ges_prozentuale_zuzahlung = ges_prozentuale_zuzahlung
             @pauschale_zuzahlung = pauschale_zuzahlung
             @ges_eigenanteil = ges_eigenanteil
-            @betriebsstaetten_nr = betriebsstaetten_nr
-            @arztnummer = arztnummer
+            if betriebsstaetten_nr.to_s == ""
+              @betriebsstaetten_nr = "999999999"
+            else
+              @betriebsstaetten_nr = betriebsstaetten_nr
+            end
+            if arztnummer.to_s == ""
+              @arztnummer = "999999999"
+            else
+              @arztnummer = arztnummer
+            end
             @verordnungs_datum = verordnungs_datum
             @genehmigungskennzeichen = genehmigungskennzeichen
             @genehmigungsart = genehmigungsart
