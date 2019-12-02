@@ -68,6 +68,10 @@ module RubyGkvBilling
               identifikationsmerkmal
             )
 
+            @enfs = []
+            # TODO: Add_Methode fehlt
+            @zuzs = []
+
             @zuzahlungskennzeichen = zuzahlungskennzeichen
             @unfallkennzeichen = unfallkennzeichen
             @kennzeichen_bvg = kennzeichen_bvg
@@ -91,11 +95,26 @@ module RubyGkvBilling
             @genehmigungskennzeichen = genehmigungskennzeichen
             @genehmigungsart = genehmigungsart
             @datum_genehmigung = datum_genehmigung
+          end
 
-            self.<< zuv_segment if @betriebsstaetten_nr
-            self.<< skz_segment if @genehmigungskennzeichen
-            self.<< bes_segment
+          def zuv_segement_block
+            res = []
+            res << zuv_segment if @betriebsstaetten_nr
 
+            res
+          end
+
+          def final_segments
+            elements = []
+
+            elements << skz_segment if @genehmigungskennzeichen
+            elements << bes_segment
+
+            elements
+          end
+
+          def segments
+            @segments + @enfs + @zuzs + zuv_segement_block + @diagnoses + final_segments
           end
 
           def add_enf_segment(
@@ -123,7 +142,7 @@ module RubyGkvBilling
             datum_leistungserbringung: Time.now
           )
 
-            self.<< enf_segment(
+            @enfs << enf_segment(
               identifikationsnummer,
               abrechnungscode,
               tarifkennzeichen,
@@ -134,7 +153,7 @@ module RubyGkvBilling
               zuzahlung
             )
 
-            self.<< sut_segment(
+            @enfs << sut_segment(
               kilometer,
               uhrzeit,
               uhrzeit_bis,
@@ -143,11 +162,11 @@ module RubyGkvBilling
               versorgung_bis
             ) if kilometer
 
-            self.<< txt_segment(
+            @enfs << txt_segment(
               text
             ) if text
 
-            self.<< mws_segment(
+            @enfs << mws_segment(
               kennzeichen_mws,
               betrag_mws
             ) if kennzeichen_mws && betrag_mws
@@ -217,7 +236,7 @@ module RubyGkvBilling
 
             mws_segment
           end
-          
+
           def zuv_segment
 
             zuv_segment = RubyGkvBilling::Edifact::Segment.new("ZUV")

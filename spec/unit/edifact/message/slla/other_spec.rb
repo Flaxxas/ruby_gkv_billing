@@ -50,6 +50,10 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
       "34565",
       "63445",
       #SUT_SEGMENT
+      uhrzeit: Time.new(2010,10,10,10,10,10),
+      uhrzeit_bis: Time.new(2010,10,10,10,10,10),
+      versorgung_von: Time.new(2010,10,10,10,10,10),
+      versorgung_bis: Time.new(2010,10,10,10,10,10),
       kilometer: "234",
       dauer: "45",
       #TXT_SEGMENT
@@ -102,5 +106,18 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
 
   it { expect(subject.segments.count).to eq(12) }
 
-
+  describe "in sequence" do
+    it { expect(subject.segments[0].to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
+    it { expect(subject.segments[1].to_edifact).to eq("URI+zuzhalung'") }
+    it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
+    it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+01+merkmal'") }
+    it { expect(subject.segments[4].to_edifact).to eq("ENF+123+01:35632+test+43+34565+201912 2+63445'") }
+    it { expect(subject.segments[5].to_edifact).to eq("SUT+234+1010+1010+45+20101010+20101010'") }
+    it { expect(subject.segments[6].to_edifact).to eq("TXT+text'") }
+    it { expect(subject.segments[7].to_edifact).to eq("MWS+1+23454'") }
+    it { expect(subject.segments[8].to_edifact).to eq("ZUV+999999999+999999999+201001 1+1+1+1+1'") }
+    it { expect(subject.segments[9].to_edifact).to eq("DIA+01+Test'") }
+    it { expect(subject.segments[10].to_edifact).to eq("SKZ+01+201001 1+02'") }
+    it { expect(subject.segments[11].to_edifact).to eq("BES+1234+765+45+7854+456'") }
+  end
 end
