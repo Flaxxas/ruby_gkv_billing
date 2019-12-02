@@ -112,15 +112,27 @@ module RubyGkvBilling
             @forderung_prozentual = forderung_prozentual
             @forderung_pauschal = forderung_pauschal
 
-            self.<< zhe_segment
-            self.<< skz_segment if @genehmigungskennzeichen
+            @ehes = []
+          end
+
+          def final_segments
+            elements = []
+
+            elements << skz_segment if @genehmigungskennzeichen
 
             #TODO lese verarbeitungskennzeichen aus
             if @forderung_gesetzlich.to_s != ""
-              self.<< gzf_segment
+              elements << gzf_segment
             else
-              self.<< bes_segment
+              elements << bes_segment
             end
+
+            elements
+          end
+
+          # ueberschreiben fuer eigene Struktur
+          def segments
+            @segments + @ehes + [zhe_segment] + @diagnoses + final_segments
           end
 
           def add_ehe_segment(
@@ -141,7 +153,7 @@ module RubyGkvBilling
             datum_leistungserbringung: Time.now
           )
 
-            self.<< ehe_segment(
+            @ehes << ehe_segment(
               abrechnungscode,
               tarifkennzeichen,
               leistungs_art,
@@ -152,11 +164,11 @@ module RubyGkvBilling
               kilometer
             )
 
-            self.<< txt_segment(
+            @ehes << txt_segment(
               text
             ) if text
 
-            self.<< mws_segment(
+            @ehes << mws_segment(
               kennzeichen_mws,
               betrag_mws
             ) if kennzeichen_mws && betrag_mws

@@ -49,6 +49,7 @@ module RubyGkvBilling
             @identifikationsmerkmal = identifikationsmerkmal
 
             @segments = []
+            @diagnoses = []
 
             self.<< inv_segment
             self.<< uri_segment
@@ -62,6 +63,10 @@ module RubyGkvBilling
 
           def segments
             @segments
+          end
+
+          def diagnoses
+            @diagnoses
           end
 
           def inv_segment
@@ -106,7 +111,7 @@ module RubyGkvBilling
 
           def add_diagnose(diagnoseschluessel,
                            diagnosetext)
-            self.<< dia_segment(diagnoseschluessel,
+            @diagnoses << dia_segment(diagnoseschluessel,
                                 diagnosetext)
           end
 

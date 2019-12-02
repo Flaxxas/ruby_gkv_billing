@@ -62,6 +62,10 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
       kennzeichen_mws: "1",
       betrag_mws: "23454"
     )
+    subject.add_diagnose(
+      "1234567",
+      "diganose_text"
+    )
   end
 
   describe "add_ehe_segments" do
@@ -97,6 +101,20 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   it { expect(subject.img_segment.to_edifact).to eq("IMG+2010+10+merkmal'") }
 
-  it { expect(subject.segments.count).to eq(10) }
+  it { expect(subject.segments.count).to eq(11) }
+
+  describe "in sequence" do
+    it { expect(subject.segments[0].to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
+    it { expect(subject.segments[1].to_edifact).to eq("URI+zuzhalung'") }
+    it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
+    it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+10+merkmal'") }
+    it { expect(subject.segments[4].to_edifact).to eq("EHE+01+35632+test+43+34565+201912 2+63445+234'") }
+    it { expect(subject.segments[5].to_edifact).to eq("TXT+text'") }
+    it { expect(subject.segments[6].to_edifact).to eq("MWS+1+23454'") }
+    it { expect(subject.segments[7].to_edifact).to eq("ZHE+999999999+999999999+20111111+1+9999+11+1+1+1+20101010+1+1'") }
+    it { expect(subject.segments[8].to_edifact).to eq("DIA+1234567+diganose_text'") }
+    it { expect(subject.segments[9].to_edifact).to eq("SKZ+4567643+20121212+01'") }
+    it { expect(subject.segments[10].to_edifact).to eq("GZF+567+43+765'") }
+  end
 
 end
