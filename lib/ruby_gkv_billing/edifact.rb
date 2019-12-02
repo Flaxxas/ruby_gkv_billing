@@ -128,6 +128,7 @@ module RubyGkvBilling
       "68" => "Sozialpädiatrische Zentren/Frühförderstellen",
       "69" => "Soziotherapeutischer Leistungserbringer",
       "75" => "Spezialisierte ambulante Palliativversorgung (SAPV)",
+      "76" => "Leistungserbringer nach § 132g SGB V",
       "71" => "Podologen",
       "72" => "Med. Fußpfleger (gemäß § 10 Abs. 4 bis 6 PodG)",
       "73" => "Leistungserbringer von Ernährungstherapie für seltene angeborene Stoffwechselerkrankungen",
