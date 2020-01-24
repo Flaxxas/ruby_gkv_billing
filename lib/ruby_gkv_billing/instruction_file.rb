@@ -166,8 +166,12 @@ module RubyGkvBilling
     end
 
     # der Nutzdatendatei
-    def payload_filename
-      RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
+    def payload_filename(dakota: false)
+      if dakota
+        instruction_filename
+      else
+        RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
+      end
     end
 
     # 2.2 Bandverarbeitung
