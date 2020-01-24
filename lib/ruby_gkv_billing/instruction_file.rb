@@ -108,8 +108,15 @@ module RubyGkvBilling
       ].join('')
     end
 
-    def store(path)
-      file_path = File.join(path, instruction_filename)
+    def store(path, dakota: false)
+      filename =
+        if dakota
+          "#{instruction_filename}.AUF"
+        else
+          instruction_filename
+        end
+
+      file_path = File.join(path, filename)
       file = File.open(file_path, "w:#{ENCODING}")
       file.write(content)
       file.close
