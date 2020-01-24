@@ -109,22 +109,21 @@ module RubyGkvBilling
     end
 
     def store(path, dakota: false)
-      filename =
-        if dakota
-          "#{instruction_filename}.AUF"
-        else
-          instruction_filename
-        end
-
-      file_path = File.join(path, filename)
+      file_path = File.join(path, instruction_filename(dakota: dakota))
       file = File.open(file_path, "w:#{ENCODING}")
       file.write(content)
       file.close
     end
 
     # Dateiname der Auftragsdatei
-    def instruction_filename
-      RubyGkvBilling::Edifact.physical_filename(@dateityp, @transfer_nummer)
+    def instruction_filename(dakota: false)
+      filename = RubyGkvBilling::Edifact.physical_filename(@dateityp, @transfer_nummer)
+
+      if dakota
+        filename = "#{filename}.AUF"
+      end
+
+      filename
     end
 
     # 2.1 Allgemeine KK-Felder

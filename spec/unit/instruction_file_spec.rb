@@ -37,7 +37,15 @@ RSpec.describe RubyGkvBilling::InstructionFile do
   }
 
   it {
+    expect(subject.instruction_filename(dakota: true)).to eq("TSOL0001.AUF")
+  }
+
+  it {
     expect(subject.payload_filename).to eq("SL030008S10")
+  }
+
+  it {
+    expect(subject.payload_filename(dakota: true)).to eq("TSOL0001")
   }
 
   describe "file generation" do
