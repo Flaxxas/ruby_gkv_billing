@@ -99,6 +99,11 @@ module RubyGkvBilling
       @datei_bezeichnung = datei_bezeichnung #TODO Anzahl Gesamtpakete?
     end
 
+    # https://www.gkv-datenaustausch.de/media/dokumente/standards_und_normen/technische_spezifikationen/Anlage_4_-_Verfahrenskennungen.pdf
+    def verfahrenskennung
+      "#{@dateityp}#{@verfahren_kennung}0"
+    end
+
     def content
       [
         basic_fields,
@@ -139,7 +144,7 @@ module RubyGkvBilling
         numeric(VERSION, 2),
         numeric(INSTRUCTION_LENGTH, 8),
         numeric(@sequenz_nr, 3),
-        alphanumeric(@verfahren_kennung, 5),
+        alphanumeric(verfahrenskennung, 5),
         numeric(@transfer_nummer, 3),
         alphanumeric(@verfahren_kennung_spezifikation, 5),
         alphanumeric(@absender_eigner, 15),

@@ -48,6 +48,10 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     expect(subject.payload_filename(dakota: true)).to eq("TSOL0001")
   }
 
+  it {
+    expect(subject.verfahrenskennung).to eq("TSOL0")
+  }
+
   describe "file generation" do
     let(:path) { RubyGkvBilling.root }
     let(:file) { File.join(path, subject.instruction_filename) }
