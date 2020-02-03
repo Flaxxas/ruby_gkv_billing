@@ -72,7 +72,7 @@ module RubyGkvBilling
       datum_empf_start: Time.now,
       datum_empf_ende: Time.now,
       verfahren_kennung: VERFAHREN_KENNUNG,
-      verfahren_kennung_spezifikation: VERFAHREN_KENNUNG,
+      verfahren_kennung_spezifikation: "",
       sequenz_nr: SEQUENZ_NR)
 
       @transfer_nummer = transfer_nummer
