@@ -20,7 +20,7 @@ module RubyGkvBilling
         @erstellt_am = erstellt_am
         @datenaustausch_ref = datenaustausch_ref.to_s.rjust(5, "0")[0..4]
         @leistungsbereich = leistungsbereich
-        @anwendungs_ref = anwendungs_ref.to_s.rjust(5, "0")[0..4]
+        @anwendungs_ref = anwendungs_ref.to_s.rjust(5, "0")[0..10]
         @testindikator = testindikator
 
         @message_count = 0
@@ -34,27 +34,27 @@ module RubyGkvBilling
       end
 
       def header_segment
-        header_segment = RubyGkvBilling::Edifact::Segment.new("UNB")
-        header_segment.add_splitted_element(
+        @header_segment = RubyGkvBilling::Edifact::Segment.new("UNB")
+        @header_segment.add_splitted_element(
           [
             RubyGkvBilling::Edifact::ENCODING,
             RubyGkvBilling::Edifact::VERSION
           ]
         )
-        header_segment << @absender_datei
-        header_segment << @empfaenger_datei
-        header_segment.add_splitted_element(
+        @header_segment << @absender_datei
+        @header_segment << @empfaenger_datei
+        @header_segment.add_splitted_element(
           [
             @erstellt_am.strftime("%Y%m%e"),
             @erstellt_am.strftime("%H%M")
           ]
         )
-        header_segment << @datenaustausch_ref
-        header_segment << @leistungsbereich
-        header_segment << @anwendungs_ref
-        header_segment << @testindikator
+        @header_segment << @datenaustausch_ref
+        @header_segment << @leistungsbereich
+        @header_segment << @anwendungs_ref
+        @header_segment << @testindikator
 
-        header_segment
+        @header_segment
       end
 
       def footer_segment
