@@ -20,8 +20,8 @@ RSpec.describe RubyGkvBilling::Edifact::Message do
   }
 
   it {
-    expect(subject.to_edifact).to include("UNH+00123+SLGA:12:0:0'",
-                                          "UNB+Test 123+-3,14+D?'Angelo+Test??'",
-                                          "UNT+3+00123'")
+    expect(subject.to_edifact).to eq(["UNH+00123+SLGA:12:0:0'",
+                                      "UNB+Test 123+-3,14+D?'Angelo+Test??'",
+                                      "UNT+3+00123'"].join("\n"))
   }
 end
