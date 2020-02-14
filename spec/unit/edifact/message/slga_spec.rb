@@ -29,14 +29,15 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   let(:ges_segment) {
     subject.ges_segment(
       "00",
-      "gesbetrag",
-      "brubetrag",
-      "zubetrag"
+      "435,20",
+      "23.756",
+      234.214
     )
   }
 
   before do
     subject.<< ges_segment
+    subject.<< subject.nam_segment
   end
 
   it { expect(subject.fkt_segment.to_edifact).to eq(
@@ -56,22 +57,22 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   ) }
 
   it { expect(ges_segment.to_edifact).to eq(
-    "GES+00+gesbetrag+brubetrag+zubetrag'"
+    "GES+00+435,20+23,76+234,21'"
   ) }
 
   it { expect(subject.nam_segment.to_edifact).to eq(
     "NAM+Firma+partner tel+E-Mail'"
   ) }
 
-  it { expect(subject.to_edifact).to include(
-    "UNH+00123+SLGA:12:0:0'",
+  it { expect(subject.to_edifact).to eq(
+    ["UNH+00123+SLGA:12:0:0'",
     "FKT+01+N+IK5430684+IK8234568+IK8643456+IK5924783'",
     "REC+sammel_nummer:001+#{Time.now.strftime("%Y%m%e")}+0'",
     "UST+steuernummer+J'",
     "SKO+0+5'",
-    "GES+00+gesbetrag+brubetrag+zubetrag'",
+    "GES+00+435,20+23,76+234,21'",
     "NAM+Firma+partner tel+E-Mail'",
-    "UNT+8+00123'"
+    "UNT+8+00123'"].join("\n")
   ) }
 
 

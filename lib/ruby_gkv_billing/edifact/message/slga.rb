@@ -66,8 +66,12 @@ module RubyGkvBilling
           if @sammelrechnung == "N"
             self.<< ust_segment
           end
-          self.<< sko_segment
-          self.<< nam_segment
+          if @skonto_prozent.to_s != ""
+            self.<< sko_segment
+          end
+
+          #TODO automatisch ans Ende packen
+          #self.<< nam_segment
         end
 
         def ges_segment(
@@ -78,9 +82,9 @@ module RubyGkvBilling
         )
           ges_segment = RubyGkvBilling::Edifact::Segment.new("GES")
           ges_segment << status
-          ges_segment << gesamt_rechnungsbetrag
-          ges_segment << gesamt_bruttobetrag
-          ges_segment << gesamt_zuzahlung
+          ges_segment.add_float(gesamt_rechnungsbetrag)
+          ges_segment.add_float(gesamt_bruttobetrag)
+          ges_segment.add_float(gesamt_zuzahlung)
 
           ges_segment
         end
