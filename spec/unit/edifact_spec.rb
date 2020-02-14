@@ -6,7 +6,7 @@ RSpec.describe RubyGkvBilling::Edifact do
     it { expect(subject.size).to eq(8) }
   end
 
-  describe "physical_filename" do
+  describe "logical_filename" do
     subject{ RubyGkvBilling::Edifact.logical_filename("IKDE4321", "S", 2, classification: "SL") }
 
     it { expect(subject).to eq("SLDE4321S02") }
