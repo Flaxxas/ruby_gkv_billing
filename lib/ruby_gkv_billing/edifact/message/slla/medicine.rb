@@ -201,10 +201,10 @@ module RubyGkvBilling
               tarifkennzeichen
             ])
             ehe_segment << leistungs_art
-            ehe_segment << menge
-            ehe_segment << einzelbetrag
+            ehe_segment.convert_float(menge)
+            ehe_segment.convert_float(einzelbetrag)
             ehe_segment << datum_leistungserbringung.strftime("%Y%m%e")
-            ehe_segment << zuzahlung
+            ehe_segment.convert_float(zuzahlung)
             ehe_segment << kilometer
 
             ehe_segment
@@ -224,7 +224,7 @@ module RubyGkvBilling
 
             mws_segment = RubyGkvBilling::Edifact::Segment.new("MWS")
             mws_segment << kennzeichen_mws
-            mws_segment << betrag_mws
+            mws_segment.convert_float(betrag_mws)
 
             mws_segment
           end

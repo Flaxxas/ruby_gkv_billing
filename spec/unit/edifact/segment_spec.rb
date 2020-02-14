@@ -19,4 +19,11 @@ RSpec.describe RubyGkvBilling::Edifact::Segment do
   it {
     expect(subject.to_edifact).to eq("UNB+Test 123+-3,14+D?'Angelo+Test??+Version 3:0:0'")
   }
+
+  describe "floats" do
+    it { expect(subject.convert_float(4)).to include("4,00") }
+    it { expect(subject.convert_float(4.2324)).to include("4,23") }
+    it { expect(subject.convert_float("4.2384")).to include("4,24") }
+    it { expect(subject.convert_float("4,2384")).to include("4,24") }
+  end
 end
