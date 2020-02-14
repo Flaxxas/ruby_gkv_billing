@@ -23,6 +23,8 @@ module RubyGkvBilling
       def add_float(value)
         if value.is_a?(String)
           value = value.gsub(",", ".")
+        else
+          value = value.to_f
         end
 
         @elements << format("%.2f", value).gsub(".", ",")
