@@ -201,10 +201,10 @@ module RubyGkvBilling
               tarifkennzeichen
             ])
             ehe_segment << leistungs_art
-            ehe_segment.convert_float(menge)
-            ehe_segment.convert_float(einzelbetrag)
+            ehe_segment.add_float(menge)
+            ehe_segment.add_float(einzelbetrag)
             ehe_segment << datum_leistungserbringung.strftime("%Y%m%e")
-            ehe_segment.convert_float(zuzahlung)
+            ehe_segment.add_float(zuzahlung)
             ehe_segment << kilometer
 
             ehe_segment
@@ -224,7 +224,7 @@ module RubyGkvBilling
 
             mws_segment = RubyGkvBilling::Edifact::Segment.new("MWS")
             mws_segment << kennzeichen_mws
-            mws_segment.convert_float(betrag_mws)
+            mws_segment.add_float(betrag_mws)
 
             mws_segment
           end
@@ -261,10 +261,10 @@ module RubyGkvBilling
           def bes_segment
 
             bes_segment = RubyGkvBilling::Edifact::Segment.new("BES")
-            bes_segment << @ges_brutto
-            bes_segment << @ges_gesetzliche_zuzahlung
-            bes_segment << @ges_prozentuale_zuzahlung
-            bes_segment << @pauschale_zuzahlung
+            bes_segment.add_float(@ges_brutto)
+            bes_segment.add_float(@ges_gesetzliche_zuzahlung)
+            bes_segment.add_float(@ges_prozentuale_zuzahlung)
+            bes_segment.add_float(@pauschale_zuzahlung)
 
             bes_segment
           end
@@ -272,9 +272,9 @@ module RubyGkvBilling
 
           def gzf_segment
             gzf_segment = RubyGkvBilling::Edifact::Segment.new("GZF")
-            gzf_segment << @forderung_gesetzlich
-            gzf_segment << @forderung_prozentual
-            gzf_segment << @forderung_pauschal
+            gzf_segment.add_float(@forderung_gesetzlich)
+            gzf_segment.add_float(@forderung_prozentual)
+            gzf_segment.add_float(@forderung_pauschal)
 
             gzf_segment
           end

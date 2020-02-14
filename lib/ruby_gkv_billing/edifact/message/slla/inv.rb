@@ -101,7 +101,7 @@ module RubyGkvBilling
             uri_segment << @urpsruengliche_einzel_rechnungsnummer
             uri_segment << @urpsruengliches_rechnungsdatum
             uri_segment << @urpsruengliche_belegnummer
-            uri_segment << @gesamt_zuzahlung
+            uri_segment.add_float(@gesamt_zuzahlung)
 
             uri_segment
           end

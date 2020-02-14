@@ -20,7 +20,7 @@ module RubyGkvBilling
         @elements << values.map {|c| convert(c)}.join(RubyGkvBilling::Edifact::DATA_DIVIDE_CHAR)
       end
 
-      def convert_float(value)
+      def add_float(value)
         if value.is_a?(String)
           value = value.gsub(",", ".")
         end

@@ -21,9 +21,9 @@ RSpec.describe RubyGkvBilling::Edifact::Segment do
   }
 
   describe "floats" do
-    it { expect(subject.convert_float(4)).to include("4,00") }
-    it { expect(subject.convert_float(4.2324)).to include("4,23") }
-    it { expect(subject.convert_float("4.2384")).to include("4,24") }
-    it { expect(subject.convert_float("4,2384")).to include("4,24") }
+    it { expect(subject.add_float(4)).to include("4,00") }
+    it { expect(subject.add_float(4.2324)).to include("4,23") }
+    it { expect(subject.add_float("4.2384")).to include("4,24") }
+    it { expect(subject.add_float("4,2384")).to include("4,24") }
   end
 end
