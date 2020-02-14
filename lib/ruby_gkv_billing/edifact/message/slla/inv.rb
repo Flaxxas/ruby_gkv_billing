@@ -13,6 +13,11 @@ module RubyGkvBilling
             beleg_nummer,
             besondere_versorgungsform,
             #URI_SEGMENT
+            urspruengliche_ik_leistungserbringer,
+            urpsruengliche_sammel_rechnungsnummer,
+            urpsruengliche_einzel_rechnungsnummer,
+            urpsruengliches_rechnungsdatum,
+            urpsruengliche_belegnummer,
             gesamt_zuzahlung,
             #NAD_SEGMENT
             vers_nachname,
@@ -34,6 +39,11 @@ module RubyGkvBilling
             @beleg_nummer = beleg_nummer
             @besondere_versorgungsform = besondere_versorgungsform
             #URI_SEGMENT
+            @urspruengliche_ik_leistungserbringer = urspruengliche_ik_leistungserbringer
+            @urpsruengliche_sammel_rechnungsnummer = urpsruengliche_sammel_rechnungsnummer
+            @urpsruengliche_einzel_rechnungsnummer = urpsruengliche_einzel_rechnungsnummer
+            @urpsruengliches_rechnungsdatum = urpsruengliches_rechnungsdatum
+            @urpsruengliche_belegnummer = urpsruengliche_belegnummer
             @gesamt_zuzahlung = gesamt_zuzahlung
             #NAD_SEGMENT
             @vers_nachname = vers_nachname
@@ -52,9 +62,13 @@ module RubyGkvBilling
             @diagnoses = []
 
             self.<< inv_segment
-            self.<< uri_segment
+            if @urspruengliche_ik_leistungserbringer.to_s != ""
+              self.<< uri_segment
+            end
             self.<< nad_segment
-            self.<< img_segment
+            if @abrechnungsjahr.to_s != ""
+              self.<< img_segment
+            end
           end
 
           def <<(segment)
@@ -82,6 +96,11 @@ module RubyGkvBilling
 
           def uri_segment
             uri_segment = RubyGkvBilling::Edifact::Segment.new("URI")
+            uri_segment << @urspruengliche_ik_leistungserbringer
+            uri_segment << @urpsruengliche_sammel_rechnungsnummer
+            uri_segment << @urpsruengliche_einzel_rechnungsnummer
+            uri_segment << @urpsruengliches_rechnungsdatum
+            uri_segment << @urpsruengliche_belegnummer
             uri_segment << @gesamt_zuzahlung
 
             uri_segment
