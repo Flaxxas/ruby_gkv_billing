@@ -84,7 +84,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
       Time.new(2010,10,10),
       "63445",
       "234"
-    ).to_edifact).to eq("EHE+01+35632+test+43+34565+20101010+63445+234'") }
+    ).to_edifact).to eq("EHE+01:35632+test+43+34565+20101010+63445+234'") }
 
     it { expect(subject.txt_segment("text").to_edifact).to eq("TXT+text'") }
 
@@ -114,7 +114,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
     it { expect(subject.segments[1].to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum+10'") }
     it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
     it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+10+merkmal'") }
-    it { expect(subject.segments[4].to_edifact).to eq("EHE+01+35632+test+43+34565+20101010+63445+234'") }
+    it { expect(subject.segments[4].to_edifact).to eq("EHE+01:35632+test+43+34565+20101010+63445+234'") }
     it { expect(subject.segments[5].to_edifact).to eq("TXT+text'") }
     it { expect(subject.segments[6].to_edifact).to eq("MWS+1+23454'") }
     it { expect(subject.segments[7].to_edifact).to eq("ZHE+999999999+999999999+20111111+1+9999+11+1+1+1+20101010+1+1'") }

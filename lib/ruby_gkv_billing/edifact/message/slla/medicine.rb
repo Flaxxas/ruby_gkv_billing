@@ -196,8 +196,10 @@ module RubyGkvBilling
           )
 
             ehe_segment = RubyGkvBilling::Edifact::Segment.new("EHE")
-            ehe_segment << abrechnungscode
-            ehe_segment << tarifkennzeichen
+            ehe_segment.add_splitted_element([
+              abrechnungscode,
+              tarifkennzeichen
+            ])
             ehe_segment << leistungs_art
             ehe_segment << menge
             ehe_segment << einzelbetrag
