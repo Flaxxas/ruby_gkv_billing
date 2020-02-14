@@ -45,7 +45,7 @@ module RubyGkvBilling
         @header_segment << @empfaenger_datei
         @header_segment.add_splitted_element(
           [
-            @erstellt_am.strftime("%Y%m%e"),
+            @erstellt_am.strftime("%Y%m%d"),
             @erstellt_am.strftime("%H%M")
           ]
         )

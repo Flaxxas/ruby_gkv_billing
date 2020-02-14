@@ -203,7 +203,7 @@ module RubyGkvBilling
             ehe_segment << leistungs_art
             ehe_segment.add_float(menge)
             ehe_segment.add_float(einzelbetrag)
-            ehe_segment << datum_leistungserbringung.strftime("%Y%m%e")
+            ehe_segment << datum_leistungserbringung.strftime("%Y%m%d")
             ehe_segment.add_float(zuzahlung)
             ehe_segment << kilometer
 
@@ -234,14 +234,14 @@ module RubyGkvBilling
             zhe_segment = RubyGkvBilling::Edifact::Segment.new("ZHE")
             zhe_segment << @betriebsstaetten_nr
             zhe_segment << @arztnummer
-            zhe_segment << @verordnungs_datum.strftime("%Y%m%e")
+            zhe_segment << @verordnungs_datum.strftime("%Y%m%d")
             zhe_segment << @zuzahlungskennzeichen
             zhe_segment << @indikationsschluessel
             zhe_segment << @kennzeichen_verordnungsart
             zhe_segment << @kennzeichen_verordnungsbesonderheiten
             zhe_segment << @unfallkennzeichen
             zhe_segment << @kennzeichen_bvg
-            zhe_segment << @behandlungsbeginn.strftime("%Y%m%e")
+            zhe_segment << @behandlungsbeginn.strftime("%Y%m%d")
             zhe_segment << @therapie_bericht
             zhe_segment << @hausbesuch
 
@@ -252,7 +252,7 @@ module RubyGkvBilling
 
             skz_segment = RubyGkvBilling::Edifact::Segment.new("SKZ")
             skz_segment << @genehmigungskennzeichen
-            skz_segment << @datum_genehmigung.strftime("%Y%m%e")
+            skz_segment << @datum_genehmigung.strftime("%Y%m%d")
             skz_segment << @genehmigungsart
 
             skz_segment

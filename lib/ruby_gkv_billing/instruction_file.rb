@@ -134,10 +134,10 @@ module RubyGkvBilling
     # 2.1 Allgemeine KK-Felder
     def basic_fields
 
-      datum_erstellt = @datum_erstellt.strftime("%Y%m%e%H%M%S") if @datum_erstellt
-      datum_gesendet = @datum_gesendet.strftime("%Y%m%e%H%M%S") if @datum_gesendet
-      datum_empf_start = @datum_empf_start.strftime("%Y%m%e%H%M%S") if @datum_empf_start
-      datum_empf_ende = @datum_empf_ende.strftime("%Y%m%e%H%M%S") if @datum_empf_ende
+      datum_erstellt = @datum_erstellt.strftime("%Y%m%d%H%M%S") if @datum_erstellt
+      datum_gesendet = @datum_gesendet.strftime("%Y%m%d%H%M%S") if @datum_gesendet
+      datum_empf_start = @datum_empf_start.strftime("%Y%m%d%H%M%S") if @datum_empf_start
+      datum_empf_ende = @datum_empf_ende.strftime("%Y%m%d%H%M%S") if @datum_empf_ende
 
       [
         numeric(IDENTIFICATOR, 6),

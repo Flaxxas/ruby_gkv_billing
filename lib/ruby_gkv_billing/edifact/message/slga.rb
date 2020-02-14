@@ -107,7 +107,7 @@ module RubyGkvBilling
               @sammel_rechnungsnummer,
               @einzel_rechnungs_nummer
             ])
-          rec_segment << @datum.strftime("%Y%m%e")
+          rec_segment << @datum.strftime("%Y%m%d")
           rec_segment << @rechnungs_art
 
           rec_segment

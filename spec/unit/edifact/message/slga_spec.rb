@@ -23,7 +23,8 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     skonto_prozent: "0",
     zahlungsziel: "5",
     #OPTIONAL => NAM_SEGMENT
-    name2: "partner tel"
+    name2: "partner tel",
+    datum: Time.new(2010,10,9)
   ) }
 
   let(:ges_segment) {
@@ -45,7 +46,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   ) }
 
   it { expect(subject.rec_segment.to_edifact).to eq(
-    "REC+sammel_nummer:001+#{Time.now.strftime("%Y%m%e")}+0'"
+    "REC+sammel_nummer:001+20101009+0'"
   ) }
 
   it { expect(subject.ust_segment.to_edifact).to eq(
@@ -67,7 +68,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   it { expect(subject.to_edifact).to eq(
     ["UNH+00123+SLGA:12:0:0'",
     "FKT+01+N+IK5430684+IK8234568+IK8643456+IK5924783'",
-    "REC+sammel_nummer:001+#{Time.now.strftime("%Y%m%e")}+0'",
+    "REC+sammel_nummer:001+20101009+0'",
     "UST+steuernummer+J'",
     "SKO+0+5'",
     "GES+00+435,20+23,76+234,21'",

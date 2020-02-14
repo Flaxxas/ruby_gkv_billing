@@ -202,7 +202,7 @@ module RubyGkvBilling
             enf_segment << leistungs_art
             enf_segment << menge
             enf_segment << einzelbetrag
-            enf_segment << datum_leistungserbringung.strftime("%Y%m%e")
+            enf_segment << datum_leistungserbringung.strftime("%Y%m%d")
             enf_segment << zuzahlung
 
             enf_segment
@@ -222,8 +222,8 @@ module RubyGkvBilling
             sut_segment << uhrzeit.strftime("%H%M")
             sut_segment << uhrzeit_bis.strftime("%H%M")
             sut_segment << dauer
-            sut_segment << versorgung_von.strftime("%Y%m%e")
-            sut_segment << versorgung_bis.strftime("%Y%m%e")
+            sut_segment << versorgung_von.strftime("%Y%m%d")
+            sut_segment << versorgung_bis.strftime("%Y%m%d")
 
             sut_segment
           end
@@ -252,7 +252,7 @@ module RubyGkvBilling
             zuv_segment = RubyGkvBilling::Edifact::Segment.new("ZUV")
             zuv_segment << @betriebsstaetten_nr
             zuv_segment << @arztnummer
-            zuv_segment << @verordnungs_datum.strftime("%Y%m%e")
+            zuv_segment << @verordnungs_datum.strftime("%Y%m%d")
             zuv_segment << @zuzahlungskennzeichen
             zuv_segment << @unfallkennzeichen
             zuv_segment << @kennzeichen_bvg
@@ -265,7 +265,7 @@ module RubyGkvBilling
 
             skz_segment = RubyGkvBilling::Edifact::Segment.new("SKZ")
             skz_segment << @genehmigungskennzeichen
-            skz_segment << @datum_genehmigung.strftime("%Y%m%e")
+            skz_segment << @datum_genehmigung.strftime("%Y%m%d")
             skz_segment << @genehmigungsart
 
             skz_segment

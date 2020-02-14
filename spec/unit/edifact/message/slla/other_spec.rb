@@ -96,9 +96,9 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
 
   it { expect(subject.dia_segment("01", "Test").to_edifact).to eq("DIA+01+Test'") }
 
-  it { expect(subject.zuv_segment.to_edifact).to eq("ZUV+999999999+999999999+201001 1+1+1+1+1'") }
+  it { expect(subject.zuv_segment.to_edifact).to eq("ZUV+999999999+999999999+20100101+1+1+1+1'") }
 
-  it { expect(subject.skz_segment.to_edifact).to eq("SKZ+01+201001 1+02'") }
+  it { expect(subject.skz_segment.to_edifact).to eq("SKZ+01+20100101+02'") }
 
   it { expect(subject.bes_segment.to_edifact).to eq("BES+1234+765+45+7854+456'") }
 
@@ -121,9 +121,9 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
     it { expect(subject.segments[5].to_edifact).to eq("SUT+234+1010+1010+45+20101010+20101010'") }
     it { expect(subject.segments[6].to_edifact).to eq("TXT+text'") }
     it { expect(subject.segments[7].to_edifact).to eq("MWS+1+23454'") }
-    it { expect(subject.segments[8].to_edifact).to eq("ZUV+999999999+999999999+201001 1+1+1+1+1'") }
+    it { expect(subject.segments[8].to_edifact).to eq("ZUV+999999999+999999999+20100101+1+1+1+1'") }
     it { expect(subject.segments[9].to_edifact).to eq("DIA+01+Test'") }
-    it { expect(subject.segments[10].to_edifact).to eq("SKZ+01+201001 1+02'") }
+    it { expect(subject.segments[10].to_edifact).to eq("SKZ+01+20100101+02'") }
     it { expect(subject.segments[11].to_edifact).to eq("BES+1234+765+45+7854+456'") }
   end
 end
