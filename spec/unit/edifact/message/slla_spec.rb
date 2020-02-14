@@ -23,7 +23,12 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
         "beleg_nr",
         "besondere_versorgung",
         #URI_SEGMENT
-        "zuzhalung",
+        "123456789",
+        "sammel",
+        "einzel",
+        "01012010",
+        "belegnum",
+        "10",
         #NAD_SEGMENT
         "vers_nachname",
         "vers_vorname",
@@ -52,10 +57,9 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
     "FKT+01+IK5430684+IK8234568+IK8643456+IK5924783'",
     "REC+sammel_nummer:001+20101010+0'",
     "INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'",
-    "URI+zuzhalung'",
     "NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'",
     "IMG+2010+10+merkmal'",
-    "UNT+8+00123'"
+    "UNT+7+00123'"
   ) }
 
 end

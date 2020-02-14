@@ -7,7 +7,12 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
     "beleg_nr",
     "besondere_versorgung",
     #URI_SEGMENT
-    "zuzhalung",
+    "123456789",
+    "sammel",
+    "einzel",
+    "01012010",
+    "belegnum",
+    "10",
     #NAD_SEGMENT
     "vers_nachname",
     "vers_vorname",
@@ -60,7 +65,8 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
       text: "text",
       #MWS_SEGMENT
       kennzeichen_mws: "1",
-      betrag_mws: "23454"
+      betrag_mws: "23454",
+      datum_leistungserbringung: Time.new(2010,10,10)
     )
     subject.add_diagnose(
       "1234567",
@@ -95,7 +101,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
 
-  it { expect(subject.uri_segment.to_edifact).to eq("URI+zuzhalung'") }
+  it { expect(subject.uri_segment.to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum+10'") }
 
   it { expect(subject.nad_segment.to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
 
@@ -105,10 +111,10 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   describe "in sequence" do
     it { expect(subject.segments[0].to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
-    it { expect(subject.segments[1].to_edifact).to eq("URI+zuzhalung'") }
+    it { expect(subject.segments[1].to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum+10'") }
     it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
     it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+10+merkmal'") }
-    it { expect(subject.segments[4].to_edifact).to eq("EHE+01+35632+test+43+34565+201912 2+63445+234'") }
+    it { expect(subject.segments[4].to_edifact).to eq("EHE+01+35632+test+43+34565+20101010+63445+234'") }
     it { expect(subject.segments[5].to_edifact).to eq("TXT+text'") }
     it { expect(subject.segments[6].to_edifact).to eq("MWS+1+23454'") }
     it { expect(subject.segments[7].to_edifact).to eq("ZHE+999999999+999999999+20111111+1+9999+11+1+1+1+20101010+1+1'") }

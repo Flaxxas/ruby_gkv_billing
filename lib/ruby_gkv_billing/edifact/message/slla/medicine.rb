@@ -12,6 +12,11 @@ module RubyGkvBilling
               beleg_nummer,
               besondere_versorgungsform,
               #URI_SEGMENT
+              urspruengliche_ik_leistungserbringer,
+              urpsruengliche_sammel_rechnungsnummer,
+              urpsruengliche_einzel_rechnungsnummer,
+              urpsruengliches_rechnungsdatum,
+              urpsruengliche_belegnummer,
               gesamt_zuzahlung,
               #NAD_SEGMENT
               vers_nachname,
@@ -62,6 +67,11 @@ module RubyGkvBilling
               beleg_nummer,
               besondere_versorgungsform,
               #URI_SEGMENT
+              urspruengliche_ik_leistungserbringer,
+              urpsruengliche_sammel_rechnungsnummer,
+              urpsruengliche_einzel_rechnungsnummer,
+              urpsruengliches_rechnungsdatum,
+              urpsruengliche_belegnummer,
               gesamt_zuzahlung,
               #NAD_SEGMENT
               vers_nachname,
