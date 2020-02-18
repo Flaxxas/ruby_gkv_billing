@@ -128,7 +128,7 @@ module RubyGkvBilling
           def final_segments
             elements = []
 
-            elements << skz_segment if @genehmigungskennzeichen
+            elements << skz_segment if @genehmigungskennzeichen.to_s != ""
 
             #TODO lese verarbeitungskennzeichen aus
             if @forderung_gesetzlich.to_s != ""
@@ -176,7 +176,7 @@ module RubyGkvBilling
 
             @ehes << txt_segment(
               text
-            ) if text
+            ) if text.to_s != ""
 
             @ehes << mws_segment(
               kennzeichen_mws,
