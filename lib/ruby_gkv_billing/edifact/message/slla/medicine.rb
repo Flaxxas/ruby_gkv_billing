@@ -241,7 +241,7 @@ module RubyGkvBilling
             zhe_segment << @kennzeichen_verordnungsbesonderheiten
             zhe_segment << @unfallkennzeichen
             zhe_segment << @kennzeichen_bvg
-            if @behandlungsbeginn
+            if @behandlungsbeginn.to_s != ""
               zhe_segment << @behandlungsbeginn.strftime("%Y%m%d")
             else
               zhe_segment << ""
