@@ -32,7 +32,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
         #NAD_SEGMENT
         "vers_nachname",
         "vers_vorname",
-        "vers_gebdatum",
+        Date.new(2010, 10, 9),
         "vers_strasse",
         "vers_plz",
         "vers_ort",
@@ -57,7 +57,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
     "FKT+01+IK5430684+IK8234568+IK8643456+IK5924783'",
     "REC+sammel_nummer:001+20101010+0'",
     "INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'",
-    "NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'",
+    "NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'",
     "IMG+2010+10+merkmal'",
     "UNT+7+00123'"].join("\n")
   ) }

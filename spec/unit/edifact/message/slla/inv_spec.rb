@@ -16,7 +16,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Inv do
     #NAD_SEGMENT
     "vers_nachname",
     "vers_vorname",
-    "vers_gebdatum",
+    Date.new(2010,10,9),
     "vers_strasse",
     "vers_plz",
     "vers_ort",
@@ -31,7 +31,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Inv do
 
   it { expect(subject.uri_segment.to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum+10,00'") }
 
-  it { expect(subject.nad_segment.to_edifact).to eq("NAD+vers_nachname+vers_vorname+vers_gebdatum+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
+  it { expect(subject.nad_segment.to_edifact).to eq("NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
 
   it { expect(subject.img_segment.to_edifact).to eq("IMG+2010+10+merkmal'") }
 
@@ -55,7 +55,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Inv do
       #NAD_SEGMENT
       "vers_nachname",
       "vers_vorname",
-      "vers_gebdatum",
+      Date.new(2010,10,9),
       "vers_strasse",
       "vers_plz",
       "vers_ort",

@@ -110,7 +110,7 @@ module RubyGkvBilling
             nad_segment = RubyGkvBilling::Edifact::Segment.new("NAD")
             nad_segment << @vers_nachname
             nad_segment << @vers_vorname
-            nad_segment << @vers_gebdatum
+            nad_segment << @vers_gebdatum.strftime("%Y%m%d")
             nad_segment << @vers_strasse
             nad_segment << @vers_plz
             nad_segment << @vers_ort
