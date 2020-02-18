@@ -42,6 +42,8 @@ module RubyGkvBilling
         def fkt_segment
           fkt_segment = RubyGkvBilling::Edifact::Segment.new("FKT")
           fkt_segment << @verarbeitungskennzeichnung
+          # Freifeld
+          fkt_segment << ""
           fkt_segment << @ik_leistungserbringer
           fkt_segment << @ik_kostentraeger
           fkt_segment << @ik_krankenkasse
