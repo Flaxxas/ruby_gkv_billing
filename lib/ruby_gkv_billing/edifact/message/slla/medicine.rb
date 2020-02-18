@@ -241,7 +241,11 @@ module RubyGkvBilling
             zhe_segment << @kennzeichen_verordnungsbesonderheiten
             zhe_segment << @unfallkennzeichen
             zhe_segment << @kennzeichen_bvg
-            zhe_segment << @behandlungsbeginn.strftime("%Y%m%d")
+            if @behandlungsbeginn
+              zhe_segment << @behandlungsbeginn.strftime("%Y%m%d")
+            else
+              zhe_segment << ""
+            end
             zhe_segment << @therapie_bericht
             zhe_segment << @hausbesuch
 
