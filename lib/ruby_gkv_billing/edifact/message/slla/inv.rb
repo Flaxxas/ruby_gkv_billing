@@ -18,7 +18,6 @@ module RubyGkvBilling
             urpsruengliche_einzel_rechnungsnummer,
             urpsruengliches_rechnungsdatum,
             urpsruengliche_belegnummer,
-            gesamt_zuzahlung,
             #NAD_SEGMENT
             vers_nachname,
             vers_vorname,
@@ -44,7 +43,6 @@ module RubyGkvBilling
             @urpsruengliche_einzel_rechnungsnummer = urpsruengliche_einzel_rechnungsnummer
             @urpsruengliches_rechnungsdatum = urpsruengliches_rechnungsdatum
             @urpsruengliche_belegnummer = urpsruengliche_belegnummer
-            @gesamt_zuzahlung = gesamt_zuzahlung
             #NAD_SEGMENT
             @vers_nachname = vers_nachname
             @vers_vorname = vers_vorname
@@ -101,7 +99,6 @@ module RubyGkvBilling
             uri_segment << @urpsruengliche_einzel_rechnungsnummer
             uri_segment << @urpsruengliches_rechnungsdatum
             uri_segment << @urpsruengliche_belegnummer
-            uri_segment.add_float(@gesamt_zuzahlung)
 
             uri_segment
           end

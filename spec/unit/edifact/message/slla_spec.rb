@@ -28,7 +28,6 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
         "einzel",
         "01012010",
         "belegnum",
-        "10",
         #NAD_SEGMENT
         "vers_nachname",
         "vers_vorname",

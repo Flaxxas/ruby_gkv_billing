@@ -12,7 +12,6 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
     "einzel",
     "01012010",
     "belegnum",
-    "10,111",
     #NAD_SEGMENT
     "vers_nachname",
     "vers_vorname",
@@ -101,7 +100,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
 
-  it { expect(subject.uri_segment.to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum+10,11'") }
+  it { expect(subject.uri_segment.to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum'") }
 
   it { expect(subject.nad_segment.to_edifact).to eq("NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
 
@@ -111,7 +110,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   describe "in sequence" do
     it { expect(subject.segments[0].to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
-    it { expect(subject.segments[1].to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum+10,11'") }
+    it { expect(subject.segments[1].to_edifact).to eq("URI+123456789+sammel+einzel+01012010+belegnum'") }
     it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
     it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+10+merkmal'") }
     it { expect(subject.segments[4].to_edifact).to eq("EHE+01:35632+test+43,12+34565,32+20101010+63445,00+234'") }
