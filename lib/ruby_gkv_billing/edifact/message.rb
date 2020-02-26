@@ -44,7 +44,8 @@ module RubyGkvBilling
 
       def footer_segment
         footer_segment = RubyGkvBilling::Edifact::Segment.new("UNT")
-        footer_segment << (@segments.size + 2)
+        size = (@segments.size + 2)
+        footer_segment << size.to_s.rjust(6, "0")
         footer_segment << @nachrichten_ref_nummer
 
         footer_segment

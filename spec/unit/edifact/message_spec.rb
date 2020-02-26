@@ -16,12 +16,12 @@ RSpec.describe RubyGkvBilling::Edifact::Message do
   }
 
   it {
-    expect(subject.footer_segment.to_edifact).to eq("UNT+3+00123'")
+    expect(subject.footer_segment.to_edifact).to eq("UNT+000003+00123'")
   }
 
   it {
     expect(subject.to_edifact).to eq(["UNH+00123+SLGA:13:0:0'",
                                       "UNB+Test 123+-3,14+D?'Angelo+Test??'",
-                                      "UNT+3+00123'"].join("\n"))
+                                      "UNT+000003+00123'"].join("\n"))
   }
 end

@@ -73,7 +73,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
     "SKO+0+5'",
     "GES+00+435,20+23,76+234,21'",
     "NAM+Firma+partner tel+E-Mail'",
-    "UNT+8+00123'"].join("\n")
+    "UNT+000008+00123'"].join("\n")
   ) }
 
 

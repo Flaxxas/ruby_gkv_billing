@@ -59,7 +59,7 @@ module RubyGkvBilling
 
       def footer_segment
         footer_segment = RubyGkvBilling::Edifact::Segment.new("UNZ")
-        footer_segment << @message_count
+        footer_segment << @message_count.to_s.rjust(6, "0")
         footer_segment << @datenaustausch_ref
 
         footer_segment

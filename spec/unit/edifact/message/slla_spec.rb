@@ -58,7 +58,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
     "INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'",
     "NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'",
     "IMG+2010+10+merkmal'",
-    "UNT+7+00123'"].join("\n")
+    "UNT+000007+00123'"].join("\n")
   ) }
 
 end
