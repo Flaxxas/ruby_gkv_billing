@@ -138,4 +138,52 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       expect(subject.public_key.to_s).to eq(key.public_key.to_s)
     }
   end
+  describe "ssl", focus: true do
+    subject{ RubyGkvBilling::Security::Certification }
+    let(:ik_number){ "123456" }
+    let(:path){ File.join(RubyGkvBilling.root, "spec/examples/ssl/") }
+    let(:config){ File.join(RubyGkvBilling.root, "spec/examples/ssl/itsg.config") }
+
+    context "create_private_key" do
+      let(:key){ subject.create_private_key(ik_number, path) }
+
+      it {expect(subject.open_key(key).to_pem).to include("PRIVATE KEY")}
+
+      it {expect(File.exist?(key)).to be_truthy}
+    end
+
+    context "create_certificate" do
+      let(:certificate){ File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.p10.req.pem") }
+
+      it {expect(File.exist?(certificate)).to be_truthy}
+    end
+
+    context "create_public_key" do
+      let(:key){ subject.create_public_key(ik_number, path, config_file_path: config) }
+
+      it {expect(subject.open_key(key).to_pem).to include("PUBLIC KEY")}
+
+      it {expect(File.exist?(key)).to be_truthy}
+    end
+
+    context "extract_pkey" do
+      let(:pkey){ subject.extract_pkey(ik_number, path) }
+
+      it {expect(File.exist?(pkey)).to be_truthy}
+    end
+
+    context "sha1_code" do
+      let(:key) { File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.pub.key.pem") }
+      let(:example){ File.join(RubyGkvBilling.root, "spec/examples/ssl/example.pub.key.pem") }
+
+      it {expect(subject.sha1_code(key)).to eq(subject.sha1_code(example))}
+    end
+
+    after(:all) do
+      File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.prv.key.pem"))
+      # Example Certificate: File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.p10.req.pem"))
+      File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.pub.key.pem"))
+      File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.pkey"))
+    end
+  end
 end

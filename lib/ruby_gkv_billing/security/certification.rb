@@ -113,6 +113,30 @@ module RubyGkvBilling
           OpenSSL::X509::Attribute.new('msExtReq', attrval)
         ]
       end
+
+      def self.create_private_key(ik_number, path)
+        system("openssl genrsa -out #{path}/#{ik_number}.prv.key.pem 4096")
+        return "#{path}/#{ik_number}.prv.key.pem"
+      end
+
+      def self.create_certificate(ik_number, private_key_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
+        system("openssl req -new -config #{config_file_path} -key #{private_key_path + ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem")
+        return "#{private_key_path}/#{ik_number}.p10.req.pem"
+      end
+
+      def self.create_public_key(ik_number, private_key_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
+        system("openssl req -config #{config_file_path} -in #{private_key_path}/#{ik_number}.p10.req.pem -pubkey -noout -out #{private_key_path}/#{ik_number}.pub.key.pem")
+        return "#{private_key_path}/#{ik_number}.pub.key.pem"
+      end
+
+      def self.extract_pkey(ik_number, public_key_path)
+        system("openssl asn1parse -in #{public_key_path}/#{ik_number}.pub.key.pem -strparse 19 -out #{public_key_path}/#{ik_number}.pkey -noout")
+        return "#{public_key_path}/#{ik_number}.pkey"
+      end
+
+      def self.sha1_code(pkey_path)
+        system("openssl dgst -c -sha1 #{pkey_path}")
+      end
     end
   end
 end
