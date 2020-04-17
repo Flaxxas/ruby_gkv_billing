@@ -145,6 +145,10 @@ module RubyGkvBilling
         extract_pkey(ik_number, path)
         sha1_code(File.join(path, "#{ik_number}.pkey"))
       end
+
+      def self.print_certificate(file_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
+        system("openssl req -text -config #{config_file_path} -in #{file_path} -nameopt multiline -noout")
+      end
     end
   end
 end
