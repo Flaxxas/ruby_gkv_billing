@@ -179,6 +179,12 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       it {expect(subject.sha1_code(key)).to eq(subject.sha1_code(example))}
     end
 
+    context "p7c to pem" do
+      let(:p7c) { File.join(RubyGkvBilling.root, "spec/examples/certificate_1234567.p7c") }
+
+      it {expect(subject.convert_p7c_to_pem(p7c)).to include("CERTIFICATE")}
+    end
+
     after(:all) do
       File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.prv.key.pem"))
       # Example Certificate: File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.p10.req.pem"))
