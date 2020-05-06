@@ -149,6 +149,15 @@ module RubyGkvBilling
       def self.print_certificate(file_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
         system("openssl req -text -config #{config_file_path} -in #{file_path} -nameopt multiline -noout")
       end
+
+      def self.convert_p7c_to_pem(p7c_file)
+        #system("openssl pkcs7 -in cert.p7b -inform DER -print_certs -out cert.pem")
+        cer = OpenSSL::PKCS7.new(File.read(p7c_file))
+
+        content = cer.certificates.map(&:to_pem)
+
+        content.join("")
+      end
     end
   end
 end
