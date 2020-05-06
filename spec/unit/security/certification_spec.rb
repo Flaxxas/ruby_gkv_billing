@@ -46,7 +46,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
         key: key
         )
       }
-      let(:private_key) { File.join(RubyGkvBilling.root, "spec/examples/private_1234567_key.pem") }
+      let(:private_key) { RubyGkvBilling.file_path("spec/examples/private_1234567_key.pem") }
       let(:key) { RubyGkvBilling::Security::Certification.open_key(private_key) }
       let(:crt_path) { File.join(Dir.tmpdir, "1234567.p10") }
 
@@ -129,9 +129,9 @@ RSpec.describe RubyGkvBilling::Security::Certification do
   end
 
   describe "opening crt" do
-    let(:crt) { File.join(RubyGkvBilling.root, "spec/examples/certificate_1234567.pem") }
+    let(:crt) { RubyGkvBilling.file_path("spec/examples/certificate_1234567.pem") }
     subject { RubyGkvBilling::Security::Certification.open_crt(crt) }
-    let(:private_key) { File.join(RubyGkvBilling.root, "spec/examples/private_1234567_key.pem") }
+    let(:private_key) { RubyGkvBilling.file_path("spec/examples/private_1234567_key.pem") }
     let(:key) { RubyGkvBilling::Security::Certification.open_key(private_key) }
 
     it {
@@ -141,8 +141,8 @@ RSpec.describe RubyGkvBilling::Security::Certification do
   describe "ssl", focus: true do
     subject{ RubyGkvBilling::Security::Certification }
     let(:ik_number){ "123456" }
-    let(:path){ File.join(RubyGkvBilling.root, "spec/examples/ssl/") }
-    let(:config){ File.join(RubyGkvBilling.root, "spec/examples/ssl/itsg.config") }
+    let(:path){ RubyGkvBilling.file_path("spec/examples/ssl/") }
+    let(:config){ RubyGkvBilling.file_path("spec/examples/ssl/itsg.config") }
 
     context "create_private_key" do
       let(:key){ subject.create_private_key(ik_number, path) }
@@ -153,7 +153,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     end
 
     context "create_certificate" do
-      let(:certificate){ File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.p10.req.pem") }
+      let(:certificate){ RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem") }
 
       it {expect(File.exist?(certificate)).to be_truthy}
     end
@@ -173,23 +173,23 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     end
 
     context "sha1_code" do
-      let(:key) { File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.pub.key.pem") }
-      let(:example){ File.join(RubyGkvBilling.root, "spec/examples/ssl/example.pub.key.pem") }
+      let(:key) { RubyGkvBilling.file_path("spec/examples/ssl/123456.pub.key.pem") }
+      let(:example){ RubyGkvBilling.file_path("spec/examples/ssl/example.pub.key.pem") }
 
       it {expect(subject.sha1_code(key)).to eq(subject.sha1_code(example))}
     end
 
     context "p7c to pem" do
-      let(:p7c) { File.join(RubyGkvBilling.root, "spec/examples/certificate_1234567.p7c") }
+      let(:p7c) { RubyGkvBilling.file_path("spec/examples/certificate_1234567.p7c") }
 
       it {expect(subject.convert_p7c_to_pem(p7c)).to include("CERTIFICATE")}
     end
 
     after(:all) do
-      File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.prv.key.pem"))
-      # Example Certificate: File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.p10.req.pem"))
-      File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.pub.key.pem"))
-      File.delete(File.join(RubyGkvBilling.root, "spec/examples/ssl/123456.pkey"))
+      File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.prv.key.pem"))
+      # Example Certificate: File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem"))
+      File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pub.key.pem"))
+      File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pkey"))
     end
   end
 end
