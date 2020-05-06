@@ -181,8 +181,10 @@ RSpec.describe RubyGkvBilling::Security::Certification do
 
     context "p7c to pem" do
       let(:p7c) { RubyGkvBilling.file_path("spec/examples/certificate_1234567.p7c") }
+      let(:crt) { RubyGkvBilling.file_path("spec/examples/certificate_1234567.pem") }
 
       it {expect(subject.convert_p7c_to_pem(p7c)).to include("CERTIFICATE")}
+      it {expect(subject.convert_p7c_to_pem(p7c)).to eq(File.read(crt))}
     end
 
     after(:all) do
