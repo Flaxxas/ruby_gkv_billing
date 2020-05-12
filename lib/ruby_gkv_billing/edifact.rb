@@ -17,6 +17,9 @@ module RubyGkvBilling
     ENCODING = 'UNOC'
     SEGMENT_JOIN = "\n"
 
+    # z.B. 8.2.1
+    POSITIONSNUMMER_FORMAT = /\A\d{5}?\z/
+
     #8.1.14
     LEISTUNGSBEREICH = {
       "A" => "Leistungserbringer von Hilfsmitteln",
