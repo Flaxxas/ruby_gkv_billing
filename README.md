@@ -5,7 +5,7 @@ ruby_gkv_billing is a library to generate *EDIFACT*-files for the purpose of [el
 ## Documentation (german)
 
 * [wiki](https://github.com/Sektor-N/ruby_gkv_billing/wiki)
-* [Technische Standards](https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anlage_1_TP5_V12_20190207.pdf)
+* [Technische Standards](https://www.gkv-datenaustausch.de/leistungserbringer/sonstige_leistungserbringer/sonstige_leistungserbringer.jsp)
 
 ## Installation
 
