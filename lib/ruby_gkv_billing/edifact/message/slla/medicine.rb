@@ -99,7 +99,14 @@ module RubyGkvBilling
             @verordnungs_datum = verordnungs_datum
             @zuzahlungskennzeichen = zuzahlungskennzeichen
             @indikationsschluessel = indikationsschluessel
-            @kennzeichen_verordnungsart = kennzeichen_verordnungsart
+
+            @kennzeichen_verordnungsart =
+              if kennzeichen_verordnungsart.to_s == ""
+                "99"
+              else
+                kennzeichen_verordnungsart
+              end
+
             @kennzeichen_verordnungsbesonderheiten = kennzeichen_verordnungsbesonderheiten
             @unfallkennzeichen = unfallkennzeichen
             @kennzeichen_bvg = kennzeichen_bvg
