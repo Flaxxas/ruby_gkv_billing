@@ -4,8 +4,13 @@ module RubyGkvBilling
       require 'openssl'
       require 'net/http'
 
+      TRUST_CENTER_URL = 'https://trustcenter-data.itsg.de/dale/'.freeze
+
       KEY_FILE = 'gesamt-rsa4096.key'.freeze
-      KEY_URL = "https://trustcenter-data.itsg.de/dale/#{KEY_FILE}".freeze
+      KEY_URL = "#{TRUST_CENTER_URL}#{KEY_FILE}".freeze
+
+      REVOKE_FILE = 'sperrliste-le-rsa4096.crl'
+      REVOKE_FILE_URL = "#{TRUST_CENTER_URL}#{REVOKE_FILE}".freeze
 
       START_DATA = "\n-----BEGIN CERTIFICATE-----\n".freeze
       END_DATA = "\n-----END CERTIFICATE-----\n".freeze
