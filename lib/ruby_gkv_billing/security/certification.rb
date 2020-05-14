@@ -139,7 +139,10 @@ module RubyGkvBilling
       end
 
       def self.sha1_code(pkey_path)
-        system("openssl dgst -c -sha1 #{pkey_path}")
+        #system("openssl dgst -c -sha1 #{pkey_path}")
+
+        key = File.read(pkey_path)
+        OpenSSL::Digest::SHA1.new(key).to_s
       end
 
       def self.generate_keyset!(ik_number, path)

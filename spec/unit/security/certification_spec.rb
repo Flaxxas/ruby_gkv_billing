@@ -175,8 +175,13 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     context "sha1_code" do
       let(:key) { RubyGkvBilling.file_path("spec/examples/ssl/123456.pub.key.pem") }
       let(:example){ RubyGkvBilling.file_path("spec/examples/ssl/example.pub.key.pem") }
+      let(:sha1_hash) { "52dc9ec11ee8b0b235e23744e68d0b91286e4843"}
 
       it {expect(subject.sha1_code(key)).to eq(subject.sha1_code(example))}
+
+      it {
+        expect(subject.sha1_code(key)).to eq(sha1_hash)
+      }
     end
 
     context "p7c to pem" do
