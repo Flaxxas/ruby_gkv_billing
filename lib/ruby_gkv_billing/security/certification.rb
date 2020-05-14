@@ -5,6 +5,8 @@ module RubyGkvBilling
     module Certification
       require 'openssl'
 
+      ITSG_CONFIG = 'lib/ruby_gkv_billing/security/ssl/itsg.config'
+
       TRUST_CENTER_WORK = 'ITSG TrustCenter fuer Arbeitgeber'
       TRUST_CENTER_SERVICE = 'ITSG TrustCenter fuer sonstige Leistungserbringer'
       TRUST_CENTER_HOSPITAL = 'DKTIG TrustCenter fuer Krankenhaeuser und Leistungserbringer PKC'
@@ -119,12 +121,12 @@ module RubyGkvBilling
         return File.join(path, "#{ik_number}.prv.key.pem")
       end
 
-      def self.create_certificate(ik_number, private_key_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
+      def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))
         system("openssl req -new -config #{config_file_path} -key #{private_key_path}/#{ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem")
         return File.join(private_key_path, "#{ik_number}.p10.req.pem")
       end
 
-      def self.create_public_key(ik_number, private_key_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
+      def self.create_public_key(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))
         system("openssl req -config #{config_file_path} -in #{private_key_path}/#{ik_number}.p10.req.pem -pubkey -noout -out #{private_key_path}/#{ik_number}.pub.key.pem")
         return File.join(private_key_path, "#{ik_number}.pub.key.pem")
       end
@@ -146,7 +148,7 @@ module RubyGkvBilling
         sha1_code(File.join(path, "#{ik_number}.pkey"))
       end
 
-      def self.print_certificate(file_path, config_file_path: File.join(RubyGkvBilling.root, "lib/ruby_gkv_billing/security/ssl/itsg.config"))
+      def self.print_certificate(file_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))
         system("openssl req -text -config #{config_file_path} -in #{file_path} -nameopt multiline -noout")
       end
 
