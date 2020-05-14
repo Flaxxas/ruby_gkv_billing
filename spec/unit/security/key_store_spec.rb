@@ -33,8 +33,24 @@ RSpec.describe RubyGkvBilling::Security::KeyStore do
     }
 
     it {
-      expect(subject.search_certificate("12345")).to be_nil
+      expect(subject.search_certificate("2345")).to be_nil
     }
+
+    context "Rentenversicherung" do
+      let(:rente) { subject.search_certificate("110999007") }
+
+      it {
+        expect(rente).not_to be_nil
+      }
+
+      it {
+        expect(rente.subject.to_s).to include("Rentenversicherung")
+      }
+
+      it {
+        expect(rente.public_key).not_to be_nil
+      }
+    end
   end
 
   describe "re-downloading file" do

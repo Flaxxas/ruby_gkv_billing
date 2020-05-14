@@ -4,7 +4,7 @@ module RubyGkvBilling
       require 'openssl'
       require 'net/http'
 
-      KEY_FILE = 'annahme-rsa4096.key'.freeze
+      KEY_FILE = 'gesamt-rsa4096.key'.freeze
       KEY_URL = "https://trustcenter-data.itsg.de/dale/#{KEY_FILE}".freeze
 
       START_DATA = "\n-----BEGIN CERTIFICATE-----\n".freeze
