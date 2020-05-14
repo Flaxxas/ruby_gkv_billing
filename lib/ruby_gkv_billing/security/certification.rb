@@ -7,13 +7,15 @@ module RubyGkvBilling
 
       ITSG_CONFIG = 'lib/ruby_gkv_billing/security/ssl/itsg.config'
 
+      KEY_LENGTH = 4096
+
       TRUST_CENTER_WORK = 'ITSG TrustCenter fuer Arbeitgeber'
       TRUST_CENTER_SERVICE = 'ITSG TrustCenter fuer sonstige Leistungserbringer'
       TRUST_CENTER_HOSPITAL = 'DKTIG TrustCenter fuer Krankenhaeuser und Leistungserbringer PKC'
 
       # ersten 8 Stellen der IK
       def self.create_key!(ik_number, path)
-        key = OpenSSL::PKey::RSA.new(4096)
+        key = OpenSSL::PKey::RSA.new(KEY_LENGTH)
         name = ik_number.to_s[0..7]
 
         File.open(File.join(path, "private_#{name}_key.pem"), 'w') do |io|
@@ -117,7 +119,7 @@ module RubyGkvBilling
       end
 
       def self.create_private_key(ik_number, path)
-        system("openssl genrsa -out #{path}/#{ik_number}.prv.key.pem 4096")
+        system("openssl genrsa -out #{path}/#{ik_number}.prv.key.pem #{KEY_LENGTH}")
         return File.join(path, "#{ik_number}.prv.key.pem")
       end
 
