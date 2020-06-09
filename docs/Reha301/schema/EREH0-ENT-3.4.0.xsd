@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/ENTL/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ENTL/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen" type="bty:Verarbeitungskennzeichen_Stp">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall
+20 = Änderung
+30 = Fallstorno / Löschung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Geschäftsvorfall"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Entlassung_KV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Entlassungsanzeige der KV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
+						<xs:element name="Begleitperson" type="bty:Begleitperson_Ctp" minOccurs="0" maxOccurs="15"/>
+						<xs:element name="Mutter_Kind" type="bty:Kinder_in_Mutter_Kind_Massnahme_Ctp" minOccurs="0" maxOccurs="15"/>
+						<xs:element name="Entlassungsdaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Arbeitsf_Entlassung" type="bty:Arbeitsfaehig_KV_Stp"/>
+									<xs:element name="Entlassungsform" type="bty:Entlassungsform_KV_Stp">
+										<xs:annotation>
+											<xs:documentation>Die Schlüsselwerte 11, 12, 13, 16, 17 und 18 sind nur dann zu verwenden, wenn der Phasenwechsel mit einem Klinikwechsel einhergeht.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="IK_aufnehm_Einrichtung" type="bty:IK_Stp" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Identifikation des veranlassenden Krankenhauses mit dem Institutionskennzeichen (IK)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Entlassungsdiagnosen">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Version_ICD" type="bty:Version_ICD10_Stp"/>
+												<xs:element name="Entlassungsdiagnose" maxOccurs="10">
+													<xs:complexType>
+														<xs:complexContent>
+															<xs:extension base="bty:Kreuz-Stern_Diagnose_Ctp">
+																<xs:sequence>
+																	<xs:element name="Behandlungsergebnis" type="bty:Behandlungsergebnis_Stp" minOccurs="0"/>
+																</xs:sequence>
+															</xs:extension>
+														</xs:complexContent>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Versorg_Behandl" type="bty:Art_der_Behandlung_KV_Stp">
+										<xs:annotation>
+											<xs:documentation>Art der Versorgung / Art der Behandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Aufnahmedatum" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Bei ambulanter Reha: 1. Therapieeinheit = Beginn der Behandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Entlassungsdatum" type="bty:Datum_Stp"/>
+									<xs:element name="Massnahme_Behandlungsinfo" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Durchgefuehrte_Massnahme" maxOccurs="99">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Angabe_Massnahme" type="Angabe_Massnahme_Stp"/>
+															<xs:element name="Anzahl_Massnahme" type="Anzahl_Massnahme_Stp"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Empfehlung" type="bty:Empfehlung_Stp" minOccurs="0" maxOccurs="17"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Ambu_Reha" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Anwesenheitszeit" maxOccurs="300">
+										<xs:annotation>
+											<xs:documentation>Gilt für ambulante Reha ("Sucht"), ganztägig ambulante Reha und den ambulanten Anteil der Kombinationsbehandlung n maximal = 300. Die einzelnen Zeiträume müssen vollständig und jeweils zusammenhängend dokumentiert sein, sie umfassen ggf. auch nur 1 Tag. </xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Von-Datum" type="bty:Datum_Stp"/>
+												<xs:element name="Bis-Datum" type="bty:Datum_Stp"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Entlassung_RV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Entlassungsanzeige der RV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Entlassungsdaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Arbeitsf_Entlassung" type="bty:Arbeitsfaehig_RV_Stp"/>
+									<xs:element name="Entlassungsform" type="bty:Entlassungsform_RV_Stp"/>
+									<xs:element name="Versorg_Behandl" type="bty:Art_der_Behandlung_RV_Stp">
+										<xs:annotation>
+											<xs:documentation>Art der Versorgung / Art der Behandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Aufnahmedatum" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Bei ambulanter Reha: 1. Therapieeinheit = Beginn der Behandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Entlassungsdatum" type="bty:Datum_Stp"/>
+									<xs:element name="Nachsorgeempfehlung" type="bty:J_oder_N_Stp" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>"j" = PDF G4802 ist beizufügen</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Ambu_Leistung" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Anwesenheitszeit" maxOccurs="300">
+										<xs:annotation>
+											<xs:documentation>Gilt für ambulante Reha ("Sucht"), ganztägig ambulante Reha und den ambulanten Anteil der Kombinationsbehandlung n maximal = 300. Die einzelnen Zeiträume müssen vollständig und jeweils zusammenhängend dokumentiert sein, sie umfassen ggf. auch nur 1 Tag.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Von-Datum" type="bty:Datum_Stp"/>
+												<xs:element name="Bis-Datum" type="bty:Datum_Stp"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Angabe_Massnahme_Stp">
+		<xs:annotation>
+			<xs:documentation>Angabe der Massnahme</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Anzahl_Massnahme_Stp">
+		<xs:annotation>
+			<xs:documentation>Anzahl der Massnahme</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+			<xs:pattern value="([0-9])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/RECH/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/RECH/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen" type="bty:Verarbeitungskennzeichen_Stp">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall
+20 = Änderung
+30 = Fallstorno / Löschung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Admindaten_begrenzt_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Verarbeitungskennzeichen_Stp">
+						<xs:enumeration value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Geschäftsvorfall"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Rechnung_KV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Geschäftsvorfall Rechnung der KV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_begrenzt_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
+						<xs:element name="Rechnung_Reha-Einrichtung">
+							<xs:annotation>
+								<xs:documentation>Rechnung der Reha-Einrichtung</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="IK_Zahlungsempfaenger" type="bty:IK_Stp"/>
+									<xs:element name="Rechnungsnummer" type="Rechnungsnummer_Stp">
+										<xs:annotation>
+											<xs:documentation>Identifizierung der Rechnung durch die Reha-Einrichtung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Rechnungsdatum" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Rechnungsdatum JJJJ-MM-TT</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Rechnungsart" type="Rechnungsart_GKV_Stp">
+										<xs:annotation>
+											<xs:documentation>01 = Zwischenrechung ohne Anforderung Zahlsatz
+02 = Schlussrechnung ohne Anforderung Zahlsatz
+03 = Nachtragsrechnung ohne Anforderung Zahlsatz
+04 = Gutschrift / Stornierung
+06 = Zahlungserinnerung
+51 = Zwischenrechung mit Anforderung Zahlsatz
+52 = Schlussrechnung mit Anforderung Zahlsatz
+53 = Nachtragsrechnung mit Anforderung Zahlsatz</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Entgelte" type="Entgelte_Ctp" maxOccurs="99"/>
+									<xs:element name="Zuzahlung" type="Zuzahlung_GKV_Ctp"/>
+									<xs:element name="Gesamtbetrag" type="Betrag_8_2_Stp">
+										<xs:annotation>
+											<xs:documentation>Gesamtbetrag in der Rechnung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Waehrung" type="Waehrung_Stp">
+										<xs:annotation>
+											<xs:documentation>Währungskürzel auf Basis des internationalen Währungsschlüssels. EUR</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Rechnung_RV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Geschäftsvorfall Rechnung der DRV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Rechnung_Reha-Einrichtung">
+							<xs:annotation>
+								<xs:documentation>Rechnung der Reha-Einrichtung</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="IK_Zahlungsempfaenger" type="bty:IK_Stp" minOccurs="0"/>
+									<xs:element name="Rechnungsnummer" type="Rechnungsnummer_Stp">
+										<xs:annotation>
+											<xs:documentation>Identifizierung der Rechnung durch die Reha-Einrichtung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Rechnungsdatum" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Rechnungsdatum JJJJ-MM-TT</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Rechnungsart" type="Rechnungsart_DRV_Stp">
+										<xs:annotation>
+											<xs:documentation>01 = Zwischenrechung ohne Anforderung Zahlsatz
+02 = Schlussrechnung ohne Anforderung Zahlsatz
+03 = Nachtragsrechnung ohne Anforderung Zahlsatz
+04 = Gutschrift / Stornierung
+51 = Zwischenrechung mit Anforderung Zahlsatz
+52 = Schlussrechnung mit Anforderung Zahlsatz
+53 = Nachtragsrechnung mit Anforderung Zahlsatz</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Entgelte" type="Entgelte_Ctp" maxOccurs="99"/>
+									<xs:element name="Zuzahlung" type="Zuzahlung_DRV_Ctp"/>
+									<xs:element name="Gesamtbetrag" type="Betrag_8_2_Stp">
+										<xs:annotation>
+											<xs:documentation>Gesamtbetrag in der Rechnung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Waehrung" type="Waehrung_Stp">
+										<xs:annotation>
+											<xs:documentation>Währungskürzel auf Basis des internationalen Währungsschlüssels. EUR</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Zuzahlung_DRV_Ctp">
+		<xs:sequence>
+			<xs:element name="Zuzahlungskennzeichen" type="Zuzahlungskennzeichen_DRV_Stp">
+				<xs:annotation>
+					<xs:documentation> Hinweis von Reha-Einrichtung an Kostenträger / beauftr. Stelle zu Einzug / Verrechung der Zuzahlung </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zuzahlungstage" type="Zuzahlungstage_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Anzahl der Tage, für die durch einen Rehabilitanden für eine Reha-Maßnahme eine Zuzahlung zu leisten ist</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zuzahlung_Tag" type="EURO_6_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zuzahlungsbetrag pro Tag, der von der Reha-Einrichtung zu Grunde gelegt wurde, um den vom Rehabilitanden an die Reha-Einrichtung zu zahlenden Zuzahlungsgesamtbetrag zu ermitteln</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zuzahlung_Gesamt" type="EURO_6_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zuzahlungsgesamtbetrag, der vom Rehabilitanden für eine Reha-Leistung an die Reha-Einrichtung gezahlt wurde</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Zuzahlung_GKV_Ctp">
+		<xs:sequence>
+			<xs:element name="Zuzahlungskennzeichen" type="Zuzahlungskennzeichen_GKV_Stp">
+				<xs:annotation>
+					<xs:documentation> Hinweis von Reha-Einrichtung an Kostenträger / beauftr. Stelle zu Einzug / Verrechung der Zuzahlung </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zuzahlungstage" type="Zuzahlungstage_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Anzahl der Tage, für die durch einen Rehabilitanden für eine Reha-Maßnahme eine Zuzahlung zu leisten ist</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zuzahlung_Tag" type="EURO_6_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zuzahlungsbetrag pro Tag, der von der Reha-Einrichtung zu Grunde gelegt wurde, um den vom Rehabilitanden an die Reha-Einrichtung zu zahlenden Zuzahlungsgesamtbetrag zu ermitteln</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zuzahlung_Gesamt" type="EURO_6_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zuzahlungsgesamtbetrag, der vom Rehabilitanden für eine Reha-Leistung an die Reha-Einrichtung gezahlt wurde</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Entgelte_Ctp">
+		<xs:sequence>
+			<xs:element name="Entgeltschluessel" type="Entgeltschluessel_Stp">
+				<xs:annotation>
+					<xs:documentation> Mit dem strukturierten Entgeltartschlüssel wird eine abzurechnende Reha-Leistung identifiziert.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Entgeltbetrag" type="Betrag_8_2_Stp">
+				<xs:annotation>
+					<xs:documentation>Betrag für eine Abrechnungseinheit zu einem Entgeltschlüssel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Abrechnung_von" type="bty:Datum_Stp">
+				<xs:annotation>
+					<xs:documentation>Das Von-Datum in einem Abrechnungszeitraum in Verbindung mit  einer Entgeltart</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Abrechnung_bis" type="bty:Datum_Stp">
+				<xs:annotation>
+					<xs:documentation>Das Bis-Datum in einem Abrechnungszeitraum in Verbindung mit einer Entgeltart </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Entgeltanzahl" type="Entgeltanzahl_Stp">
+				<xs:annotation>
+					<xs:documentation>Anzahl Abrechnungseinheiten der Entgeltart </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tage_ohne_Berechnung" type="Tage_ohne_Berechnung_Stp">
+				<xs:annotation>
+					<xs:documentation>Anzahl der nicht in Rechnung gestellten Tage im Abrechnungszeitraum "Abrechnung von - Abrechnung bis" </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Rechnungsart_GKV_Stp">
+		<xs:annotation>
+			<xs:documentation>
+01 = Zwischenrechung
+02 = Schlussrechnung
+03 = Nachtragsrechnung
+04 = Gutschrift/Stornierung
+06 = Zahlungserinnerung
+51 = Zwischenrechnung mit Anforderung Zahlsatz
+52 = Schlussrechnung mit Anforderung Zahlsatz
+53 = Nachtragsrechnung mit Anforderung Zahlsatz
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Rechnungsart_DRV_Stp">
+		<xs:annotation>
+			<xs:documentation>
+01 = Zwischenrechung
+02 = Schlussrechnung
+03 = Nachtragsrechnung
+04 = Gutschrift/Stornierung
+51 = Zwischenrechnung mit Anforderung Zahlsatz,
+52 = Schlussrechnung mit Anforderung Zahlsatz
+53 = Nachtragsrechnung mit Anforderung Zahlsatz
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Rechnungsnummer_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Zuzahlungskennzeichen_DRV_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = keine Zuzahlungspflicht, 2 = Zuzahlungsbetrag ist mit Teilabrechnung / Endabrechung intern verrechnet, 3 Bisher keine / keine vollständige Zuzahlung, gesonderte Information erfolgt schriftlich, 4 Rehabilitand hat trotz schriftl. Aufforderung keine Zuzahlung geleistet, Zahlungseinzug durch Kostenträger, 9 = keine Zuzahlung erfolgt aus sonstigen Gründen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Zuzahlungskennzeichen_GKV_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = keine Zuzahlungspflicht, 2 = Zuzahlungsbetrag ist mit Teilabrechnung / Endabrechung intern verrechnet, 3 Bisher keine / keine vollständige Zuzahlung, gesonderte Information erfolgt schriftlich, 4 Rehabilitand hat trotz schriftl. Aufforderung keine Zuzahlung geleistet, Zahlungseinzug durch Kostenträger</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EURO_6_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+			<xs:pattern value="([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Waehrung_Stp">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EUR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Betrag_5_2_Stp">
+		<xs:annotation>
+			<xs:documentation>5 Stellen vor dem Komma, 2 Stellen Nach</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bty:Eurocent_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="7"/>
+			<xs:pattern value="([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Betrag_8_2_Stp">
+		<xs:annotation>
+			<xs:documentation>8 Stellen vor dem Komma, 2 Stellen Nach</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bty:Eurocent_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Zuzahlungstage_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+			<xs:pattern value="([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Tage_ohne_Berechnung_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+			<xs:pattern value="([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Entgeltanzahl_Stp">
+		<xs:restriction base="xs:unsignedInt">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Entgeltschluessel_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<reh:Reha xmlns:zsz="http://www.vdek.com/xml-schema/ZSZ/3.4" xmlns:kod="http://www.vdek.com/xml-schema/KOD/3.4" xmlns:atv="http://www.vdek.com/xml-schema/ATV/3.4" xmlns:zgr="http://www.vdek.com/xml-schema/ZGR/3.4" xmlns:abe="http://www.vdek.com/xml-schema/ABE/3.4" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" xmlns:anv="http://www.vdek.com/xml-schema/ANV/3.4" xmlns:feh="http://www.vdek.com/xml-schema/FEH/3.4" xmlns:apw="http://www.vdek.com/xml-schema/APW/3.4" xmlns:ebe="http://www.vdek.com/xml-schema/EBE/3.4" xmlns:aak="http://www.vdek.com/xml-schema/AAK/3.4" xmlns:ent="http://www.vdek.com/xml-schema/ENTL/3.4" xmlns:abk="http://www.vdek.com/xml-schema/ABK/3.4" xmlns:aap="http://www.vdek.com/xml-schema/AAP/3.4" xmlns:rec="http://www.vdek.com/xml-schema/RECH/3.4" xmlns:auf="http://www.vdek.com/xml-schema/AUFN/3.4" xmlns:reh="http://www.vdek.com/xml-schema/REH/3.4" xmlns:bew="http://www.vdek.com/xml-schema/BEW/3.4" xmlns:aav="http://www.vdek.com/xml-schema/AAV/3.4" xmlns:avk="http://www.vdek.com/xml-schema/AVK/3.4" xmlns:unt="http://www.vdek.com/xml-schema/UNT/3.4" xmlns:erg="http://www.vdek.com/xml-schema/ERG/3.4">
+	<reh:logische_Version>3.4.0</reh:logische_Version>
+	<reh:Nachrichtentyp>10</reh:Nachrichtentyp>
+	<reh:RV>
+		<reh:Kopfdaten>
+			<kod:Erstellungsdatum_Uhrzeit>2019-10-15T12:34:56</kod:Erstellungsdatum_Uhrzeit>
+			<kod:Version>3.4.0</kod:Version>
+			<kod:Dateinummer>000001</kod:Dateinummer>
+			<kod:Identifikationsdaten>
+				<kod:IK_Absender>269712077</kod:IK_Absender>
+				<kod:IK_Empfaenger>110612000</kod:IK_Empfaenger>
+				<kod:IK_Kostentraeger>110612000</kod:IK_Kostentraeger>
+				<!-- <kod:IK_beauftragte_Stelle>000000000</kod:IK_beauftragte_Stelle> -->
+				<kod:IK_Einrichtung>269712077</kod:IK_Einrichtung>
+				<kod:Fachabteilung>0300</kod:Fachabteilung>
+			</kod:Identifikationsdaten>
+			<kod:Fall_ID_RV>
+				<kod:Versicherungsnummer>12310161B990</kod:Versicherungsnummer>
+				<kod:Massnahmenummer>0001</kod:Massnahmenummer>
+				<kod:Berechtigtennummer>4</kod:Berechtigtennummer>
+				<kod:Zuordnung_Bearbeiter>4998</kod:Zuordnung_Bearbeiter>
+			</kod:Fall_ID_RV>
+		</reh:Kopfdaten>
+		<reh:Anzeige_einer_Verlaengerung>
+			<anv:Admindaten>
+				<anv:Verarbeitungskennzeichen>10</anv:Verarbeitungskennzeichen>
+				<anv:Version>3.4.0</anv:Version>
+				<anv:LfdNr>01</anv:LfdNr>
+			</anv:Admindaten>
+			<anv:Fachliche_Daten>
+				<anv:Rehabilitand>
+					<bty:Name>
+						<bty:Nachname>Versichertenname</bty:Nachname>
+						<bty:Vorname>Versichertenvorname</bty:Vorname>
+						<bty:Namenszusatz_Vorsatzwort>Baron</bty:Namenszusatz_Vorsatzwort>
+						<bty:Titel>Dr.</bty:Titel>
+					</bty:Name>
+					<bty:Geburtsdatum>1961-01-31</bty:Geburtsdatum>
+				</anv:Rehabilitand>
+				<anv:Anzeige_auf_Verlaengerung_Daten>
+					<anv:Verlaengerungszeitraum>
+						<anv:Anzahl_Verlaengerungstage>7</anv:Anzahl_Verlaengerungstage>
+						<anv:Datum_Verlaengerungsende>2019-08-30</anv:Datum_Verlaengerungsende>
+					</anv:Verlaengerungszeitraum>
+				</anv:Anzeige_auf_Verlaengerung_Daten>
+			</anv:Fachliche_Daten>
+		</reh:Anzeige_einer_Verlaengerung>
+	</reh:RV>
+	<reh:Freier_Text>Freier Text von Reha-Einrichtung</reh:Freier_Text>
+	<reh:Dokumente>
+		<bty:Dokument>
+			<bty:Dateiart>PDF</bty:Dateiart>
+			<bty:Dateigroesse>2856</bty:Dateigroesse>
+			<bty:medizinischesDokument>N</bty:medizinischesDokument>
+			<bty:Datei>JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhkZS1ERSkgPj4NCmVuZG9iag0KMiAwIG9iag0KPDwvVHlwZS9QYWdlcy9Db3VudCAxL0tpZHNbIDMgMCBSXSA+Pg0KZW5kb2JqDQozIDAgb2JqDQo8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL1Jlc291cmNlczw8L0ZvbnQ8PC9GMSA1IDAgUj4+L1Byb2NTZXRbL1BERi9UZXh0L0ltYWdlQi9JbWFnZUMvSW1hZ2VJXSA+Pi9NZWRpYUJveFsgMCAwIDU5NS4zMiA4NDEuOTJdIC9Db250ZW50cyA0IDAgUi9Hcm91cDw8L1R5cGUvR3JvdXAvUy9UcmFuc3BhcmVuY3kvQ1MvRGV2aWNlUkdCPj4vVGFicy9TPj4NCmVuZG9iag0KNCAwIG9iag0KPDwvRmlsdGVyL0ZsYXRlRGVjb2RlL0xlbmd0aCAxNDY+Pg0Kc3RyZWFtDQp4nIXPsQoCMQwG4D3Qd8jYDo1Je7TX9dATnByyHU6iTk76/tg7HDylSCBZ/o/wD2pgMwqKEHeoVwOCXEcwM/Whw1wSxYB6N8B4m9fewGTRnVAPBnbVD/qjYl7OrP5mc2Iq4Z1V53t7eTiJ9tlgJVDkL+Zb2US8foGea9OYUc+TPW7HBhSpDdIK8kI+y7wAyFo8Bw0KZW5kc3RyZWFtDQplbmRvYmoNCjUgMCBvYmoNCjw8L1R5cGUvRm9udC9TdWJ0eXBlL1RydWVUeXBlL05hbWUvRjEvQmFzZUZvbnQvQXJpYWwvRW5jb2RpbmcvV2luQW5zaUVuY29kaW5nL0ZvbnREZXNjcmlwdG9yIDYgMCBSL0ZpcnN0Q2hhciAzMi9MYXN0Q2hhciAxMTYvV2lkdGhzIDggMCBSPj4NCmVuZG9iag0KNiAwIG9iag0KPDwvVHlwZS9Gb250RGVzY3JpcHRvci9Gb250TmFtZS9BcmlhbC9GbGFncyAzMi9JdGFsaWNBbmdsZSAwL0FzY2VudCA5MDUvRGVzY2VudCAtMjEwL0NhcEhlaWdodCA3MjgvQXZnV2lkdGggNDQxL01heFdpZHRoIDI2NjUvRm9udFdlaWdodCA0MDAvWEhlaWdodCAyNTAvTGVhZGluZyAzMy9TdGVtViA0NC9Gb250QkJveFsgLTY2NSAtMjEwIDIwMDAgNzI4XSA+Pg0KZW5kb2JqDQo3IDAgb2JqDQo8PC9Qcm9kdWNlcij+/wBNAGkAYwByAG8AcwBvAGYAdACuACAAVwBvAHIAZAAgADIAMAAxADApIC9DcmVhdG9yKP7/AE0AaQBjAHIAbwBzAG8AZgB0AK4AIABXAG8AcgBkACAAMgAwADEAMCkgL0NyZWF0aW9uRGF0ZShEOjIwMTkwOTExMDgxMzQwKzAyJzAwJykgL01vZERhdGUoRDoyMDE5MDkxMTA4MTM0MCswMicwMCcpID4+DQplbmRvYmoNCjggMCBvYmoNClsgMjc4IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDMzMyAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDcyMiAwIDYxMSAwIDAgMCAwIDAgMCAwIDAgMCA2NjcgMCAwIDAgNjExIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNTU2IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNTAwIDI3OF0gDQplbmRvYmoNCjkgMCBvYmoNCjw8L1R5cGUvWFJlZi9TaXplIDkvV1sgMSA0IDJdIC9Sb290IDEgMCBSL0luZm8gNyAwIFIvSURbPEYwRkNFNTdDNTA4QkUyNDk4MEYyQzczNTZGMTNBMjY5PjxGMEZDRTU3QzUwOEJFMjQ5ODBGMkM3MzU2RjEzQTI2OT5dIC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDQ0Pj4NCnN0cmVhbQ0KeJxjYACC//8ZgaQgAwOI8oNQbWCKMQlMMdlBqDtginkPmGJpZ2AAAMK0BbcNCmVuZHN0cmVhbQ0KZW5kb2JqDQp4cmVmDQowIDEwDQowMDAwMDAwMDAwIDY1NTM1IGYNCjAwMDAwMDAwMTcgMDAwMDAgbg0KMDAwMDAwMDA3OCAwMDAwMCBuDQowMDAwMDAwMTM0IDAwMDAwIG4NCjAwMDAwMDAzNTQgMDAwMDAgbg0KMDAwMDAwMDU3NCAwMDAwMCBuDQowMDAwMDAwNzMyIDAwMDAwIG4NCjAwMDAwMDA5NTYgMDAwMDAgbg0KMDAwMDAwMTE1OSAwMDAwMCBuDQowMDAwMDAxMzY5IDAwMDAwIG4NCnRyYWlsZXINCjw8L1NpemUgMTAvUm9vdCAxIDAgUi9JbmZvIDcgMCBSL0lEWzxGMEZDRTU3QzUwOEJFMjQ5ODBGMkM3MzU2RjEzQTI2OT48RjBGQ0U1N0M1MDhCRTI0OTgwRjJDNzM1NkYxM0EyNjk+XSA+Pg0Kc3RhcnR4cmVmDQoxNjEwDQolJUVPRg0KeHJlZg0KMCAwDQp0cmFpbGVyDQo8PC9TaXplIDEwL1Jvb3QgMSAwIFIvSW5mbyA3IDAgUi9JRFs8RjBGQ0U1N0M1MDhCRTI0OTgwRjJDNzM1NkYxM0EyNjk+PEYwRkNFNTdDNTA4QkUyNDk4MEYyQzczNTZGMTNBMjY5Pl0gL1ByZXYgMTYxMC9YUmVmU3RtIDEzNjk+Pg0Kc3RhcnR4cmVmDQoxOTY1DQolJUVPRg==</bty:Datei>
+		</bty:Dokument>
+	</reh:Dokumente>
+	<reh:Papieranlage>N</reh:Papieranlage>
+</reh:Reha>

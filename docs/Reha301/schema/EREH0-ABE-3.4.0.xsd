@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/ABE/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ABE/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen" type="bty:Verarbeitungskennzeichen_Stp">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall
+20 = Änderung
+30 = Fallstorno / Löschung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Geschäftsvorfall"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Absage_durch_Einrichtung_KV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Absage durch die Einrichtung KV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Lebendspender" type="bty:Rehabilitand_alle_DS_Ctp" minOccurs="0"/>
+						<xs:element name="Absagedaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Absagegrund" type="Absagegrund_GKV_Stp"/>
+									<xs:element name="Absagedatum" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Datum der Absage einer bereits bewilligten Reha-Leistung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Absage_durch_Einrichtung_RV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Absage durch die Einrichtung RV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Absagedaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Absagegrund" type="Absagegrund_DRV_Stp"/>
+									<xs:element name="Absagedatum" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Datum der Absage einer bereits bewilligten Reha-Leistung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Absagegrund_GKV_Stp">
+		<xs:annotation>
+			<xs:documentation>
+01 = Verschiebung des Aufnahmetermins nicht möglich
+02 = Aufnahmetermin ohne Angabe von Gründen nicht wahrgenommen
+03 = ärztliche Bescheinigung nicht vorgelegt
+04 = Versicherter verzichtet auf die Reha-Leistung
+05 = Kostenzusage hat nach Ablauf von x Monaten die Gültigkeit verloren
+07 = nicht rehabilitationsfähig
+08 = Reha nicht erfolgversprechend
+09 = Schwangerschaft
+11 = keine Kapazitäten in Einrichtung frei
+12 = Versicherter ist verstorben
+13 = Indikation kann nicht behandelt werden
+14 = Versicherter möchte in eine andere Klinik
+99 = Sonstige Gründe
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Absagegrund_DRV_Stp">
+		<xs:annotation>
+			<xs:documentation>
+01 = Verschiebung des Aufnahmetermins nicht möglich
+02 = Aufnahmetermin ohne Angabe von Gründen nicht wahrgenommen
+03 = ärztliche Bescheinigung nicht vorgelegt
+04 = Versicherter verzichtet auf die Reha-Leistung
+05 = Kostenzusage hat nach Ablauf von x Monaten die Gültigkeit verloren
+06 = Altersrente beantragt oder bezogen
+07 = nicht rehabilitationsfähig
+08 = Reha nicht erfolgversprechend
+09 = Schwangerschaft
+10 = Rente wg. teilweiser / voller Erwerbsminderung wird bezogen
+11 = keine Kapazitäten in Einrichtung frei
+12 = Versicherter ist verstorben
+13 = Indikation kann nicht behandelt werden
+14 = Versicherter möchte in eine andere Klinik (RV: Umeinweisung nicht möglich)
+99 = Sonstige Gründe
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

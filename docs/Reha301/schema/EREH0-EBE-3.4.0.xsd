@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/EBE/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/EBE/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<xs:complexType name="Entlassungsbericht_RV_Ctp">
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten" type="Fachliche_Daten_Ctp"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen" type="bty:Verarbeitungskennzeichen_Stp">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall
+20 = Änderung
+30 = Fallstorno / Löschung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Fachliche_Daten_Ctp">
+		<xs:sequence>
+			<xs:element name="RehaEinrichtung">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NameAnschrift" type="NameAnschrift_Stp"/>
+						<xs:element name="Abteilung" type="Abteilung_Stp"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+			<xs:element name="Entlassungsdaten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Behandlungszeitraum">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Behandlungsabschnitt">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Aufnahmedatum" type="bty:Datum_Stp"/>
+												<xs:element name="Entlasssungsdatum" type="bty:Datum_Stp"/>
+												<xs:element name="Art_der_Behandlung" type="bty:Art_der_Behandlung_RV_Stp"/>
+												<xs:element name="Besondere_Behandlungsformen" type="bty:Besondere_Behandlungsformen_RV_Stp"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Entlassungsform" type="bty:Entlassungsform_RV_Stp"/>
+						<xs:element name="Arbeitsfaehigkeit_bei_Entlassung" type="bty:Arbeitsfaehig_RV_Stp"/>
+						<xs:element name="Entlassungsdiagnosen">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Version_ICD" type="bty:Version_ICD10_Stp"/>
+									<xs:element name="Entlassungsdiagnose" maxOccurs="10">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Diagnosenschluessel" type="bty:Diagnosenschluessel_Stp"/>
+												<xs:element name="Seitenlokalisation" type="bty:Seitenlokalisation_Stp" minOccurs="0"/>
+												<xs:element name="Diagnosensicherheit" type="bty:Diagnosesicherheit_Stp" minOccurs="0"/>
+												<xs:element name="Behandlungsergebnis" type="bty:Behandlungsergebnis_Stp"/>
+												<xs:element name="Diagnosentext" type="Diagnosentext_Stp"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Krankheitsursache" type="Ursache_der_Erkrankung_Stp"/>
+						<xs:element name="Arbeitsunfaehigkeitszeiten" type="Arbeitsunfaehigkeitszeiten_Stp"/>
+						<xs:element name="AU_bei_Aufnahme" type="J1_oder_N2_Stp"/>
+						<xs:element name="Weitere_Empfehlungen_oder_Weiterbehandlung" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Weitere_Empfehlung" type="Weitere_Empfehlung_Stp" maxOccurs="13"/>
+									<xs:element name="Erlaeuterungen" type="Erlaeuterungen_zu_Empfehlungen_Stp" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Unterschriften">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Datum" type="bty:Datum_Stp"/>
+									<xs:element name="Ort" type="Unterschrift_Ort_Stp"/>
+									<xs:element name="Leitender_Aerztin_Arzt" type="Unterzeichner_Stp"/>
+									<xs:element name="Aerztin_Arzt" type="Unterzeichner_Stp" minOccurs="0"/>
+									<xs:element name="Unterschrift_Verfasser" type="Unterzeichner_Stp" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Version_Blatt_1" fixed="04"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Sozialmedizinische_Leistungsbeurteilung_und_Epikrise" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Letzte_sozialversicherungspflichtige_Taetigkeit">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Bezeichnung_der_Taetigkeit" type="Bezeichnung_Taetigkeit_Stp"/>
+									<xs:element name="Zeitlicher_Umfang_Leistungsfaehigkeit" type="Umfang_Taetigkeit_Stp"/>
+									<xs:element name="Beschaeftigung_besteht" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Rollstuhlbeduerftigkeit" type="bty:J_oder_N_Stp" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Positives_Leistungsvermoegen" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Koerperliche_Arbeitsschwere" type="Arbeitsschwere_Stp"/>
+									<xs:element name="Arbeitshaltung_im_Stehen" type="Dauer_Arbeitshaltung_Stp"/>
+									<xs:element name="Arbeitshaltung_im_Gehen" type="Dauer_Arbeitshaltung_Stp"/>
+									<xs:element name="Arbeitshaltung_im_Sitzen" type="Dauer_Arbeitshaltung_Stp"/>
+									<xs:element name="Tagschicht" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Frueh_Spaetschicht" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Nachtschicht" type="bty:J_oder_N_Stp"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Negatives_Leistungsvermoegen" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Psychische_Belastbarkeit" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Sinnesorgane" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Bewegungs_und_Haltungsapparat" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Gefaehrdungs_und_Belastungsfaktoren" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Kardio-pulmonal" type="bty:J_oder_N_Stp"/>
+									<xs:element name="Sonstige_Einschraenkungen" type="bty:J_oder_N_Stp"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Sozialmedizinische_Epikrise" type="Leistungsvermoegen_Beschreibung_Stp" minOccurs="0"/>
+						<xs:element name="Sonstige_berufliche_Taetigkeit" type="Umfang_Taetigkeit_Stp"/>
+						<xs:element name="Version_Blatt_1a" type="Version_Blatt_1a_Stp">
+							<xs:annotation>
+								<xs:documentation>03 - Version Blatt 1a bis 2019, 04 - Version Blatt 1a voraussichtlich ab 2020</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Leistungsdaten" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Durchgefuehrte_therapeutische_Leistungen">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Version_KTL" type="bty:Version_KTL_Stp"/>
+									<xs:element name="Leistung" maxOccurs="75">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="KTL_Code" type="bty:KTL_Code_Stp"/>
+												<xs:element name="Dauer" type="bty:Dauer_Leist_Stp"/>
+												<xs:element name="Anzahl" type="bty:Anzahl_Leist_Stp"/>
+												<xs:element name="Text" type="bty:Text_Leist_Stp" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Erlaeuterungen" type="Erlaeuterungen_zu_Leistungsdaten_Stp" minOccurs="0"/>
+						<xs:element name="Version_Blatt_1b" fixed="02"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="NameAnschrift_Stp">
+		<xs:annotation>
+			<xs:documentation>basierend auf Datentyp xs:string, da hier auch mehrzeilige und/oder per Whitespaces formatierte Angabe möglich sein sollen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="Freitext_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="102"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Abteilung_Stp">
+		<xs:restriction base="bty:Token_intern_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="34"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Diagnosentext_Stp">
+		<xs:restriction base="bty:Token_intern_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="120"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Koerpergewicht_Stp">
+		<xs:annotation>
+			<xs:documentation>Gewicht in ganzen kg, Eingabe mit oder ohne führende Nullen: 1 - 3 Ziffern außer "0", "00" und "000"; 999 = Gewicht nicht feststellbar, nicht ermittelt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+			<xs:pattern value="([0-9]*)[1-9]([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Koerpergroesse_Stp">
+		<xs:annotation>
+			<xs:documentation>Größe in ganzen cm, Eingabe mit oder ohne führende Nullen: 1 - 3 Ziffern außer "0", "00" und "000"; 999 = Größe nicht feststellbar, nicht ermittelt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+			<xs:pattern value="([0-9]*)[1-9]([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Ursache_der_Erkrankung_Stp">
+		<xs:annotation>
+			<xs:documentation>0 = 1 - 3 trifft nicht zu, 1 = Arbeitsunfall einschl. Wegeunfall, 2 = Berufskrankheit, 3 = Schädigungsfolge durch Einwirken Dritter, z.B. Unfallfolge, 4 = Folge von Kriegs-, Zivil- oder Wehrdienst, 5 = Meldepflichtige Erkrankung</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Arbeitsunfaehigkeitszeiten_Stp">
+		<xs:annotation>
+			<xs:documentation>0 = keine, 1 = bis unter 3 Monate, 2 = 3 bis unter 6 Monate, 3 = 6 und mehr Monate, 9 = nicht erwerbstätig</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DMPPatient_Stp">
+		<xs:annotation>
+			<xs:documentation>0 = kein DMP-Patient, 1 = Diabetes mellitus Typ 1, 2 = Diabetes mellitus Typ 2, 3 = Brustkrebs, 4 = KHK, 5 = Asthma bronchiale / COPD, 6 = mehrere DMP, 7 = andere DMP</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Erlaeuterungen_zu_Empfehlungen_Stp">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="210"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Unterschrift_Ort_Stp">
+		<xs:annotation>
+			<xs:documentation>Längenbeschränkung auf 26 Zeichen wegen E-Berichts-Formular</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bty:Token_intern_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Unterschrift_Geltungsbereich_Stp">
+		<xs:annotation>
+			<xs:documentation>nur Ziffern, ein- oder zweistellig, mit oder ohne führender Null</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+			<xs:pattern value="[0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Unterzeichner_Stp">
+		<xs:annotation>
+			<xs:documentation>Längenbeschränkung auf 26 Zeichen wegen E-Berichts-Formular</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bty:Token_intern_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Bezeichnung_Taetigkeit_Stp">
+		<xs:restriction base="bty:Token_intern_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="58"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Umfang_Taetigkeit_Stp">
+		<xs:annotation>
+			<xs:documentation>5 = 6 Stunden und mehr, 6 = 3 bis unter 6 Stunden, 7 = unter 3 Stunden, 9 = keine Angabe</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Arbeitsschwere_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = schwere Arbeiten, 2 = mittelschwere Arbeiten, 3 = leicht bis mittelschwere Arbeiten, 4 = leichte Arbeiten, 9 = keine Angabe</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Dauer_Arbeitshaltung_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = ständig, 2 = überwiegend, 3 = zeitweise, 9 = keine Angabe</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Leistungsvermoegen_Beschreibung_Stp">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1050"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Erlaeuterungen_zu_Leistungsdaten_Stp">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="840"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Freitext_Stp">
+		<xs:annotation>
+			<xs:documentation>keine führenden u/o abschliessenden Whitespaces, ansonsten beliebiger Text - z.B. für Formatierung in Adreßfeldern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(\S\s*)*\S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LfdNr_Stp">
+		<xs:annotation>
+			<xs:documentation>Schlüsselverzeichnis: "Abweichungen vom Maximalwert 01 ergeben sich bei [...]: [...]Entlassungsbericht  = 03."</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9][1-9]|[1-9]0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Freier_Text_weitere_Diagnosen_Stp">
+		<xs:annotation>
+			<xs:documentation>freier Text zur Angabe weiterer Diagnosen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Weitere_Empfehlung_Stp">
+		<xs:annotation>
+			<xs:documentation>01 = Diagnostische Klärung, 02 = Kontrolle Laborwerte / Medikamente, 03 = Stationäre Behandlung / Operation, 04 = Suchtberatung, 05 = Psychologische Beratung / Psychotherapie, 06 = Heil- und Hilfsmittel inkl. Physiotherapie u. Ergotherapie, 07 = Stufenweise Wiedereingliederung, 08 = Leistungen zur Teilhabe am Arbeitsleben prüfen, 09 = Rehabilitationssport, 10 = Funktionstraining, 11 = Reha-Nachsorge (z.B. IRENA, Curriculum Hanover, Suchtnachsorge), 12 = Selbsthilfe, 13 = Sonstige Empfehlung</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bty:Token_intern_Stp">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="J1_oder_N2_Stp">
+		<xs:annotation>
+			<xs:documentation>Ja (1) - Nein (2) Feld</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Version_Blatt_1a_Stp">
+		<xs:annotation>
+			<xs:documentation>03 - Version Blatt 1a bis 2019, 04 - Version Blatt 1a voraussichtlich ab 2020</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

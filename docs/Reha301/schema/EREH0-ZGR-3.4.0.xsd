@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/ZGR/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ZGR/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_begrenzt_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Verarbeitungskennzeichen_Stp">
+						<xs:enumeration value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Geschäftsvorfall"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Zuzahlung_KV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Geschäftsvorfall Zuzahlungsgutschrift /-rückforderung der KV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_begrenzt_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
+						<xs:element name="Rechnungsdaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="IK_Zahlungsempfaenger" type="bty:IK_Stp"/>
+									<xs:element name="Rechnungsnummer" type="Rechnungsnummer_Stp">
+										<xs:annotation>
+											<xs:documentation>Identifizierung der Rechnung durch die Reha-Einrichtung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Gutschrifts_Rueckforderungsdatum" type="bty:Datum_Stp"/>
+									<xs:element name="Gutschrifts_Rueckforderungsbetrag" type="EURO_6_Stp"/>
+									<xs:element name="Rechnungsart" type="Rechnungsart_GKV_Stp">
+										<xs:annotation>
+											<xs:documentation>06 = Zahlungserinnerung, 
+80 = Zuzahlungsgutschrift, 90 = Rückforderung von Zuzahlungen</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Waehrung" type="Waehrung_Stp">
+										<xs:annotation>
+											<xs:documentation>Währungskürzel auf Basis des internationalen Währungsschlüssels. EUR</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Rechnungsart_GKV_Stp">
+		<xs:annotation>
+			<xs:documentation>
+06 = Zahlungserinnerung
+80 = Zuzahlungsgutschrift
+90 = Rückforderung von Zuzahlungen 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="80"/>
+			<xs:enumeration value="90"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Rechnungsnummer_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EURO_6_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+			<xs:pattern value="([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Waehrung_Stp">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EUR"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

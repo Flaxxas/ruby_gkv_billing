@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/UNT/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/UNT/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen" type="bty:Verarbeitungskennzeichen_Stp">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall
+20 = Änderung
+30 = Fallstorno / Löschung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version des Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Geschäftsvorfall"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Unterbrechung_RV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Unterbrechung RV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Unterbrechungsdaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Behandlungsart" type="bty:Art_der_Behandlung_RV_Stp">
+										<xs:annotation>
+											<xs:documentation>Art der Versorgung / Art der Behandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Erlaeuterung_zur_Unterbrechung" type="Erlaeuterung_zur_Unterbrechung_RV_Stp">
+										<xs:annotation>
+											<xs:documentation>Das Datenfeld dokumentiert die für den RV-Träger relevanten Gründe einer Unterbrechung einer Rehabilitationsmaßnahme im Einzelfall (01=Interkurrente Erkrankung, 02=Stationäre Krankenhausbehandlung (nicht interkurrente Erkrankung), 09=Sonstiger Grund, der zur Unterbrechung der Pflegekosten führt).</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Beginn_der_Unterbrechung" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Datum des Beginns der Unterbrechung einer Reha-Leistung </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Ende_der_Unterbrechung" type="bty:Datum_Stp" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Datum des Endes der Unterbrechung einer Reha-Leistung </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Unterbrechung_KV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Unterbrechung KV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
+			<xs:element name="Fachliche_Daten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
+						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
+						<xs:element name="Unterbrechungsdaten">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Behandlungsart" type="bty:Art_der_Behandlung_KV_Stp">
+										<xs:annotation>
+											<xs:documentation>Art der Versorgung / Art der Behandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Erlaeuterung_zur_Unterbrechung" type="Erlaeuterung_zur_Unterbrechung_KV_Stp">
+										<xs:annotation>
+											<xs:documentation>Das Datenfeld dokumentiert die für den KV-Träger relevanten Gründe einer Unterbrechung einer Rehabilitationsmaßnahme im Einzelfall (03=Beurlaubung, 04=Stationäre Krankenhausbehandlung, 05=Erkrankung (ohne Krankenhausbehandlung), 06=Belastungserprobung im häuslichen Umfeld, 09=Sonstiger Grund, der zur Unterbrechung der Pflegekosten führt).</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Beginn_der_Unterbrechung" type="bty:Datum_Stp">
+										<xs:annotation>
+											<xs:documentation>Datum des Beginns der Unterbrechung einer Reha-Leistung </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Ende_der_Unterbrechung" type="bty:Datum_Stp" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Datum des Endes der Unterbrechung einer Reha-Leistung </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Erlaeuterung_zur_Unterbrechung_RV_Stp">
+		<xs:annotation>
+			<xs:documentation>Das Datenfeld dokumentiert die relevanten Gründe einer Unterbrechung einer Rehabilitationsmaßnahme im Einzelfall (01=Interkurrente Erkrankung, 02=Stationäre Krankenhausbehandlung, 09=Sonstiger Grund).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="09"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Erlaeuterung_zur_Unterbrechung_KV_Stp">
+		<xs:annotation>
+			<xs:documentation>Das Datenfeld dokumentiert die relevanten Gründe einer Unterbrechung einer Rehabilitationsmaßnahme im Einzelfall (03=Beurlaubung, 04=Stationäre Krankenhausbehandlung, 05=Erkrankung, 06=Belastungserprobung im häuslichen Umfeld, 09=Sonstiger Grund).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="09"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

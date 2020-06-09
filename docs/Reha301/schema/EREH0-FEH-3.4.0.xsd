@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/FEH/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/FEH/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<xs:simpleType name="Fehlercode_Stp">
+		<xs:restriction base="xs:string">
+			<xs:length value="5"/>
+			<xs:pattern value="[0-9]{5}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Fehlertext_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Fehler_X_Path_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Fehlertext_aus_Parser_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="laufendeNrGP_Stp">
+		<xs:annotation>
+			<xs:documentation>Laufende Nummer der Nachricht</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9][1-9]|[1-9]0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--
+:notation name="Admin-Datenblock"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Admindaten_Ctp">
+		<xs:sequence>
+			<xs:element name="Verarbeitungskennzeichen" type="bty:Verarbeitungskennzeichen_Stp">
+				<xs:annotation>
+					<xs:documentation>10 = Normalfall
+20 = Änderung
+30 = Fallstorno / Löschung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version" type="bty:Version_Stp">
+				<xs:annotation>
+					<xs:documentation>Version des referenzierten Geschäftsvorfalls</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LfdNr" type="bty:laufende_Nummer_GVF_Stp">
+				<xs:annotation>
+					<xs:documentation>Laufende Nummer des Geschäftsvorfalls - Wertebereich von Lfd. Nr. ist abhängig vom jeweiligen Geschäftsvorfall, siehe SV</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+:notation name="Geschäftsvorfall"
+_________________________________________________________________________________________________________________ -->
+	<xs:complexType name="Fehlernachricht_Ctp">
+		<xs:annotation>
+			<xs:documentation>Fehlernachricht</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version der Fehlernachricht</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Referenzierter_Geschaeftsvorfall" type="bty:Nachrichtentyp_Stp"/>
+			<xs:element name="Admindaten_des_referenzierten_Geschaeftsvorfalls" type="Admindaten_Ctp"/>
+			<xs:element name="Fehler" maxOccurs="99">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Fehlercode" type="Fehlercode_Stp"/>
+						<xs:element name="Fehlertext" type="Fehlertext_Stp" minOccurs="0"/>
+						<xs:element name="Fehler_X_Path" type="Fehler_X_Path_Stp" minOccurs="0"/>
+						<xs:element name="Fehlertext_aus_Parser" type="Fehlertext_aus_Parser_Stp" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FehlerhaftesXMLDokument" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="XML_Dokument_Fehlerfall" type="xs:base64Binary"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

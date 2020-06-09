@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<reh:Reha xmlns:zsz="http://www.vdek.com/xml-schema/ZSZ/3.4" xmlns:kod="http://www.vdek.com/xml-schema/KOD/3.4" xmlns:atv="http://www.vdek.com/xml-schema/ATV/3.4" xmlns:zgr="http://www.vdek.com/xml-schema/ZGR/3.4" xmlns:abe="http://www.vdek.com/xml-schema/ABE/3.4" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" xmlns:anv="http://www.vdek.com/xml-schema/ANV/3.4" xmlns:feh="http://www.vdek.com/xml-schema/FEH/3.4" xmlns:apw="http://www.vdek.com/xml-schema/APW/3.4" xmlns:ebe="http://www.vdek.com/xml-schema/EBE/3.4" xmlns:aak="http://www.vdek.com/xml-schema/AAK/3.4" xmlns:ent="http://www.vdek.com/xml-schema/ENTL/3.4" xmlns:abk="http://www.vdek.com/xml-schema/ABK/3.4" xmlns:aap="http://www.vdek.com/xml-schema/AAP/3.4" xmlns:rec="http://www.vdek.com/xml-schema/RECH/3.4" xmlns:auf="http://www.vdek.com/xml-schema/AUFN/3.4" xmlns:reh="http://www.vdek.com/xml-schema/REH/3.4" xmlns:bew="http://www.vdek.com/xml-schema/BEW/3.4" xmlns:aav="http://www.vdek.com/xml-schema/AAV/3.4" xmlns:avk="http://www.vdek.com/xml-schema/AVK/3.4" xmlns:unt="http://www.vdek.com/xml-schema/UNT/3.4" xmlns:erg="http://www.vdek.com/xml-schema/ERG/3.4">
+	<reh:logische_Version>3.4.0</reh:logische_Version>
+	<reh:Nachrichtentyp>11</reh:Nachrichtentyp>
+	<reh:RV>
+		<reh:Kopfdaten>
+			<kod:Erstellungsdatum_Uhrzeit>2019-10-15T12:34:56</kod:Erstellungsdatum_Uhrzeit>
+			<kod:Version>3.4.0</kod:Version>
+			<kod:Dateinummer>000001</kod:Dateinummer>
+			<kod:Identifikationsdaten>
+				<kod:IK_Absender>110612000</kod:IK_Absender>
+				<kod:IK_Empfaenger>269712077</kod:IK_Empfaenger>
+				<kod:IK_Kostentraeger>110612000</kod:IK_Kostentraeger>
+				<!-- <kod:IK_beauftragte_Stelle>000000000</kod:IK_beauftragte_Stelle> -->
+				<kod:IK_Einrichtung>269712077</kod:IK_Einrichtung>
+				<kod:Fachabteilung>0300</kod:Fachabteilung>
+			</kod:Identifikationsdaten>
+			<kod:Fall_ID_RV>
+				<kod:Versicherungsnummer>12310161B990</kod:Versicherungsnummer>
+				<kod:Massnahmenummer>0001</kod:Massnahmenummer>
+				<kod:Berechtigtennummer>4</kod:Berechtigtennummer>
+				<kod:Zuordnung_Bearbeiter>4998</kod:Zuordnung_Bearbeiter>
+			</kod:Fall_ID_RV>
+			<kod:Fall_ID_Rehaeinrichtung>ggf. EWnet-Buch.nr.</kod:Fall_ID_Rehaeinrichtung>
+		</reh:Kopfdaten>
+		<reh:Bewilligung>
+			<bew:Admindaten>
+				<bew:Verarbeitungskennzeichen>10</bew:Verarbeitungskennzeichen>
+				<bew:Version>3.4.0</bew:Version>
+				<bew:LfdNr>01</bew:LfdNr>
+			</bew:Admindaten>
+			<bew:Fachliche_Daten>
+				<bew:Rehabilitand>
+					<!-- Element entfällt mit Version 3.4.0:	<bew:Anrede>0</bew:Anrede> -->
+					<bew:Name>
+						<bty:Nachname>Versichertenname</bty:Nachname>
+						<bty:Vorname>Versichertenvorname</bty:Vorname>
+						<bty:Namenszusatz_Vorsatzwort>Baron</bty:Namenszusatz_Vorsatzwort>
+						<bty:Titel>Dr.</bty:Titel>
+					</bew:Name>
+					<!-- mit Version 3.4.0 neue Ausprägung 3-divers -->
+					<bew:Geschlecht>3</bew:Geschlecht>
+					<bew:Geburtsdatum>1967-01-06</bew:Geburtsdatum>
+					<bew:Staatsangehoerigkeit>151</bew:Staatsangehoerigkeit>
+					<bew:Adresse>
+						<bty:Strasse>Schweizerstraße</bty:Strasse>
+						<bty:Hausnummer>1</bty:Hausnummer>
+						<bty:Postfach>Postfach 1234</bty:Postfach>
+						<bty:Wohnort>Frankfurt am Main</bty:Wohnort>
+						<bty:PLZ>60596</bty:PLZ>
+						<bty:Laenderkennzeichen>D</bty:Laenderkennzeichen>
+					</bew:Adresse>
+					<bew:Kommunikation>
+						<bty:Telefon>069-654321</bty:Telefon>
+						<bty:Faxnummer>069-99-654321</bty:Faxnummer>
+						<bty:Email>versicherter@gmx.de</bty:Email>
+					</bew:Kommunikation>
+				</bew:Rehabilitand>
+				<bew:Mitteilungsempfaenger>
+					<bew:Anrede>1</bew:Anrede>
+					<bew:Name>
+						<bty:Nachname_Institution>Bevollmächtigter</bty:Nachname_Institution>
+						<bty:Vorname>Bert</bty:Vorname>
+						<bty:Namenszusatz_Vorsatzwort>Graf</bty:Namenszusatz_Vorsatzwort>
+						<bty:Titel>Dr.</bty:Titel>
+					</bew:Name>
+					<bew:Adresse>
+						<bty:Strasse>Gartenstraße</bty:Strasse>
+						<bty:Hausnummer>3</bty:Hausnummer>
+						<bty:Postfach>Postfach 1234</bty:Postfach>
+						<bty:Wohnort>Frankfurt am Main</bty:Wohnort>
+						<bty:PLZ>60596</bty:PLZ>
+						<bty:Laenderkennzeichen>D</bty:Laenderkennzeichen>
+					</bew:Adresse>
+					<bew:Kommunikation>
+						<bty:Telefon>069-123456</bty:Telefon>
+						<bty:Faxnummer>069-99-123456</bty:Faxnummer>
+						<bty:Email>bevoll@gmx.de</bty:Email>
+					</bew:Kommunikation>
+				</bew:Mitteilungsempfaenger>
+				<bew:Krankenkasse>
+					<bew:Name>BKK Thyssen Draht AG</bew:Name>
+					<bew:IK_Nummer>103525453</bew:IK_Nummer>
+					<bew:Adresse>
+						<bty:Strasse>Wilhelmstr.</bty:Strasse>
+						<bty:Hausnummer>2</bty:Hausnummer>
+						<bty:Postfach>Postfach 1234</bty:Postfach>
+						<bty:Wohnort>Hamm</bty:Wohnort>
+						<bty:PLZ>59067</bty:PLZ>
+						<bty:Laenderkennzeichen>D</bty:Laenderkennzeichen>
+					</bew:Adresse>
+					<bew:Kommunikation>
+						<bty:Sachbearbeiter>Sachbearbeiter KK</bty:Sachbearbeiter>
+						<bty:Telefon>02381-543210</bty:Telefon>
+						<bty:Faxnummer>02381-99-543210</bty:Faxnummer>
+						<bty:Email>bkkthyssen@web.de</bty:Email>
+					</bew:Kommunikation>
+				</bew:Krankenkasse>
+				<bew:Truppenarzt>
+					<bew:Anrede>1</bew:Anrede>
+					<bew:Name>
+						<bty:Nachname>Truppenärztin</bty:Nachname>
+						<bty:Vorname>Thea</bty:Vorname>
+						<bty:Namenszusatz_Vorsatzwort>Prinzessin</bty:Namenszusatz_Vorsatzwort>
+						<bty:Titel>Dr.</bty:Titel>
+					</bew:Name>
+					<bew:Adresse>
+						<bty:Strasse>Offenbacher Landstr.</bty:Strasse>
+						<bty:Hausnummer>299</bty:Hausnummer>
+						<bty:Postfach>Postfach 1234</bty:Postfach>
+						<bty:Wohnort>Frankfurt am Main</bty:Wohnort>
+						<bty:PLZ>60599</bty:PLZ>
+						<bty:Laenderkennzeichen>D</bty:Laenderkennzeichen>
+					</bew:Adresse>
+					<bew:Kommunikation>
+						<bty:Telefon>069-765432</bty:Telefon>
+						<bty:Faxnummer>069-99-765432</bty:Faxnummer>
+						<bty:Email>trupparzt@gmx.de</bty:Email>
+					</bew:Kommunikation>
+				</bew:Truppenarzt>
+				<bew:Kosteninformationen>
+					<bew:Zuzahlung>
+						<bew:Zuzahlungseinzug>3</bew:Zuzahlungseinzug>
+						<bew:Anzahl_Tage>21</bew:Anzahl_Tage>
+						<bew:Zuzahlungsbetrag>21000</bew:Zuzahlungsbetrag>
+					</bew:Zuzahlung>
+				</bew:Kosteninformationen>
+				<bew:Rehainformationen>
+					<bew:Datenweitergabe>N</bew:Datenweitergabe>
+					<bew:Rehaart>71</bew:Rehaart>
+					<bew:Eilfall>N</bew:Eilfall>
+					<bew:Leistungsart>410</bew:Leistungsart>
+					<bew:Zusatzinformation>Neuer Bereich für die Übermittlung von normierten Texten an die Reha-Einrichtung</bew:Zusatzinformation>
+					<bew:Begleitperson>
+						<bew:Kostenuebernahme>4</bew:Kostenuebernahme>
+						<bew:Name>
+							<bty:Nachname>Begleitername</bty:Nachname>
+							<bty:Vorname>Bernd</bty:Vorname>
+							<bty:Namenszusatz_Vorsatzwort>Prinz</bty:Namenszusatz_Vorsatzwort>
+							<bty:Titel>Dipl.-Kfm.</bty:Titel>
+						</bew:Name>
+						<bew:Geburtsdatum>1957-08-13</bew:Geburtsdatum>
+					</bew:Begleitperson>
+					<bew:Begleitperson>
+						<bew:Kostenuebernahme>1</bew:Kostenuebernahme>
+						<bew:Name>
+							<bty:Nachname>Zweiterbegleiter</bty:Nachname>
+							<bty:Vorname>Zarah</bty:Vorname>
+							<bty:Namenszusatz_Vorsatzwort>Freifrau van der</bty:Namenszusatz_Vorsatzwort>
+							<bty:Titel>Rechtsanwältin</bty:Titel>
+						</bew:Name>
+						<bew:Geburtsdatum>1962-07-11</bew:Geburtsdatum>
+					</bew:Begleitperson>
+					<bew:Partnerleistung>
+						<bew:Versicherungsnummer>12310161B989</bew:Versicherungsnummer>
+						<bew:Name>
+							<bty:Nachname>Ehepartnername</bty:Nachname>
+							<bty:Vorname>Emma</bty:Vorname>
+							<bty:Namenszusatz_Vorsatzwort>Erbprinzessin</bty:Namenszusatz_Vorsatzwort>
+							<bty:Titel>Dr.</bty:Titel>
+						</bew:Name>
+					</bew:Partnerleistung>
+					<bew:Leistungsvermoegen>
+						<bew:Stellungnahme>J</bew:Stellungnahme>
+						<bew:Bezugsberuf>hier muss Text statt 9999 hinein</bew:Bezugsberuf>
+					</bew:Leistungsvermoegen>
+				</bew:Rehainformationen>
+				<bew:Aufnahmedaten>
+					<bew:Behandlungsart>1</bew:Behandlungsart>
+					<bew:Bewilligungsdiagnosen>
+						<bew:Version_ICD>2018</bew:Version_ICD>
+						<bew:Diagnose>
+							<bty:Diagnosenschluessel>M45</bty:Diagnosenschluessel>
+							<bty:Seitenlokalisation>L</bty:Seitenlokalisation>
+							<bty:Diagnosensicherheit>G</bty:Diagnosensicherheit>
+						</bew:Diagnose>
+						<bew:Diagnose>
+							<bty:Diagnosenschluessel>I260</bty:Diagnosenschluessel>
+							<bty:Seitenlokalisation>R</bty:Seitenlokalisation>
+							<bty:Diagnosensicherheit>G</bty:Diagnosensicherheit>
+						</bew:Diagnose>
+					</bew:Bewilligungsdiagnosen>
+					<bew:Aufnahmedaten>
+						<bew:Erfolgt>N</bew:Erfolgt>
+						<bew:Geplant>2019-11-01</bew:Geplant>
+						<bew:Fruehestes>2019-11-15</bew:Fruehestes>
+						<bew:Spaetestes>2019-11-30</bew:Spaetestes>
+					</bew:Aufnahmedaten>
+					<bew:Kostuebernahme_Phase_C>2019-11-13</bew:Kostuebernahme_Phase_C>
+				</bew:Aufnahmedaten>
+				<bew:Bewilligungsinformationen>
+					<bew:Bewilligungsdatum>2019-10-15</bew:Bewilligungsdatum>
+					<bew:Kostenzusage_gueltig_bis>2020-04-14</bew:Kostenzusage_gueltig_bis>
+				</bew:Bewilligungsinformationen>
+				<!--Im folgenden Abschnitt darf nur jeweils  einzeln Element "Stationaerdaten" oder "Ganztaegigambulantdaten" oder "Ambulantdaten" verwendet werden.-->
+				<bew:Stationaerdaten>
+					<bew:Behandlungsabschnitte>1</bew:Behandlungsabschnitte>
+					<bew:Anzahl_Tage>22</bew:Anzahl_Tage>
+				</bew:Stationaerdaten>
+			</bew:Fachliche_Daten>
+		</reh:Bewilligung>
+	</reh:RV>
+	<reh:Freier_Text>Text an die Klinik mit Umlauten, Steuerungs- und Sonderzeichen.</reh:Freier_Text>
+	<!-- derzeit werden von der RV noch keine Dokumente übermittelt -->
+	<reh:Dokumente>
+		<bty:Dokument>
+			<bty:Dateiart>PDF</bty:Dateiart>
+			<bty:Dateigroesse>2856</bty:Dateigroesse>
+			<bty:medizinischesDokument>J</bty:medizinischesDokument>
+			<bty:Datei>JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhkZS1ERSkgPj4NCmVuZG9iag0KMiAwIG9iag0KPDwvVHlwZS9QYWdlcy9Db3VudCAxL0tpZHNbIDMgMCBSXSA+Pg0KZW5kb2JqDQozIDAgb2JqDQo8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL1Jlc291cmNlczw8L0ZvbnQ8PC9GMSA1IDAgUj4+L1Byb2NTZXRbL1BERi9UZXh0L0ltYWdlQi9JbWFnZUMvSW1hZ2VJXSA+Pi9NZWRpYUJveFsgMCAwIDU5NS4zMiA4NDEuOTJdIC9Db250ZW50cyA0IDAgUi9Hcm91cDw8L1R5cGUvR3JvdXAvUy9UcmFuc3BhcmVuY3kvQ1MvRGV2aWNlUkdCPj4vVGFicy9TPj4NCmVuZG9iag0KNCAwIG9iag0KPDwvRmlsdGVyL0ZsYXRlRGVjb2RlL0xlbmd0aCAxNDY+Pg0Kc3RyZWFtDQp4nIXPsQoCMQwG4D3Qd8jYDo1Je7TX9dATnByyHU6iTk76/tg7HDylSCBZ/o/wD2pgMwqKEHeoVwOCXEcwM/Whw1wSxYB6N8B4m9fewGTRnVAPBnbVD/qjYl7OrP5mc2Iq4Z1V53t7eTiJ9tlgJVDkL+Zb2US8foGea9OYUc+TPW7HBhSpDdIK8kI+y7wAyFo8Bw0KZW5kc3RyZWFtDQplbmRvYmoNCjUgMCBvYmoNCjw8L1R5cGUvRm9udC9TdWJ0eXBlL1RydWVUeXBlL05hbWUvRjEvQmFzZUZvbnQvQXJpYWwvRW5jb2RpbmcvV2luQW5zaUVuY29kaW5nL0ZvbnREZXNjcmlwdG9yIDYgMCBSL0ZpcnN0Q2hhciAzMi9MYXN0Q2hhciAxMTYvV2lkdGhzIDggMCBSPj4NCmVuZG9iag0KNiAwIG9iag0KPDwvVHlwZS9Gb250RGVzY3JpcHRvci9Gb250TmFtZS9BcmlhbC9GbGFncyAzMi9JdGFsaWNBbmdsZSAwL0FzY2VudCA5MDUvRGVzY2VudCAtMjEwL0NhcEhlaWdodCA3MjgvQXZnV2lkdGggNDQxL01heFdpZHRoIDI2NjUvRm9udFdlaWdodCA0MDAvWEhlaWdodCAyNTAvTGVhZGluZyAzMy9TdGVtViA0NC9Gb250QkJveFsgLTY2NSAtMjEwIDIwMDAgNzI4XSA+Pg0KZW5kb2JqDQo3IDAgb2JqDQo8PC9Qcm9kdWNlcij+/wBNAGkAYwByAG8AcwBvAGYAdACuACAAVwBvAHIAZAAgADIAMAAxADApIC9DcmVhdG9yKP7/AE0AaQBjAHIAbwBzAG8AZgB0AK4AIABXAG8AcgBkACAAMgAwADEAMCkgL0NyZWF0aW9uRGF0ZShEOjIwMTkwOTExMDgxMzQwKzAyJzAwJykgL01vZERhdGUoRDoyMDE5MDkxMTA4MTM0MCswMicwMCcpID4+DQplbmRvYmoNCjggMCBvYmoNClsgMjc4IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDMzMyAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDcyMiAwIDYxMSAwIDAgMCAwIDAgMCAwIDAgMCA2NjcgMCAwIDAgNjExIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNTU2IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNTAwIDI3OF0gDQplbmRvYmoNCjkgMCBvYmoNCjw8L1R5cGUvWFJlZi9TaXplIDkvV1sgMSA0IDJdIC9Sb290IDEgMCBSL0luZm8gNyAwIFIvSURbPEYwRkNFNTdDNTA4QkUyNDk4MEYyQzczNTZGMTNBMjY5PjxGMEZDRTU3QzUwOEJFMjQ5ODBGMkM3MzU2RjEzQTI2OT5dIC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDQ0Pj4NCnN0cmVhbQ0KeJxjYACC//8ZgaQgAwOI8oNQbWCKMQlMMdlBqDtginkPmGJpZ2AAAMK0BbcNCmVuZHN0cmVhbQ0KZW5kb2JqDQp4cmVmDQowIDEwDQowMDAwMDAwMDAwIDY1NTM1IGYNCjAwMDAwMDAwMTcgMDAwMDAgbg0KMDAwMDAwMDA3OCAwMDAwMCBuDQowMDAwMDAwMTM0IDAwMDAwIG4NCjAwMDAwMDAzNTQgMDAwMDAgbg0KMDAwMDAwMDU3NCAwMDAwMCBuDQowMDAwMDAwNzMyIDAwMDAwIG4NCjAwMDAwMDA5NTYgMDAwMDAgbg0KMDAwMDAwMTE1OSAwMDAwMCBuDQowMDAwMDAxMzY5IDAwMDAwIG4NCnRyYWlsZXINCjw8L1NpemUgMTAvUm9vdCAxIDAgUi9JbmZvIDcgMCBSL0lEWzxGMEZDRTU3QzUwOEJFMjQ5ODBGMkM3MzU2RjEzQTI2OT48RjBGQ0U1N0M1MDhCRTI0OTgwRjJDNzM1NkYxM0EyNjk+XSA+Pg0Kc3RhcnR4cmVmDQoxNjEwDQolJUVPRg0KeHJlZg0KMCAwDQp0cmFpbGVyDQo8PC9TaXplIDEwL1Jvb3QgMSAwIFIvSW5mbyA3IDAgUi9JRFs8RjBGQ0U1N0M1MDhCRTI0OTgwRjJDNzM1NkYxM0EyNjk+PEYwRkNFNTdDNTA4QkUyNDk4MEYyQzczNTZGMTNBMjY5Pl0gL1ByZXYgMTYxMC9YUmVmU3RtIDEzNjk+Pg0Kc3RhcnR4cmVmDQoxOTY1DQolJUVPRg==</bty:Datei>
+		</bty:Dokument>
+	</reh:Dokumente>
+	<reh:Papieranlage>J</reh:Papieranlage>
+</reh:Reha>

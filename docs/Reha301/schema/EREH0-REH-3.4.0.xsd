@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/REH/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aak="http://www.vdek.com/xml-schema/AAK/3.4" xmlns:aap="http://www.vdek.com/xml-schema/AAP/3.4" xmlns:aav="http://www.vdek.com/xml-schema/AAV/3.4" xmlns:abe="http://www.vdek.com/xml-schema/ABE/3.4" xmlns:abk="http://www.vdek.com/xml-schema/ABK/3.4" xmlns:anv="http://www.vdek.com/xml-schema/ANV/3.4" xmlns:apw="http://www.vdek.com/xml-schema/APW/3.4" xmlns:atv="http://www.vdek.com/xml-schema/ATV/3.4" xmlns:auf="http://www.vdek.com/xml-schema/AUFN/3.4" xmlns:avk="http://www.vdek.com/xml-schema/AVK/3.4" xmlns:bew="http://www.vdek.com/xml-schema/BEW/3.4" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" xmlns:ebe="http://www.vdek.com/xml-schema/EBE/3.4" xmlns:ent="http://www.vdek.com/xml-schema/ENTL/3.4" xmlns:erg="http://www.vdek.com/xml-schema/ERG/3.4" xmlns:feh="http://www.vdek.com/xml-schema/FEH/3.4" xmlns:kod="http://www.vdek.com/xml-schema/KOD/3.4" xmlns:rec="http://www.vdek.com/xml-schema/RECH/3.4" xmlns:unt="http://www.vdek.com/xml-schema/UNT/3.4" xmlns:zgr="http://www.vdek.com/xml-schema/ZGR/3.4" xmlns:zsz="http://www.vdek.com/xml-schema/ZSZ/3.4" targetNamespace="http://www.vdek.com/xml-schema/REH/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/AAK/3.4" schemaLocation="EREH0-AAK-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AAP/3.4" schemaLocation="EREH0-AAP-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AAV/3.4" schemaLocation="EREH0-AAV-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ABE/3.4" schemaLocation="EREH0-ABE-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ABK/3.4" schemaLocation="EREH0-ABK-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ANV/3.4" schemaLocation="EREH0-ANV-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/APW/3.4" schemaLocation="EREH0-APW-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ATV/3.4" schemaLocation="EREH0-ATV-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AUFN/3.4" schemaLocation="EREH0-AUF-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AVK/3.4" schemaLocation="EREH0-AVK-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/BEW/3.4" schemaLocation="EREH0-BEW-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/EBE/3.4" schemaLocation="EREH0-EBE-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ENTL/3.4" schemaLocation="EREH0-ENT-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ERG/3.4" schemaLocation="EREH0-ERG-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/FEH/3.4" schemaLocation="EREH0-FEH-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/KOD/3.4" schemaLocation="EREH0-KOD-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/RECH/3.4" schemaLocation="EREH0-REC-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/UNT/3.4" schemaLocation="EREH0-UNT-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ZGR/3.4" schemaLocation="EREH0-ZGR-3.4.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ZSZ/3.4" schemaLocation="EREH0-ZSZ-3.4.0.xsd"/>
+	<xs:element name="Reha">
+		<xs:annotation>
+			<xs:documentation>Root</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="logische_Version">
+					<xs:simpleType>
+						<xs:restriction base="bty:Version_Stp">
+							<xs:enumeration value="3.4.0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Nachrichtentyp" type="bty:Nachrichtentyp_Stp">
+					<xs:annotation>
+						<xs:documentation>Geschäftsvorfallnummer</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:choice>
+					<xs:element name="KV">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Kopfdaten" type="kod:Kopfdaten_KV_Ctp"/>
+								<xs:choice>
+									<xs:element name="Bewilligung" type="bew:Bewilligung_KV_Ctp"/>
+									<xs:element name="Aufnahme" type="auf:Aufnahme_KV_Ctp"/>
+									<xs:element name="Rechnung" type="rec:Rechnung_KV_Ctp"/>
+									<xs:element name="Zuzahlungsgutschrift_rueckforderung" type="zgr:Zuzahlung_KV_Ctp"/>
+									<xs:element name="Zahlsatz" type="zsz:Zahlsatz_KV_Ctp"/>
+									<xs:element name="Entlassungsmeldung" type="ent:Entlassung_KV_Ctp"/>
+									<xs:element name="Antrag_auf_Verlaengerung_Aufenthalt" type="atv:Antrag_Verlaengerung_Aufenthalt_KV_Ctp"/>
+									<xs:element name="Antwort_auf_Antrag_auf_Verlaengerung_Aufenthalt" type="aav:Antwort_Antrag_Verlaengerung_Aufenthalt_KV_Ctp"/>
+									<xs:element name="Antrag_auf_Phasenwechsel" type="apw:Antrag_Phasenwechsel_KV_Ctp"/>
+									<xs:element name="Antwort_zum_Antrag_auf_Phasenwechsel" type="aap:Antwort_Antrag_Phasenwechsel_KV_Ctp"/>
+									<xs:element name="Unterbrechung" type="unt:Unterbrechung_KV_Ctp"/>
+									<xs:element name="Absage_durch_Einrichtung" type="abe:Absage_durch_Einrichtung_KV_Ctp"/>
+									<xs:element name="Fehlernachricht" type="feh:Fehlernachricht_Ctp"/>
+								</xs:choice>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="RV">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Kopfdaten" type="kod:Kopfdaten_RV_Ctp"/>
+								<xs:choice>
+									<xs:element name="Bewilligung" type="bew:Bewilligung_RV_Ctp"/>
+									<xs:element name="Ergaenzungen_vor_Reha_Beginn" type="erg:Ergaenzungen_RV_Ctp"/>
+									<xs:element name="Aufnahme" type="auf:Aufnahme_RV_Ctp"/>
+									<xs:element name="Rechnung" type="rec:Rechnung_RV_Ctp"/>
+									<xs:element name="Zahlsatz" type="zsz:Zahlsatz_RV_Ctp"/>
+									<xs:element name="Entlassungsmeldung" type="ent:Entlassung_RV_Ctp"/>
+									<xs:element name="Entlassungsbericht" type="ebe:Entlassungsbericht_RV_Ctp"/>
+									<xs:element name="Antrag_auf_Verlaengerung_Aufenthalt" type="atv:Antrag_Verlaengerung_Aufenthalt_RV_Ctp"/>
+									<xs:element name="Antwort_auf_Antrag_auf_Verlaengerung_Aufenthalt" type="aav:Antwort_Antrag_Verlaengerung_Aufenthalt_RV_Ctp"/>
+									<xs:element name="Antrag_Verlaengerung_Kostenzusage" type="avk:Antrag_Verlaengerung_Kostenzusage_Ctp"/>
+									<xs:element name="Antwort_auf_Antrag_auf_Verlaengerung_Kostenzusage" type="aak:Antwort_Antrag_Verlaengerung_Kostenzusage_Ctp"/>
+									<xs:element name="Anzeige_einer_Verlaengerung" type="anv:Anzeige_einer_Verlaengerung_RV_Ctp"/>
+									<xs:element name="Unterbrechung" type="unt:Unterbrechung_RV_Ctp"/>
+									<xs:element name="Absage_durch_Einrichtung" type="abe:Absage_durch_Einrichtung_RV_Ctp"/>
+									<xs:element name="Absage_durch_Kostentraeger" type="abk:Absage_durch_Kostentraeger_RV_Ctp"/>
+									<xs:element name="Fehlernachricht" type="feh:Fehlernachricht_Ctp"/>
+								</xs:choice>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:element name="Freier_Text" type="bty:Freier_Text_Stp" minOccurs="0"/>
+				<xs:element name="Dokumente" type="bty:Dokumente_Ctp" minOccurs="0"/>
+				<xs:element name="Papieranlage" type="bty:J_oder_N_Stp"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

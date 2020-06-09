@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/KOD/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/KOD/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+	<xs:complexType name="Kopfdaten_KV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Kopfdaten der KV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Erstellungsdatum_Uhrzeit" type="bty:Datum_Uhrzeit_Stp">
+				<xs:annotation>
+					<xs:documentation>Erstellungsdatum/uhrzeit des Geschäftsvorfalls </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version der Kopfdaten</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Dateinummer" type="bty:Dateinummer_Stp"/>
+			<xs:element name="Identifikationsdaten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IK_Absender" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Absender - verschlüsselnde Stelle</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Empfaenger" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Empfänger - entschlüsselnde Stelle</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Kostentraeger" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Kostenträger / beauftragt. Stelle GKV: Zu füllen wenn beauftragte Stelle zuständig ist , nicht zu füllen, wenn Kasse zuständig ist.						Nutzung des IK-Rechnung im Geschäftsvorfall Rechnung bei abweichendem Adressaten (optional für GKV).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_beauftragte_Stelle" type="bty:IK_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>beauftragt. Stelle GKV: Zu füllen wenn beauftragte Stelle zuständig ist. 						Nutzung des IK-Rechnung im Geschäftsvorfall Rechnung bei abweichendem Adressaten (optional für GKV).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Einrichtung" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Reha-Einrichtung 						Nutzung des IK-Rechnung im Geschäftsvorfall Rechnung bei abweichendem Adressaten (optional für GKV).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Fachabteilung" type="bty:Fachabteilung_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Fachabteilungsschlüssel der Reha-Einrichtung</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fall_ID_KV">
+				<xs:annotation>
+					<xs:documentation>Fall-ID des KV-Trägers</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Vertragskennzeichen" type="bty:Vertragskennzeichen_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Vertragskennzeichen - um Vertragskennzeichen (IV, DMP etc) zu übermitteln</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Krankenversichertennummer" type="bty:Krankenversichertennummer_Stp">
+							<xs:annotation>
+								<xs:documentation>Krankenversichertennummer (KV-Nummer) - Muss, wenn keine Auftragsleistung vorliegt, bei LAK: Mitgliedsnummer der LAK</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Lebendspende" type="bty:J_oder_N_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>"J" = Lebendspende</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Krankenversicherung" type="bty:IK_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>IK zur KV-Nummer</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Fallnummer" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="bty:Token_intern_Stp">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="17"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fall_ID_RV" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Fall-ID des RV-Trägers</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Versicherungsnummer" type="bty:RV_Versicherungsnumer_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Versicherungsnummer RV besteht aus 8 Ziffern  + 1 Buchstabe + 3 Ziffern</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fall_ID_Rehaeinrichtung" type="bty:Fall_ID_Rehaeinrichtung_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Fall-ID der Reha-Einrichtung -  Klinikinternes Kennzeichen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Kopfdaten_RV_Ctp">
+		<xs:annotation>
+			<xs:documentation>Kopfdaten der RV</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Erstellungsdatum_Uhrzeit" type="bty:Datum_Uhrzeit_Stp">
+				<xs:annotation>
+					<xs:documentation>Erstellungsdatum/uhrzeit des Geschäftsvorfalls </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>Version der Kopfdaten</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bty:Version_Stp">
+						<xs:enumeration value="3.4.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Dateinummer" type="bty:Dateinummer_Stp"/>
+			<xs:element name="Identifikationsdaten">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IK_Absender" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Absender - verschlüsselnde Stelle</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Empfaenger" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Empfänger - entschlüsselnde Stelle</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Kostentraeger" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Kostenträger / beauftragt. Stelle GKV: Zu füllen wenn beauftragte Stelle zuständig ist , nicht zu füllen, wenn Kasse zuständig ist. 						Nutzung des IK-Rechnung im Geschäftsvorfall Rechnung bei abweichendem Adressaten.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_beauftragte_Stelle" type="bty:IK_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>beauftragt. Stelle GKV: Zu füllen wenn beauftragte Stelle zuständig ist. 						Nutzung des IK-Rechnung im Geschäftsvorfall Rechnung bei abweichendem Adressaten.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IK_Einrichtung" type="bty:IK_Stp">
+							<xs:annotation>
+								<xs:documentation>IK Reha-Einrichtung 						Nutzung des IK-Rechnung im Geschäftsvorfall Rechnung bei abweichendem Adressaten (optional für GKV).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Fachabteilung" type="bty:Fachabteilung_Stp" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Fachabteilungsschlüssel der Reha-Einrichtung</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fall_ID_RV">
+				<xs:annotation>
+					<xs:documentation>Fall-ID des RV-Trägers - Muss-Felder bei Leistungen für RV-Träger.  Klinik erhält die Fall-ID vom RV-Träger mit Geschäftsvorfall "Bewilligung".</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Versicherungsnummer" type="bty:RV_Versicherungsnumer_Stp">
+							<xs:annotation>
+								<xs:documentation>Versicherungsnummer RV besteht aus 8 Ziffern  + 1 Buchstabe + 3 Ziffern</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Massnahmenummer">
+							<xs:annotation>
+								<xs:documentation>Massnahmenummer RV</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="[0-9]{4}"/>
+									<xs:pattern value="[0-9]{2}[A-Z]{1}[0-9]{1}"/>
+									<!-- 4 Ziffern oder 2 Ziffer+ein Großbuchstabe+1 Ziffer-->
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Berechtigtennummer">
+							<xs:annotation>
+								<xs:documentation>Berechtigtennummer RV</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="[0-9]{1}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Zuordnung_Bearbeiter">
+							<xs:annotation>
+								<xs:documentation>Zuordnung zum Bearbeiter des Kostenträgers - Vierstellige Angabe der Arbeitsgruppe bzw. des Kennzeichens bei der DRV</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="[0-9]{4}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fall_ID_Rehaeinrichtung" type="bty:Fall_ID_Rehaeinrichtung_Stp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Fall-ID der Reha-Einrichtung -  Klinikinternes Kennzeichen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
