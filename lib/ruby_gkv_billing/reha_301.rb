@@ -2,6 +2,28 @@ require 'ruby_gkv_billing/reha_301/xml'
 
 module RubyGkvBilling
   module Reha301
+    FALLARTEN = {
+      "01" => "Aufnahme",
+      "03" => "Antrag auf Verlängerung des Aufenthaltes",
+      "04" => "Entlassungsmeldung",
+      "06" => "Unterbrechung",
+      "07" => "Absage durch die Einrichtung",
+      "10" => "Anzeige einer Verlängerung",
+      "11" => "Bewilligung",
+      "12" => "Absage durch den Kostenträger",
+      "13" => "Ergänzungen vor Reha-Beginn",
+      "15" => "Antwort zum Antrag auf Verlängerung des Aufenthaltes",
+      "16" => "Antrag auf Verlängerung der Kostenzusage",
+      "17" => "Antwort zum Antrag auf Verlängerung der Kostenzusage",
+      "18" => "Antrag auf Phasenwechsel",
+      "19" => "Antwort zum Antrag auf Phasenwechsel",
+      "21" => "Entlassungsbericht",
+      "30" => "Rechnung",
+      "31" => "Zahlsatz",
+      "32" => "Zuzahlungsgutschrift / -rückforderung",
+      "80" => "Fehlermeldung"
+    }
+
     DRV_FALLART = {
       "01" => "Aufnahme",
       "03" => "Antrag auf Verlängerung des Aufenthaltes",
