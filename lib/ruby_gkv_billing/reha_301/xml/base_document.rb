@@ -37,11 +37,7 @@ module RubyGkvBilling
         end
 
         def papieranlage
-          if @papieranlage
-            'J'
-          else
-            'N'
-          end
+          bool_value(@papieranlage)
         end
 
         def rv_type
@@ -79,7 +75,61 @@ module RubyGkvBilling
           }
         end
 
+        def kv_id(
+          xml,
+          vertragskennzeichen,
+          kv_nummer,
+          lebendspende,
+          ik_kv_karte,
+          fallnummer
+        )
+
+          xml.send("kod:Fall_ID_KV") {
+            if vertragskennzeichen.to_s != ''
+              xml["kod"].Vertragskennzeichen vertragskennzeichen
+            end
+            xml["kod"].Krankenversichertennummer kv_nummer
+            xml["kod"].Lebendspende bool_value(lebendspende)
+            if ik_kv_karte.to_s != ''
+              xml["kod"].IK_Krankenversicherung ik_kv_karte
+            end
+            if fallnummer.to_s != ''
+              xml["kod"].Fallnummer fallnummer
+            end
+          }
+        end
+
+        def rv_id(
+          xml,
+          versicherungsnummer,
+          massnahmenummer,
+          berechtigtennummer,
+          zuordnung_mitarbeiter
+        )
+        xml.send("kod:Fall_ID_RV") {
+          xml["kod"].Versicherungsnummer versicherungsnummer
+
+          if massnahmenummer.to_s != ''
+            xml["kod"].Massnahmenummer massnahmenummer
+          end
+          if berechtigtennummer.to_s != ''
+            xml["kod"].Berechtigtennummer berechtigtennummer
+          end
+          if zuordnung_mitarbeiter.to_s != ''
+            xml["kod"].Zuordnung_Bearbeiter zuordnung_mitarbeiter
+          end
+        }
+        end
+
         private
+
+        def bool_value(value)
+          if value
+            'J'
+          else
+            'N'
+          end
+        end
 
         def xml_build
           return @xml_build if @xml_build

@@ -35,12 +35,46 @@ RSpec.describe RubyGkvBilling::Reha301::Xml::BaseDocument do
             "fachab",
             erstellungsdatum: Time.new(2020,2,1,10,12,22,33)
           )
+
+          subject.kv_id(
+            xml,
+            "Vertrag",
+            "KVN",
+            true,
+            "KVKA",
+            "FALL"
+          )
+
+          subject.rv_id(
+            xml,
+            "RV123",
+            "RVMAS",
+            "RVBER",
+            "RVZuordnung"
+          )
         }
+
       end
     }
 
     let(:xml_doc) {
       xml.to_xml
+    }
+
+    it {
+      expect(xml_doc).to include("<kod:Lebendspende>J</kod:Lebendspende>")
+    }
+
+    it {
+      expect(xml_doc).to include("<kod:IK_Krankenversicherung>KVKA</kod:IK_Krankenversicherung>")
+    }
+
+    it {
+      expect(xml_doc).to include("<kod:Versicherungsnummer>RV123</kod:Versicherungsnummer>")
+    }
+
+    it {
+      expect(xml_doc).to include("<kod:Massnahmenummer>RVMAS</kod:Massnahmenummer>")
     }
 
     it {
