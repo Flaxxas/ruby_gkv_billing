@@ -72,7 +72,7 @@ module RubyGkvBilling
       2 => "keine Zuzahlung trotz schriftlicher Zahlungsaufforderung",
       3 => "Zuzahlungspflichtig",
       4 => "Übergang zuzahlungspflichtig zu zuzahlungsfrei",
-      5 => "Übergang zuzahlungspflichtig zu zuzahlungsfrei"
+      5 => "Übergang zuzahlungsfrei zu zuzahlungspflichtig"
     }
 
     #8.1.4
