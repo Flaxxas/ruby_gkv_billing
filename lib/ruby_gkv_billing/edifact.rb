@@ -69,10 +69,11 @@ module RubyGkvBilling
     ZUZAHLUNG = {
       0 => "keine gesetzliche Zuzahlung",
       1 => "Zuzahlungsbefreit",
-      2 => "keine Zuzahlung trotz schriftlicher Zahlungsaufforderung",
-      3 => "Zuzahlungspflichtig",
-      4 => "Übergang zuzahlungspflichtig zu zuzahlungsfrei",
-      5 => "Übergang zuzahlungsfrei zu zuzahlungspflichtig"
+      2 => "keine Zuzahlung trotz schriftlicher Zahlungsaufforderung"
+      #TODO noch nicht unterstuezt
+      #3 => "Zuzahlungspflichtig",
+      #4 => "Übergang zuzahlungspflichtig zu zuzahlungsfrei",
+      #5 => "Übergang zuzahlungsfrei zu zuzahlungspflichtig"
     }
 
     #8.1.4
