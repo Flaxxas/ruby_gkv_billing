@@ -118,7 +118,7 @@ module RubyGkvBilling
       "48" => "48 - Sonstiger nichtöffentlicher Anbieter von qualifizierten Krankentransport- bzw. Rettungsdienstleistungen",
       "49" => "49 - Sonstiger Anbieter von Krankentransportleistungen (z.B. Bergwacht, Wasserwacht etc.)",
       "50" => "50 - Hebamme/Entbindungspfleger",
-      "55" => "50 - Sonstiger Leistungserbringer von nichtärztlichen Dialysesachleistungen",
+      "55" => "55 - Sonstiger Leistungserbringer von nichtärztlichen Dialysesachleistungen",
       "56" => "56 - Kuratorium für Heimdialyse (KfH)",
       "57" => "57 - Patienten-Heimversorgung (PHV)",
       "60" => "60 - Betriebshilfe",
