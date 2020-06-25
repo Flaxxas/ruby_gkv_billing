@@ -59,9 +59,9 @@ module RubyGkvBilling
         potential_data_recipient = search_by_ik(ik)
         potential_data_recipient_dfüs = potential_data_recipient.data_entry("Segment_DFÜ", "Kommunikationskanal") if potential_data_recipient
         if potential_data_recipient_dfüs && !potential_data_recipient_dfüs.empty?
-          return message
-        else
           return provider_message(ik)
+        else
+          return message
         end
       # TODO: Sonderfall IDK+103711119+99+AOK NORDWEST?
       elsif dfü_segments && !dfü_segments.empty?
