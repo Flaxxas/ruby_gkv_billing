@@ -22,21 +22,21 @@ module RubyGkvBilling
 
     #8.1.14
     LEISTUNGSBEREICH = {
-      "A" => "Leistungserbringer von Hilfsmitteln",
-      "B" => "Leistungserbringer von Heilmitteln",
-      "C" => "Leistungserbringer von häuslicher Krankenpflege",
-      "D" => "Leistungserbringer von Haushaltshilfe",
-      "E" => "Leistungserbringer von Krankentransportleistungen",
-      "F" => "Hebammen",
-      "G" => "nichtärztliche Dialysesachleistungen",
-      "H" => "Leistungserbringer von Rehabilitationssport",
-      "I" => "Leistungserbringer von Funktionstraining",
-      "J" => "Weitere Sonstige Leistungserbringer, sofern nicht unter A - I und K - O aufgeführt",
-      "K" => "Leistungserbringer von Präventions- und Gesundheitsförderungsmaßnahmen im Rahmen von ambulanten Vorsorgeleistungen",
-      "L" => "Leistungserbringer für ergänzenden Rehamaß-nahmen",
-      "M" => "Sozialpädiatrische Zentren/Frühförderstellen",
-      "N" => "Soziotherapeutischer Leistungserbringer",
-      "O" => "SAPV"
+      #"A" => "A - Leistungserbringer von Hilfsmitteln",
+      "B" => "B - Leistungserbringer von Heilmitteln",
+      #"C" => "C - Leistungserbringer von häuslicher Krankenpflege",
+      #"D" => "D - Leistungserbringer von Haushaltshilfe",
+      #"E" => "E - Leistungserbringer von Krankentransportleistungen",
+      #"F" => "F - Hebammen",
+      "G" => "G - nichtärztliche Dialysesachleistungen",
+      "H" => "H - Leistungserbringer von Rehabilitationssport",
+      "I" => "I - Leistungserbringer von Funktionstraining",
+      "J" => "J - Weitere Sonstige Leistungserbringer, sofern nicht unter A - I und K - O aufgeführt",
+      "K" => "K - Leistungserbringer von Präventions- und Gesundheitsförderungsmaßnahmen im Rahmen von ambulanten Vorsorgeleistungen",
+      "L" => "L - Leistungserbringer für ergänzenden Rehamaß-nahmen",
+      "M" => "M - Sozialpädiatrische Zentren/Frühförderstellen",
+      "N" => "N - Soziotherapeutischer Leistungserbringer"
+      #"O" => "O - SAPV"
     }
 
     TESTINDIKATOR = {
