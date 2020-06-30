@@ -2,12 +2,93 @@ require 'edifact_tools'
 
 module RubyGkvBilling
   class Provider
+
+    # 8.1
+    ART_ANSCHRIFT = {
+      "1" => "1 - Hausanschrift",
+      "2" => "2 - Postfachanschrift",
+      "3" => "3 - Großkundenanschrift"
+    }
+
+    # 8.2
+    ART_DATENLIEFERUNG = {
+      "07" => "07 - Rechnungs- und Abrechnungsdaten SLGA und SLLA digitalisiert",
+      "21" => "21 - Rechnung (Papier)",
+      "24" => "24 - maschinenlesbarer Beleg",
+      "26" => "26 - Verordnung (Papier)",
+      "27" => "27 - Kostenvoranschlag (Papier)",
+      "28" => "28 - Gruppenschlüssel (Einzelschlüssel 21, 26, 27) papiergebundene Unterlagen einer digitalen Abrechnung (Verordnung, ggf. Kostenvoranschlag, ggf. Rechnung)",
+      "29" => "29 - Gruppenschlüssel (Einzelschlüssel 24, 26, 27) maschinenlesbarer Beleg einschließlich der dazugehörigen Abrechnungsunterlagen"
+    }
+
+    # 8.3
+    ART_VERKNUEPFUNG_INSTITUTIONSKENNZEICHEN = {
+      "01" => "01 - Verweis vom IK der Versichertenkarte zum Kostenträger",
+      "02" => "02 - Verweis auf eine Datenannahmestelle (ohne Entschlüsselungsbefugnis) Schlüssel ist nur gültig in Verbindung mit dem Schlüssel 07 'Art der Datenlieferung'",
+      "03" => "03 - Verweis auf eine Datenannahmestelle (mit Entschlüsselungsbefugnis) Schlüssel ist nur gültig in Verbindung mit dem Schlüssel 07 'Art der Datenlieferung'",
+      "09" => "09 - Verweis auf eine Papierannahmestelle"
+    }
+
+    # 8.4
+    BUNDESLAND = {
+      "01" => "01 - Schleswig-Holstein",
+      "02" => "02 - Hamburg",
+      "03" => "03 - Niedersachsen",
+      "04" => "04 - Bremen",
+      "05" => "05 - Nordrhein-Westfalen",
+      "06" => "06 - Hessen",
+      "07" => "07 - Rheinland-Pfalz",
+      "08" => "08 - Baden-Württemberg",
+      "09" => "09 - Bayern",
+      "10" => "10 - Saarland",
+      "11" => "11 - Berlin",
+      "12" => "12 - Brandenburg",
+      "13" => "13 - Mecklenburg-Vorpommern",
+      "14" => "14 - Sachsen",
+      "15" => "15 - Sachsen-Anhalt",
+      "16" => "16 - Thüringen",
+      "99" => "99 - Alle Bundesländer (bei Datenlieferungen)"
+    }
+
+    # 8.5
     TRANSMISSION_PROTOCOLS = {
       "016" => "FTAM",
       "023" => "FTP",
       "070" => "E-Mail/Internet"
     }
 
+    # 8.8
+    LEISTUNGSERBRINGERGRUPPE = {
+      "5" => "Sonstige Leistungserbringer"
+    }
+
+    # 8.9
+    UEBERMITTLUNGSMEDIUM = {
+      "1" => "1 - DFÜ",
+      "2" => "2 - Magnetband",
+      "3" => "3 - Magnetbandkassette",
+      "4" => "4 - Diskette",
+      "5" => "5 - Maschinenlesbarer Beleg",
+      "6" => "6 - Nicht maschinenlesbarer Beleg",
+      "7" => "7 - CD-ROM",
+      "9" => "9 - Alle Datenträger (Schlüssel 2 bis 4 und 7)"
+    }
+
+    # 8.11
+    UEBERMITTLUNGSZEICHENSATZ = {
+      "I7" => "ASCII 7-Bit",
+      "I8" => "ASCII 8-Bit"
+    }
+
+    # 8.13
+    VERABREITUNGSKENNZEICHEN = {
+      "01" => "01 - Neuanmeldung",
+      "02" => "02 - Änderung",
+      "03" => "03 - Stornierung",
+      "04" => "04 - Unverändert"
+    }
+
+    #  8.12
     TRANSMISSION_DAYS = {
       "1" => "Übertragung an allen Tagen",
       "2" => "Übertragung nur an Werktage (Montag bis Samstag außer Feiertag)",
