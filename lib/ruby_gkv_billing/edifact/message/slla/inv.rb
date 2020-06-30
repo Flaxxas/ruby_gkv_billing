@@ -95,9 +95,11 @@ module RubyGkvBilling
           def uri_segment
             uri_segment = RubyGkvBilling::Edifact::Segment.new("URI")
             uri_segment << @urspruengliche_ik_leistungserbringer
-            uri_segment << @urpsruengliche_sammel_rechnungsnummer
-            uri_segment << @urpsruengliche_einzel_rechnungsnummer
-            uri_segment << @urpsruengliches_rechnungsdatum
+            uri_segment.add_splitted_element([
+                @urpsruengliche_sammel_rechnungsnummer,
+                @urpsruengliche_einzel_rechnungsnummer
+              ])
+            uri_segment << @urpsruengliches_rechnungsdatum.strftime("%Y%m%d")
             uri_segment << @urpsruengliche_belegnummer
 
             uri_segment
