@@ -156,6 +156,19 @@ module RubyGkvBilling
       "9" => "9 - Alle Datenträger (Schlüssel 2 bis 4 und 7)"
     }
 
+    # 8.10
+    UEBERMITTLUNGSMEDIUM_PARAMETER = {
+      "00" => "00 - kein Parameter (DFÜ-Parameter sind im Segment DFU hinterlegt)",
+      "02" => "02 - Magnetband 6250 bpi",
+      "03" => "03 - Magnetbandkassette 3480",
+      "04" => "04 - Magnetbandkassette 3490 - 18 Spur",
+      "05" => "05 - Magnetbandkassette 3490 - 36 Spur",
+      "08" => "08 - Diskette 3,5\" - 720 KB - DOS-Format",
+      "09" => "09 - Diskette 3,5\" - 1,44 MB - DOS-Format",
+      "10" => "10 - Diskette 3,5\" - 2,88 MB - DOS-Format",
+      "14" => "14 - CD-ROM, 12 cm, 650 MB"
+    }
+
     # 8.11
     UEBERMITTLUNGSZEICHENSATZ = {
       "I7" => "ASCII 7-Bit",
