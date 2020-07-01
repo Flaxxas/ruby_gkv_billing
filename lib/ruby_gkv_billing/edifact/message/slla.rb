@@ -47,8 +47,11 @@ module RubyGkvBilling
           fkt_segment << @ik_leistungserbringer
           fkt_segment << @ik_kostentraeger
           fkt_segment << @ik_krankenkasse
-          fkt_segment << @ik_rechnungssteller
-
+          if @rechnungs_art.to_s == "3"
+            fkt_segment << @ik_rechnungssteller
+          else
+            fkt_segment << ""
+          end
           fkt_segment
         end
 
