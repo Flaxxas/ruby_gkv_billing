@@ -75,7 +75,6 @@ RSpec.describe RubyGkvBilling::ProviderFile do
     it "has data_recipient_message" do
       pm = subject.provider_message("103511264")
       expect(subject.data_recipient_message(pm, "00")).not_to be_nil
-      p subject.contact_messages("103511264", "00")
     end
 
     it { expect(subject.contact_messages("103511264", "00").length).to eq(2)}
