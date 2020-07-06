@@ -138,7 +138,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       expect(subject.public_key.to_s).to eq(key.public_key.to_s)
     }
   end
-  describe "ssl", focus: true do
+  describe "ssl" do
     subject{ RubyGkvBilling::Security::Certification }
     let(:ik_number){ "123456" }
     let(:path){ RubyGkvBilling.file_path("spec/examples/ssl/") }
