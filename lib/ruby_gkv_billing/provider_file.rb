@@ -4,8 +4,9 @@ require 'edifact_tools'
 
 module RubyGkvBilling
   class ProviderFile
-    def initialize(provider_category)
-      load_file(provider_category)
+    # kann Pfad oder Name sein
+    def initialize(provider_string)
+      load_file(provider_string)
     end
 
     def contact_messages(client_idk, billing_code)
@@ -30,8 +31,9 @@ module RubyGkvBilling
       @messages ||= @data.non_storno_messages
     end
 
-    def load_file(provider_name)
-      @data = EdifactTools::EdifactParser.read(provider_name)
+    # kann Pfad oder Name sein
+    def load_file(provider_string)
+      @data = EdifactTools::EdifactParser.read(provider_string)
     end
 
     def dataname
