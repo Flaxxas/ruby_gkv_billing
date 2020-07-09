@@ -1,5 +1,5 @@
 RSpec.describe RubyGkvBilling::Provider do
-  subject {RubyGkvBilling::Provider.new("AOK_2019_Q3_Nachtrag1", "107415518", "")}
+  subject {RubyGkvBilling::Provider.new("AOK_2020_Q3_Standard", "107415518", "")}
 
   it { expect(subject.provider_message).not_to be_nil}
   it { expect(subject.data_recipient_message).not_to be_nil}
@@ -45,7 +45,7 @@ RSpec.describe RubyGkvBilling::Provider do
 
   context "invalid provider type" do
     it "no nullpointer exception" do
-      provider = RubyGkvBilling::Provider.new("BKK_2019_Q3_Standard", "103411401", "")
+      provider = RubyGkvBilling::Provider.new("BKK_2020_Q3_Nachtrag1", "103411401", "")
       expect(provider.provider_full_name).to be_nil
       expect(provider.provider_ik).to be_nil
       expect(provider.provider_short_name).to be_nil
@@ -61,7 +61,7 @@ RSpec.describe RubyGkvBilling::Provider do
     end
 
     it "no nullpointer exception" do
-      provider = RubyGkvBilling::Provider.new("BKK_2019_Q3_Standard", "99999", "")
+      provider = RubyGkvBilling::Provider.new("BKK_2020_Q3_Nachtrag1", "99999", "")
       expect(provider.provider_full_name).to be_nil
       expect(provider.provider_ik).to be_nil
       expect(provider.provider_short_name).to be_nil
@@ -80,7 +80,7 @@ RSpec.describe RubyGkvBilling::Provider do
   context "Lookup for 2 messages" do
     it "has correct provider and data recipient" do
       # TODO: Ist das ein Spezialfall? Die erste gefundene Nachricht enthält sowohl Verweis auf Datenempfänger in einer anderen Nachricht, aber hat selber trotzdem DFÜ-Segmente..
-      provider = RubyGkvBilling::Provider.new("AOK_2019_Q3_Nachtrag1", "105998018", "")
+      provider = RubyGkvBilling::Provider.new("AOK_2020_Q3_Standard", "105998018", "")
       expect(provider.provider_ik).to eq("105998018")
       expect(provider.provider_short_name).to eq("AOK Plus")
       expect(provider.provider_full_name).to eq("AOK Plus")
@@ -93,7 +93,7 @@ RSpec.describe RubyGkvBilling::Provider do
   context "different data_recipients dependent on billing code" do
 
     it "Lookup for 2 messages, data recipient is DAVASO" do
-      provider = RubyGkvBilling::Provider.new("AOK_2019_Q3_Nachtrag1", "103411401", "21")
+      provider = RubyGkvBilling::Provider.new("AOK_2020_Q3_Standard", "103411401", "21")
       expect(provider.provider_ik).to eq("103411401")
       expect(provider.provider_short_name).to eq("AOK NORDWEST")
       expect(provider.data_recipient_ik).to eq("661430035")
@@ -101,7 +101,7 @@ RSpec.describe RubyGkvBilling::Provider do
     end
 
     it "Lookup for 1 message, data recipient itself is AOK NORDWEST" do
-      provider = RubyGkvBilling::Provider.new("AOK_2019_Q3_Nachtrag1", "103411401", "11")
+      provider = RubyGkvBilling::Provider.new("AOK_2020_Q3_Standard", "103411401", "11")
       expect(provider.provider_ik).to eq("103411401")
       expect(provider.provider_short_name).to eq("AOK NORDWEST")
       expect(provider.data_recipient_ik).to eq("103411401")
@@ -112,7 +112,7 @@ RSpec.describe RubyGkvBilling::Provider do
 
   context "Lookup for 3 messages: AOK in Erbach -> provider: AOK Hessen -> data recipient: ITSCare" do
     it "has correct provider and data recipient" do
-      provider = RubyGkvBilling::Provider.new("AOK_2019_Q3_Nachtrag1", "105213188", "21")
+      provider = RubyGkvBilling::Provider.new("AOK_2020_Q3_Standard", "105213188", "21")
       expect(provider.provider_ik).to eq("105313145")
       expect(provider.provider_short_name).to eq("AOK Hessen")
       expect(provider.provider_full_name).to eq("AOK-Die Gesundheitskasse in Hessen")
