@@ -295,7 +295,11 @@ module RubyGkvBilling
     GENEHMIGUNGSART = {
       "B1" => "Heilmittel - Genehmigung gemäß §8 Abs. 4 bzw. §7 Abs. 4",
       "B2" => "Heilmittel - Genehmigung gemäß §8a Abs. 3 bzw. §8 Abs. 1",
+      "G1" => "Sonstige - G Sonstige Leistungserbringer - Genehmigung im Einzelfall",
+      "H1" => "Sonstige - H Sonstige Leistungserbringer - Genehmigung im Einzelfall",
+      "I1" => "Sonstige - I Sonstige Leistungserbringer - Genehmigung im Einzelfall",
       "J1" => "Sonstige - J Sonstige Leistungserbringer - Genehmigung im Einzelfall",
+      "K1" => "Sonstige - K Sonstige Leistungserbringer - Genehmigung im Einzelfall",
       "L1" => "Sonstige - L Ambulantes Rehazentrum - Genehmigung im Einzelfall",
       "M1" => "Sonstige - M Sozialpädiatrische Zentren/Frühförderstellen - Genehmigung im Einzelfall",
       "N1" => "Sonstige - N Soziotherapeutische Leistungserbringer - Genehmigung im Einzelfall"
