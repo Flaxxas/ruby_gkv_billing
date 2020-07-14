@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/REH/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aak="http://www.vdek.com/xml-schema/AAK/3.4" xmlns:aap="http://www.vdek.com/xml-schema/AAP/3.4" xmlns:aav="http://www.vdek.com/xml-schema/AAV/3.4" xmlns:abe="http://www.vdek.com/xml-schema/ABE/3.4" xmlns:abk="http://www.vdek.com/xml-schema/ABK/3.4" xmlns:anv="http://www.vdek.com/xml-schema/ANV/3.4" xmlns:apw="http://www.vdek.com/xml-schema/APW/3.4" xmlns:atv="http://www.vdek.com/xml-schema/ATV/3.4" xmlns:auf="http://www.vdek.com/xml-schema/AUFN/3.4" xmlns:avk="http://www.vdek.com/xml-schema/AVK/3.4" xmlns:bew="http://www.vdek.com/xml-schema/BEW/3.4" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" xmlns:ebe="http://www.vdek.com/xml-schema/EBE/3.4" xmlns:ent="http://www.vdek.com/xml-schema/ENTL/3.4" xmlns:erg="http://www.vdek.com/xml-schema/ERG/3.4" xmlns:feh="http://www.vdek.com/xml-schema/FEH/3.4" xmlns:kod="http://www.vdek.com/xml-schema/KOD/3.4" xmlns:rec="http://www.vdek.com/xml-schema/RECH/3.4" xmlns:unt="http://www.vdek.com/xml-schema/UNT/3.4" xmlns:zgr="http://www.vdek.com/xml-schema/ZGR/3.4" xmlns:zsz="http://www.vdek.com/xml-schema/ZSZ/3.4" targetNamespace="http://www.vdek.com/xml-schema/REH/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/AAK/3.4" schemaLocation="EREH0-AAK-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/AAP/3.4" schemaLocation="EREH0-AAP-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/AAV/3.4" schemaLocation="EREH0-AAV-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ABE/3.4" schemaLocation="EREH0-ABE-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ABK/3.4" schemaLocation="EREH0-ABK-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ANV/3.4" schemaLocation="EREH0-ANV-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/APW/3.4" schemaLocation="EREH0-APW-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ATV/3.4" schemaLocation="EREH0-ATV-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/AUFN/3.4" schemaLocation="EREH0-AUF-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/AVK/3.4" schemaLocation="EREH0-AVK-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/BEW/3.4" schemaLocation="EREH0-BEW-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/EBE/3.4" schemaLocation="EREH0-EBE-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ENTL/3.4" schemaLocation="EREH0-ENT-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ERG/3.4" schemaLocation="EREH0-ERG-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/FEH/3.4" schemaLocation="EREH0-FEH-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/KOD/3.4" schemaLocation="EREH0-KOD-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/RECH/3.4" schemaLocation="EREH0-REC-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/UNT/3.4" schemaLocation="EREH0-UNT-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ZGR/3.4" schemaLocation="EREH0-ZGR-3.4.0.xsd"/>
-	<xs:import namespace="http://www.vdek.com/xml-schema/ZSZ/3.4" schemaLocation="EREH0-ZSZ-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/REH/4.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aak="http://www.vdek.com/xml-schema/AAK/4.1" xmlns:aap="http://www.vdek.com/xml-schema/AAP/4.1" xmlns:aav="http://www.vdek.com/xml-schema/AAV/4.2" xmlns:abe="http://www.vdek.com/xml-schema/ABE/4.1" xmlns:abk="http://www.vdek.com/xml-schema/ABK/4.1" xmlns:anv="http://www.vdek.com/xml-schema/ANV/4.1" xmlns:apw="http://www.vdek.com/xml-schema/APW/4.1" xmlns:atv="http://www.vdek.com/xml-schema/ATV/4.2" xmlns:auf="http://www.vdek.com/xml-schema/AUFN/4.1" xmlns:avk="http://www.vdek.com/xml-schema/AVK/4.1" xmlns:bew="http://www.vdek.com/xml-schema/BEW/4.2" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" xmlns:ebe="http://www.vdek.com/xml-schema/EBE/4.1" xmlns:ent="http://www.vdek.com/xml-schema/ENTL/4.1" xmlns:erg="http://www.vdek.com/xml-schema/ERG/4.1" xmlns:feh="http://www.vdek.com/xml-schema/FEH/4.1" xmlns:kod="http://www.vdek.com/xml-schema/KOD/4.1" xmlns:nra="http://www.vdek.com/xml-schema/NRA/4.1" xmlns:rec="http://www.vdek.com/xml-schema/RECH/4.2" xmlns:unt="http://www.vdek.com/xml-schema/UNT/4.1" xmlns:zgr="http://www.vdek.com/xml-schema/ZGR/4.1" xmlns:zsz="http://www.vdek.com/xml-schema/ZSZ/4.1" targetNamespace="http://www.vdek.com/xml-schema/REH/4.2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/AAK/4.1" schemaLocation="EREH0-AAK-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AAP/4.1" schemaLocation="EREH0-AAP-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AAV/4.2" schemaLocation="EREH0-AAV-4.2.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ABE/4.1" schemaLocation="EREH0-ABE-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ABK/4.1" schemaLocation="EREH0-ABK-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ANV/4.1" schemaLocation="EREH0-ANV-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/APW/4.1" schemaLocation="EREH0-APW-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ATV/4.2" schemaLocation="EREH0-ATV-4.2.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AUFN/4.1" schemaLocation="EREH0-AUF-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/AVK/4.1" schemaLocation="EREH0-AVK-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/BEW/4.2" schemaLocation="EREH0-BEW-4.2.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/EBE/4.1" schemaLocation="EREH0-EBE-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ENTL/4.1" schemaLocation="EREH0-ENT-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ERG/4.1" schemaLocation="EREH0-ERG-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/FEH/4.1" schemaLocation="EREH0-FEH-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/KOD/4.1" schemaLocation="EREH0-KOD-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/NRA/4.1" schemaLocation="EREH0-NRA-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/RECH/4.2" schemaLocation="EREH0-REC-4.2.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/UNT/4.1" schemaLocation="EREH0-UNT-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ZGR/4.1" schemaLocation="EREH0-ZGR-4.1.0.xsd"/>
+	<xs:import namespace="http://www.vdek.com/xml-schema/ZSZ/4.1" schemaLocation="EREH0-ZSZ-4.1.0.xsd"/>
 	<xs:element name="Reha">
 		<xs:annotation>
 			<xs:documentation>Root</xs:documentation>
@@ -30,7 +31,7 @@
 				<xs:element name="logische_Version">
 					<xs:simpleType>
 						<xs:restriction base="bty:Version_Stp">
-							<xs:enumeration value="3.4.0"/>
+							<xs:enumeration value="4.2.0"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
@@ -57,6 +58,7 @@
 									<xs:element name="Antwort_zum_Antrag_auf_Phasenwechsel" type="aap:Antwort_Antrag_Phasenwechsel_KV_Ctp"/>
 									<xs:element name="Unterbrechung" type="unt:Unterbrechung_KV_Ctp"/>
 									<xs:element name="Absage_durch_Einrichtung" type="abe:Absage_durch_Einrichtung_KV_Ctp"/>
+									<xs:element name="Neurologisches_Reha_Assessment" type="nra:Neurologisches_Reha_Assessment_KV_Ctp"/>
 									<xs:element name="Fehlernachricht" type="feh:Fehlernachricht_Ctp"/>
 								</xs:choice>
 							</xs:sequence>

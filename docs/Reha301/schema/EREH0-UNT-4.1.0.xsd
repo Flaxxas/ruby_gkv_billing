@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/UNT/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/UNT/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/UNT/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/UNT/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -19,7 +19,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.1.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>

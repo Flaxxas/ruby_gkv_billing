@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/RECH/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/RECH/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/RECH/4.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/RECH/4.2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -19,7 +19,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.2.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -48,7 +48,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.2.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -103,7 +103,7 @@ ________________________________________________________________________________
 53 = Nachtragsrechnung mit Anforderung Zahlsatz</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="Entgelte" type="Entgelte_Ctp" maxOccurs="99"/>
+									<xs:element name="Entgelte" type="Entgelte_KV_Ctp" maxOccurs="99"/>
 									<xs:element name="Zuzahlung" type="Zuzahlung_GKV_Ctp"/>
 									<xs:element name="Gesamtbetrag" type="Betrag_8_2_Stp">
 										<xs:annotation>
@@ -162,7 +162,7 @@ ________________________________________________________________________________
 53 = Nachtragsrechnung mit Anforderung Zahlsatz</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="Entgelte" type="Entgelte_Ctp" maxOccurs="99"/>
+									<xs:element name="Entgelte" type="Entgelte_RV_Ctp" maxOccurs="99"/>
 									<xs:element name="Zuzahlung" type="Zuzahlung_DRV_Ctp"/>
 									<xs:element name="Gesamtbetrag" type="Betrag_8_2_Stp">
 										<xs:annotation>
@@ -230,9 +230,43 @@ ________________________________________________________________________________
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Entgelte_Ctp">
+	<xs:complexType name="Entgelte_KV_Ctp">
 		<xs:sequence>
-			<xs:element name="Entgeltschluessel" type="Entgeltschluessel_Stp">
+			<xs:element name="Entgeltschluessel" type="Entgeltschluessel_KV_Stp">
+				<xs:annotation>
+					<xs:documentation> Mit dem strukturierten Entgeltartschlüssel wird eine abzurechnende Reha-Leistung identifiziert.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Entgeltbetrag" type="Betrag_8_2_Stp">
+				<xs:annotation>
+					<xs:documentation>Betrag für eine Abrechnungseinheit zu einem Entgeltschlüssel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Abrechnung_von" type="bty:Datum_Stp">
+				<xs:annotation>
+					<xs:documentation>Das Von-Datum in einem Abrechnungszeitraum in Verbindung mit  einer Entgeltart</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Abrechnung_bis" type="bty:Datum_Stp">
+				<xs:annotation>
+					<xs:documentation>Das Bis-Datum in einem Abrechnungszeitraum in Verbindung mit einer Entgeltart </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Entgeltanzahl" type="Entgeltanzahl_Stp">
+				<xs:annotation>
+					<xs:documentation>Anzahl Abrechnungseinheiten der Entgeltart </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tage_ohne_Berechnung" type="Tage_ohne_Berechnung_Stp">
+				<xs:annotation>
+					<xs:documentation>Anzahl der nicht in Rechnung gestellten Tage im Abrechnungszeitraum "Abrechnung von - Abrechnung bis" </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Entgelte_RV_Ctp">
+		<xs:sequence>
+			<xs:element name="Entgeltschluessel" type="Entgeltschluessel_RV_Stp">
 				<xs:annotation>
 					<xs:documentation> Mit dem strukturierten Entgeltartschlüssel wird eine abzurechnende Reha-Leistung identifiziert.</xs:documentation>
 				</xs:annotation>
@@ -318,7 +352,7 @@ ________________________________________________________________________________
 	</xs:simpleType>
 	<xs:simpleType name="Zuzahlungskennzeichen_DRV_Stp">
 		<xs:annotation>
-			<xs:documentation>1 = keine Zuzahlungspflicht, 2 = Zuzahlungsbetrag ist mit Teilabrechnung / Endabrechung intern verrechnet, 3 Bisher keine / keine vollständige Zuzahlung, gesonderte Information erfolgt schriftlich, 4 Rehabilitand hat trotz schriftl. Aufforderung keine Zuzahlung geleistet, Zahlungseinzug durch Kostenträger, 9 = keine Zuzahlung erfolgt aus sonstigen Gründen</xs:documentation>
+			<xs:documentation>1 = keine Zuzahlungspflicht, 2 = Zuzahlungsbetrag ist mit Teilabrechnung / Endabrechung intern verrechnet, 3 Bisher keine Zuzahlung, gesonderte Information erfolgt schriftlich, 4 Rehabilitand hat trotz schriftl. Aufforderung keine Zuzahlung geleistet, Zahlungseinzug durch Kostenträger, 9 = keine Zuzahlung erfolgt aus sonstigen Gründen</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="1"/>
@@ -330,7 +364,7 @@ ________________________________________________________________________________
 	</xs:simpleType>
 	<xs:simpleType name="Zuzahlungskennzeichen_GKV_Stp">
 		<xs:annotation>
-			<xs:documentation>1 = keine Zuzahlungspflicht, 2 = Zuzahlungsbetrag ist mit Teilabrechnung / Endabrechung intern verrechnet, 3 Bisher keine / keine vollständige Zuzahlung, gesonderte Information erfolgt schriftlich, 4 Rehabilitand hat trotz schriftl. Aufforderung keine Zuzahlung geleistet, Zahlungseinzug durch Kostenträger</xs:documentation>
+			<xs:documentation>1 = keine Zuzahlungspflicht, 2 = Zuzahlungsbetrag ist mit Teilabrechnung / Endabrechung intern verrechnet, 3 Bisher keine Zuzahlung, gesonderte Information erfolgt schriftlich, 4 Rehabilitand hat trotz schriftl. Aufforderung keine Zuzahlung geleistet, Zahlungseinzug durch Kostenträger</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="1"/>
@@ -391,10 +425,18 @@ ________________________________________________________________________________
 			<xs:maxInclusive value="999"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="Entgeltschluessel_Stp">
+	<xs:simpleType name="Entgeltschluessel_KV_Stp">
 		<xs:restriction base="xs:string">
 			<xs:minLength value="8"/>
 			<xs:maxLength value="8"/>
+			<xs:pattern value="(6[12346]|8[12567]|9[1-5]|99)[0-7]([\dA-Z])+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Entgeltschluessel_RV_Stp">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="8"/>
+			<xs:pattern value="(71|72|78|88)[0-3]([\dA-Z])+"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

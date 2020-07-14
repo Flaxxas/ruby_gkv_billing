@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/ENTL/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ENTL/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/ENTL/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/ENTL/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -19,7 +19,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.1.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -44,8 +44,8 @@ ________________________________________________________________________________
 					<xs:sequence>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
 						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
-						<xs:element name="Begleitperson" type="bty:Begleitperson_Ctp" minOccurs="0" maxOccurs="15"/>
-						<xs:element name="Mutter_Kind" type="bty:Kinder_in_Mutter_Kind_Massnahme_Ctp" minOccurs="0" maxOccurs="15"/>
+						<xs:element name="Begleitperson" type="bty:Begleitperson_Datum_Ctp" minOccurs="0" maxOccurs="15"/>
+						<xs:element name="Mutter_Kind" type="bty:Kinder_in_Mutter_Kind_Massnahme_mit_Datum_Ctp" minOccurs="0" maxOccurs="15"/>
 						<xs:element name="Entlassungsdaten">
 							<xs:complexType>
 								<xs:sequence>
@@ -89,6 +89,12 @@ ________________________________________________________________________________
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="Entlassungsdatum" type="bty:Datum_Stp"/>
+									<xs:element name="Entlassungsdatum_stat_Kombi" type="bty:Datum_Stp" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Stationärer Teil bei ener Kombibehandlung</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Entlassungsuhrzeit" type="bty:Uhrzeit_Stp" minOccurs="0"/>
 									<xs:element name="Massnahme_Behandlungsinfo" minOccurs="0">
 										<xs:complexType>
 											<xs:sequence>
@@ -155,6 +161,7 @@ ________________________________________________________________________________
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="Entlassungsdatum" type="bty:Datum_Stp"/>
+									<xs:element name="Entlassungsuhrzeit" type="bty:Uhrzeit_Stp" minOccurs="0"/>
 									<xs:element name="Nachsorgeempfehlung" type="bty:J_oder_N_Stp" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>"j" = PDF G4802 ist beizufügen</xs:documentation>

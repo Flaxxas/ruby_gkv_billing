@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/BTY/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.vdek.com/xml-schema/BTY/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns="http://www.vdek.com/xml-schema/BTY/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.vdek.com/xml-schema/BTY/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--  	
             :notation  SIMPLE TYPE  ___ ALLGEMEIN
   _________________________________________________________________________________________________________________ -->
@@ -90,13 +90,14 @@
 	</xs:simpleType>
 	<xs:simpleType name="Besondere_Behandlungsformen_RV_Stp">
 		<xs:annotation>
-			<xs:documentation>0 = keine, 1 = MBOR, 2 = VMO, 3 = VOR, 9 = sonstige</xs:documentation>
+			<xs:documentation>0 = keine, 1 = MBOR, 2 = VMO (vor 2021), 3 = VOR, 4 = MBOR/VOR (ab 2021), 9 = sonstige</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="0"/>
 			<xs:enumeration value="1"/>
 			<xs:enumeration value="2"/>
 			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
 			<xs:enumeration value="9"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -424,6 +425,7 @@
 04 Entlassungsmeldung
 06 Unterbrechung
 07 Absage durch die Einrichtung
+08 Neurologisches Reha-Assessment
 10 Anzeige einer Verlängerung
 11 Bewilligung
 12 Absage durch den Kostenträger
@@ -446,6 +448,7 @@
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="06"/>
 			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
@@ -595,7 +598,7 @@ ________________________________________________________________________________
 			<xs:documentation>Datum mit Uhrzeit JJJJ-MM-DDThh:mm:ss</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:dateTime">
-			<xs:minInclusive value="1850-01-01T00:00:00"/>
+			<xs:minInclusive value="1901-01-01T00:00:00"/>
 			<xs:maxInclusive value="2099-12-31T23:59:59"/>
 			<xs:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"/>
 		</xs:restriction>
@@ -605,6 +608,8 @@ ________________________________________________________________________________
 			<xs:documentation>Datum JJJJ-MM-DD</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:date">
+			<xs:minInclusive value="1901-01-01"/>
+			<xs:maxInclusive value="2099-12-31"/>
 			<xs:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -661,7 +666,7 @@ ________________________________________________________________________________
 	</xs:simpleType>
 	<xs:simpleType name="Geschlecht_Stp">
 		<xs:annotation>
-			<xs:documentation>0 = Unbestimmtes Geschlecht, 1 = Männlich, 2 = Weiblich, 3 = divers</xs:documentation>
+			<xs:documentation>0 = unbestimmtes Geschlecht, 1 = männlich, 2 = weiblich, 3 = divers</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="0"/>
@@ -682,6 +687,12 @@ ________________________________________________________________________________
 			<xs:maxLength value="45"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Vorsatzwort_Stp">
+		<xs:restriction base="Token_intern_Stp">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="Namenszusatz_Stp">
 		<xs:restriction base="Token_intern_Stp">
 			<xs:minLength value="1"/>
@@ -698,6 +709,24 @@ ________________________________________________________________________________
 		<xs:restriction base="Token_intern_Stp">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="90"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Art_Ansprechpartner_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = Fallsachbearbeiter, 2 = Ansprechpartner Entlassmanagement</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Art_Begleitperson_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = Begleitperson im Rahmen einer Reha Maßnahme, 2 = zu pflegende Begleitperson</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
@@ -967,39 +996,54 @@ ________________________________________________________________________________
 			<xs:element name="Email" type="Email_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="Kommunikation_mit_AA_SB_T_Ctp">
+		<xs:annotation>
+			<xs:documentation>Kommunikationsblock bestehend aus Art des Ansprechpartners(K), Sachbearbeiter(K), Telefon(M), Fax(K) und Email(K)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Art_Ansprechpartner" type="Art_Ansprechpartner_Stp" minOccurs="0"/>
+			<xs:element name="Sachbearbeiter" type="Sachbearbeiter_Stp" minOccurs="0"/>
+			<xs:element name="Telefon" type="Telefon_Fax_Stp"/>
+			<xs:element name="Faxnummer" type="Telefon_Fax_Stp" minOccurs="0"/>
+			<xs:element name="Email" type="Email_Stp" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--
  complexType  :notation name="Namensblöcke"
 _________________________________________________________________________________________________________________-->
 	<xs:complexType name="Name_MMKK_Ctp">
 		<xs:annotation>
-			<xs:documentation>Namensblock:Nachname(M), Vorname (M), Namenszusatz(K), Titel(K)</xs:documentation>
+			<xs:documentation>Namensblock:Nachname(M), Vorname (M), Vorsatzwort und Namenszusatz(K), Titel(K)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Nachname" type="Nachname_Stp"/>
 			<xs:element name="Vorname" type="Vorname_Stp"/>
-			<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
+			<xs:element name="Vorsatzwort" type="Vorsatzwort_Stp" minOccurs="0"/>
+			<xs:element name="Namenszusatz" type="Namenszusatz_Stp" minOccurs="0"/>
 			<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Name_Institution_MKKK_Ctp">
 		<xs:annotation>
-			<xs:documentation>Namensblock:Nachname/Name Institution(M), Vorname (K), Namenszusatz(K), Titel(K)</xs:documentation>
+			<xs:documentation>Namensblock:Nachname/Name Institution(M), Vorname (K), Vorsatzwort und Namenszusatz(K), Titel(K)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Nachname_Institution" type="Nachname_Stp"/>
 			<xs:element name="Vorname" type="Vorname_Stp" minOccurs="0"/>
-			<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
+			<xs:element name="Vorsatzwort" type="Vorsatzwort_Stp" minOccurs="0"/>
+			<xs:element name="Namenszusatz" type="Namenszusatz_Stp" minOccurs="0"/>
 			<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Name_MKKK_Ctp">
 		<xs:annotation>
-			<xs:documentation>Namensblock:Nachname(M), Vorname (K), Namenszusatz(K), Titel(K)</xs:documentation>
+			<xs:documentation>Namensblock:Nachname(M), Vorname (K), Vorsatzwort und Namenszusatz(K), Titel(K)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Nachname" type="Nachname_Stp"/>
 			<xs:element name="Vorname" type="Vorname_Stp" minOccurs="0"/>
-			<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
+			<xs:element name="Vorsatzwort" type="Vorsatzwort_Stp" minOccurs="0"/>
+			<xs:element name="Namenszusatz" type="Namenszusatz_Stp" minOccurs="0"/>
 			<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1008,16 +1052,7 @@ ________________________________________________________________________________
 			<xs:documentation>Versicherter/Berechtigter für alle Geschäftsvorfälle außerhalb der Bewilligung</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Nachname" type="Nachname_Stp"/>
-						<xs:element name="Vorname" type="Vorname_Stp"/>
-						<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
-						<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Name" type="Name_MMKK_Ctp"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1026,17 +1061,29 @@ ________________________________________________________________________________
 			<xs:documentation>Lebendspender</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Nachname" type="Nachname_Stp"/>
-						<xs:element name="Vorname" type="Vorname_Stp"/>
-						<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
-						<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Name" type="Name_MMKK_Ctp"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Begleitperson_Art_Ctp">
+		<xs:annotation>
+			<xs:documentation>Begleitperson mit Art der Begleitperson</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Art_Begleitperson" type="Art_Begleitperson_Stp"/>
+			<xs:element name="Name" type="Name_MMKK_Ctp" minOccurs="0"/>
+			<xs:element name="Geburtsdatum" type="Datum_Stp" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Begleitperson_Datum_Ctp">
+		<xs:annotation>
+			<xs:documentation>Begleitperson mit Aufnahme- und Entlassungsdatum</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="Name_MMKK_Ctp" minOccurs="0"/>
+			<xs:element name="Geburtsdatum" type="Datum_Stp" minOccurs="0"/>
+			<xs:element name="Aufnahmedatum" type="Datum_Stp" minOccurs="0"/>
+			<xs:element name="Entlassungsdatum" type="Datum_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Begleitperson_Ctp">
@@ -1044,16 +1091,7 @@ ________________________________________________________________________________
 			<xs:documentation>Begleitperson</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Nachname" type="Nachname_Stp"/>
-						<xs:element name="Vorname" type="Vorname_Stp"/>
-						<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
-						<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Name" type="Name_MMKK_Ctp" minOccurs="0"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1062,16 +1100,7 @@ ________________________________________________________________________________
 			<xs:documentation>nur Begleitpersonen, die den Aufenthalt wahrnehmen</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Nachname" type="Nachname_Stp"/>
-						<xs:element name="Vorname" type="Vorname_Stp"/>
-						<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
-						<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Name" type="Name_MMKK_Ctp" minOccurs="0"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1080,17 +1109,9 @@ ________________________________________________________________________________
 			<xs:documentation>Begleitperson</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="Art_Begleitperson" type="Art_Begleitperson_Stp"/>
 			<xs:element name="Hinweis_zur_Kostenuebernahme" type="Hinweis_Kostenuebernahme_Stp"/>
-			<xs:element name="Name" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Nachname" type="Nachname_Stp"/>
-						<xs:element name="Vorname" type="Vorname_Stp"/>
-						<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
-						<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Name" type="Name_MMKK_Ctp" minOccurs="0"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1100,16 +1121,7 @@ ________________________________________________________________________________
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Hinweis_zur_Kostenuebernahme" type="Hinweis_Kostenuebernahme_RV_Stp"/>
-			<xs:element name="Name" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Nachname" type="Nachname_Stp"/>
-						<xs:element name="Vorname" type="Vorname_Stp"/>
-						<xs:element name="Namenszusatz_Vorsatzwort" type="Namenszusatz_Stp" minOccurs="0"/>
-						<xs:element name="Titel" type="Titel_Stp" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Name" type="Name_MMKK_Ctp" minOccurs="0"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1228,6 +1240,18 @@ ________________________________________________________________________________
 		<xs:sequence>
 			<xs:element name="Name" type="Name_MMKK_Ctp"/>
 			<xs:element name="Geburtsdatum" type="Datum_Stp"/>
+			<xs:element name="Behandlungsbeduerftiges_Kind" type="J_oder_N_Stp"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Kinder_in_Mutter_Kind_Massnahme_mit_Datum_Ctp">
+		<xs:annotation>
+			<xs:documentation>Kinder in Mutter/Kind Massnahme mit Datum</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="Name_MMKK_Ctp"/>
+			<xs:element name="Geburtsdatum" type="Datum_Stp"/>
+			<xs:element name="Aufnahmedatum" type="Datum_Stp" minOccurs="0"/>
+			<xs:element name="Entlassungsdatum" type="Datum_Stp" minOccurs="0"/>
 			<xs:element name="Behandlungsbeduerftiges_Kind" type="J_oder_N_Stp"/>
 		</xs:sequence>
 	</xs:complexType>

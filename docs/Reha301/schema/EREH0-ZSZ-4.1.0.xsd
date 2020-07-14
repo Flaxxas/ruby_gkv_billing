@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/ZSZ/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ZSZ/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/ZSZ/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/ZSZ/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -24,7 +24,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.1.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -47,7 +47,7 @@ ________________________________________________________________________________
 			<xs:element name="Fachliche_Daten">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_Ctp" minOccurs="0"/>
+						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
 						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
 						<xs:element name="Rechnung_Reha-Einrichtung">
@@ -121,6 +121,7 @@ ________________________________________________________________________________
 			<xs:element name="Fachliche_Daten">
 				<xs:complexType>
 					<xs:sequence>
+						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
 						<xs:element name="Rechnung_Reha-Einrichtung">
 							<xs:complexType>

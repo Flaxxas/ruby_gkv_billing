@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/ABE/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ABE/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/ABE/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/ABE/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -19,7 +19,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.1.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -43,7 +43,7 @@ ________________________________________________________________________________
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
-						<xs:element name="Lebendspender" type="bty:Rehabilitand_alle_DS_Ctp" minOccurs="0"/>
+						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
 						<xs:element name="Absagedaten">
 							<xs:complexType>
 								<xs:sequence>
@@ -93,7 +93,6 @@ ________________________________________________________________________________
 			<xs:documentation>
 01 = Verschiebung des Aufnahmetermins nicht möglich
 02 = Aufnahmetermin ohne Angabe von Gründen nicht wahrgenommen
-03 = ärztliche Bescheinigung nicht vorgelegt
 04 = Versicherter verzichtet auf die Reha-Leistung
 05 = Kostenzusage hat nach Ablauf von x Monaten die Gültigkeit verloren
 07 = nicht rehabilitationsfähig
@@ -109,7 +108,6 @@ ________________________________________________________________________________
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
 			<xs:enumeration value="07"/>

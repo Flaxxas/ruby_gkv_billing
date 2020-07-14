@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/AUFN/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/AUFN/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/AUFN/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/AUFN/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -19,7 +19,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.1.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -42,27 +42,11 @@ ________________________________________________________________________________
 			<xs:element name="Fachliche_Daten">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_Ctp" minOccurs="0"/>
+						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
 						<xs:element name="Lebendspender" type="bty:Lebendspender_Ctp" minOccurs="0"/>
 						<xs:element name="Begleitperson" type="bty:Begleitperson_Ctp" minOccurs="0" maxOccurs="15"/>
-						<xs:element name="Kinder_Mutter_Kind_Massnahmen" minOccurs="0" maxOccurs="15">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="Name" type="bty:Name_MMKK_Ctp"/>
-									<xs:element name="Geburtsdatum" type="bty:Datum_Stp"/>
-									<xs:element name="behandlungs_beduerftiges_Kind" type="bty:J_oder_N_Stp"/>
-									<xs:element name="Diagnose_beh_bed_Kind" minOccurs="0">
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="Version_ICD" type="bty:Version_ICD10_Stp"/>
-												<xs:element name="Diagnose_Kind" type="bty:Kreuz-Stern_Diagnose_Ctp" maxOccurs="10"/>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
+						<xs:element name="Kinder_in_Mutter_Kind_Massnahme" type="bty:Kinder_in_Mutter_Kind_Massnahme_mit_Diagnose_Ctp" minOccurs="0" maxOccurs="15"/>
 						<xs:element name="Aufnahmedaten">
 							<xs:complexType>
 								<xs:sequence>
@@ -138,7 +122,7 @@ ________________________________________________________________________________
 			<xs:element name="Fachliche_Daten">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_Ctp" minOccurs="0"/>
+						<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
 						<xs:element name="Aufnahmedaten">
 							<xs:complexType>

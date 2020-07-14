@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/BEW/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/BEW/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/BEW/4.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/BEW/4.2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
  :notation name="allgemein"
 _________________________________________________________________________________________________________________-->
@@ -24,6 +24,26 @@ ________________________________________________________________________________
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="0"/>
 			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Pflegegrad_KV_Stp">
+		<xs:annotation>
+			<xs:documentation>1 = Pflegegrad 1
+2 = Pflegegrad 2
+3 = Pflegegrad 3
+4 = Pflegegrad 4
+5 = Pflegegrad 5
+6 = Pflegebedürftigkeit besteht ohne Empfehlung eines Pflegegrades (Kurzgutachten), Voraussetzungen mindestens des Pflegegrad 2 liegen vor.
+7 = Pflegebedürftigkeit besteht ohne endgültige Empfehlung eines Pflegegrades (Kurzgutachten), Voraussetzungen mindestens des Pflegegrad 2 liegen nicht vor.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
@@ -86,7 +106,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.2.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -167,7 +187,7 @@ ________________________________________________________________________________
 						<xs:element name="Krankenkasse" minOccurs="0">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Kommunikation" type="bty:Kommunikation_mit_SB_T_Ctp" minOccurs="0"/>
+									<xs:element name="Kommunikation" type="bty:Kommunikation_mit_AA_SB_T_Ctp" minOccurs="0" maxOccurs="2"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
@@ -205,6 +225,11 @@ ________________________________________________________________________________
 									<xs:element name="Begleitperson" minOccurs="0" maxOccurs="15">
 										<xs:complexType>
 											<xs:sequence>
+												<xs:element name="Art_Begleitperson" type="bty:Art_Begleitperson_Stp">
+													<xs:annotation>
+														<xs:documentation>Das Feld "Hinweise zur Kostenübernahme" ist nur bei Schlüssel "1 = Begleitperson im Rahmen einer Reha Maßnahme" zu nutzen.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 												<xs:element name="Kostenuebernahme" type="Kostenuebernahme_KV_Stp">
 													<xs:annotation>
 														<xs:documentation>Hinweis zur Kostenübernahme </xs:documentation>
@@ -212,6 +237,7 @@ ________________________________________________________________________________
 												</xs:element>
 												<xs:element name="Name" type="bty:Name_MMKK_Ctp" minOccurs="0"/>
 												<xs:element name="Geburtsdatum" type="bty:Datum_Stp" minOccurs="0"/>
+												<xs:element name="Pflegegrad" type="Pflegegrad_KV_Stp" minOccurs="0"/>
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
@@ -287,11 +313,7 @@ ________________________________________________________________________________
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element name="Indikationsgruppe" type="bty:Indikationsgruppenzuordnung_Stp">
-										<xs:annotation>
-											<xs:documentation>Indikationsgruppenzuordnung</xs:documentation>
-										</xs:annotation>
-									</xs:element>
+									<xs:element name="Indikationsgruppenzuordnung" type="bty:Indikationsgruppenzuordnung_Stp"/>
 									<xs:element name="Entlassungsdatum_AHB" type="bty:Datum_Stp" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Entlassung aus dem Krankenhaus vor AHB</xs:documentation>
@@ -309,57 +331,60 @@ ________________________________________________________________________________
 											<xs:documentation>Gültigkeit der Kostenzusage bis</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="Vorlaeufige_Kostenzusage" type="bty:J_Stp" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>gilt nur für Indikationsgruppenzuordnung "IC", "IE", "IG", "IK", "IM" und "IO"</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-						<xs:choice>
-							<xs:element name="Stationaerdaten">
-								<xs:annotation>
-									<xs:documentation>Daten zur stationären Reha</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:choice>
-										<xs:element name="Anzahl_Tage" type="bty:Anzahl_Tage_Stp">
-											<xs:annotation>
-												<xs:documentation>Anzahl der bewilligten Tage</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-										<xs:element name="Fallpauschale" type="bty:Eins_Stp"/>
-									</xs:choice>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Ganztaegigambulantdaten">
-								<xs:annotation>
-									<xs:documentation>Daten zur ganztägig ambulanten Reha</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:choice>
-										<xs:element name="Behandlungszeitraum">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="Behandlungszeitraum_Tage" type="bty:Anzahl_Tage_Stp" minOccurs="0">
-														<xs:annotation>
-															<xs:documentation>Behandlunsgszeitraum in Tagen</xs:documentation>
-														</xs:annotation>
-													</xs:element>
-													<xs:element name="Anzahl_Tage_Behandlungszeitraum" type="bty:Anzahl_Tage_Stp">
-														<xs:annotation>
-															<xs:documentation>Anzahl Tage Behandlungszeitraum</xs:documentation>
-														</xs:annotation>
-													</xs:element>
-													<xs:element name="Therapieeinheiten" type="bty:Therapieeinheiten_99_Stp" minOccurs="0">
-														<xs:annotation>
-															<xs:documentation>Anzahl bewilligter Therapieeinheiten bei einer mobilen / ganztägigen ambulanten Reha</xs:documentation>
-														</xs:annotation>
-													</xs:element>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Fallpauschale" type="bty:Eins_Stp"/>
-									</xs:choice>
-								</xs:complexType>
-							</xs:element>
-						</xs:choice>
+						<xs:element name="Stationaerdaten" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Daten zur stationären Reha</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="Anzahl_Tage" type="bty:Anzahl_Tage_Stp">
+										<xs:annotation>
+											<xs:documentation>Die Anzahl bewilligter Behandlungstage bei einer ganztägig ambulanten Reha gibt an, an wie vielen Tagen im Behandlungszeitraum die Behandlung durchgeführt werden muss.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Fallpauschale" type="bty:Eins_Stp"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Ganztaegigambulantdaten" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Daten zur ganztägig ambulanten Reha</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="Behandlungszeitraum">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Behandlungszeitraum_Tage" type="bty:Anzahl_Tage_Stp" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Behandlunsgszeitraum in Tagen</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Anzahl_Tage_Behandlungszeitraum" type="bty:Anzahl_Tage_Stp">
+													<xs:annotation>
+														<xs:documentation>Anzahl Tage Behandlungszeitraum</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Therapieeinheiten" type="bty:Therapieeinheiten_99_Stp" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Anzahl bewilligter Therapieeinheiten bei einer mobilen / ganztägigen ambulanten Reha</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Fallpauschale" type="bty:Eins_Stp"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>

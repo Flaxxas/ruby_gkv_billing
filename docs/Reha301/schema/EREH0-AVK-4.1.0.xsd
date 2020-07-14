@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns="http://www.vdek.com/xml-schema/ABK/3.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/3.4" targetNamespace="http://www.vdek.com/xml-schema/ABK/3.4" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/3.4" schemaLocation="EREH0-BTY-3.4.0.xsd"/>
+<xs:schema xmlns="http://www.vdek.com/xml-schema/AVK/4.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bty="http://www.vdek.com/xml-schema/BTY/4.1" targetNamespace="http://www.vdek.com/xml-schema/AVK/4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.vdek.com/xml-schema/BTY/4.1" schemaLocation="EREH0-BTY-4.1.0.xsd"/>
 	<!--
 :notation name="Admin-Datenblock"
 _________________________________________________________________________________________________________________ -->
@@ -19,7 +19,7 @@ ________________________________________________________________________________
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="bty:Version_Stp">
-						<xs:enumeration value="3.4.0"/>
+						<xs:enumeration value="4.1.0"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -33,9 +33,9 @@ ________________________________________________________________________________
 	<!--
 :notation name="Geschäftsvorfall"
 _________________________________________________________________________________________________________________ -->
-	<xs:complexType name="Absage_durch_Kostentraeger_RV_Ctp">
+	<xs:complexType name="Antrag_Verlaengerung_Kostenzusage_Ctp">
 		<xs:annotation>
-			<xs:documentation>Absage durch die Kostenträger nur RV</xs:documentation>
+			<xs:documentation>Antrag auf Verlängerung nur RV</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Admindaten" type="Admindaten_Ctp"/>
@@ -43,14 +43,11 @@ ________________________________________________________________________________
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="Rehabilitand" type="bty:Rehabilitand_alle_DS_Ctp"/>
-						<xs:element name="Absagedaten">
+						<xs:element name="Informationen_Verlaengerungsantrag">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Absagedatum" type="bty:Datum_Stp">
-										<xs:annotation>
-											<xs:documentation>Datum der Absage einer bereits bewilligten Reha-Leistung</xs:documentation>
-										</xs:annotation>
-									</xs:element>
+									<xs:element name="Anzahl_Verlaengerungstage" type="Anzahl_Verlaengerungstage_Stp" minOccurs="0"/>
+									<xs:element name="Datum_Verlaengerungsende" type="bty:Datum_Stp" minOccurs="0"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
@@ -59,4 +56,14 @@ ________________________________________________________________________________
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="Anzahl_Verlaengerungstage_Stp">
+		<xs:annotation>
+			<xs:documentation>1-999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+			<xs:pattern value="([0-9]*)([1-9])([0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

@@ -15,5 +15,5 @@ module RubyGkvBilling
     File.join(root, path)
   end
 
-  REHA_301_SCHEMA = file_path('docs/Reha301/schema/EREH0-REH-3.4.0.xsd').freeze
+  REHA_301_SCHEMA = file_path('docs/Reha301/schema/EREH0-REH-4.2.0.xsd').freeze
 end
