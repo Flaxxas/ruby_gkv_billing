@@ -19,6 +19,7 @@ module RubyGkvBilling
 
     # 8.2.1
     POSITIONSNUMMER_FORMAT_HEILMITTEL = /\A\d{5}?\z/
+    POSITIONSNUMMER_FORMAT_SONSTIGE = /\A\d{7}?\z/
 
     IK_KLASSIFIKATIONEN = {
       "10" => "10 - Krankenversicherungsträger",
