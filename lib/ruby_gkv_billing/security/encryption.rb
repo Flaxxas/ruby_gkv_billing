@@ -7,7 +7,7 @@ module RubyGkvBilling
       require 'base64'
 
       def self.encrypt(input_file_path, private_key_path, certificate_path, target_ik, basedir = nil)
-        system("java -jar lib/ruby_gkv_billing/security/bin/Nebraska.jar -enc -i #{RubyGkvBilling.file_path(input_file_path)} -c #{certificate_path} -p #{private_key_path} -t #{target_ik} -dl")
+        system("java -jar #{RubyGkvBilling.file_path("lib/ruby_gkv_billing/security/bin/Nebraska.jar")} -enc -i #{input_file_path} -c #{certificate_path} -p #{private_key_path} -t #{target_ik} -dl")
       end
 
       def self.decrypt(key, encrypted_data)
