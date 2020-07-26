@@ -113,18 +113,18 @@ module RubyGkvBilling
       ].join('')
     end
 
-    def store(path, dakota: false)
-      file_path = File.join(path, instruction_filename(dakota: dakota))
+    def store(path)
+      file_path = File.join(path, instruction_filename(suffix: false))
       file = File.open(file_path, "w:#{ENCODING}")
       file.write(content)
       file.close
     end
 
     # Dateiname der Auftragsdatei
-    def instruction_filename(dakota: false)
+    def instruction_filename(suffix: false)
       filename = RubyGkvBilling::Edifact.physical_filename(@dateityp, @transfer_nummer)
 
-      if dakota
+      if suffix
         filename = "#{filename}.AUF"
       end
 
@@ -170,12 +170,10 @@ module RubyGkvBilling
     end
 
     # der Nutzdatendatei
-    def payload_filename(dakota: false)
-      if dakota
-        instruction_filename
-      else
-        RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
-      end
+    def payload_filename
+      #RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
+
+      instruction_filename(suffix: false)
     end
 
     # 2.2 Bandverarbeitung
