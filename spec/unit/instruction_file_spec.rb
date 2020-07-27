@@ -33,11 +33,15 @@ RSpec.describe RubyGkvBilling::InstructionFile do
   end
 
   it {
-    expect(subject.instruction_filename).to eq("TSOL0001")
+    expect(subject.instruction_filename(suffix: false)).to eq("TSOL0001")
   }
 
   it {
     expect(subject.instruction_filename(suffix: true)).to eq("TSOL0001.AUF")
+  }
+
+  it {
+    expect(subject.instruction_filename).to eq("TSOL0001.AUF")
   }
 
   it {
@@ -50,7 +54,7 @@ RSpec.describe RubyGkvBilling::InstructionFile do
 
   describe "file generation" do
     let(:path) { RubyGkvBilling.root }
-    let(:file) { File.join(path, subject.instruction_filename) }
+    let(:file) { File.join(path, subject.instruction_filename(suffix: true)) }
     before do
       subject.store(path)
     end

@@ -113,15 +113,15 @@ module RubyGkvBilling
       ].join('')
     end
 
-    def store(path)
-      file_path = File.join(path, instruction_filename(suffix: true))
+    def store(path, suffix: true)
+      file_path = File.join(path, instruction_filename(suffix: suffix))
       file = File.open(file_path, "w:#{ENCODING}")
       file.write(content)
       file.close
     end
 
     # Dateiname der Auftragsdatei
-    def instruction_filename(suffix: false)
+    def instruction_filename(suffix: true)
       filename = RubyGkvBilling::Edifact.physical_filename(@dateityp, @transfer_nummer)
 
       if suffix
