@@ -6,8 +6,12 @@ module RubyGkvBilling
       require 'openssl'
       require 'base64'
 
+      def self.call_jar_help
+        system("java -jar -Dfile.encoding=UTF-8 #{RubyGkvBilling.file_path("lib/ruby_gkv_billing/security/bin/Nebraska-1.0-SNAPSHOT.jar")} -h")
+      end
+
       def self.encrypt(input_file_path, private_key_path, certificate_path, target_ik, basedir = nil)
-        system("java -jar #{RubyGkvBilling.file_path("lib/ruby_gkv_billing/security/bin/Nebraska.jar")} -enc -i #{input_file_path} -c #{certificate_path} -p #{private_key_path} -t #{target_ik} -dl")
+        system("java -jar -Dfile.encoding=UTF-8 #{RubyGkvBilling.file_path("lib/ruby_gkv_billing/security/bin/Nebraska-1.0-SNAPSHOT.jar")} -enc -p #{private_key_path} -c #{certificate_path} -t #{target_ik} -i #{input_file_path} -dl")
       end
 
       def self.decrypt(key, encrypted_data)
