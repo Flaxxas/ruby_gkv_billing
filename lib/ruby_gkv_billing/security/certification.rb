@@ -58,6 +58,12 @@ module RubyGkvBilling
         OpenSSL::X509::Request.new(certificate)
       end
 
+      def self.extract_key_from_p12(path, password: nil)
+        p12 = OpenSSL::PKCS12.new(File.read(path), password)
+
+        p12.key
+      end
+
       # 4.4.4
       def self.create_certificate_request!(
         path,
