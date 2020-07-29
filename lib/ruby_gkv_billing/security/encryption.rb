@@ -21,7 +21,7 @@ module RubyGkvBilling
 
       def self.decrypt(input_file_path, private_key_path, certificate_path, basedir = nil)
         basedir_arg = "-b #{basedir}" if basedir
-        call_jar("-enc -p #{private_key_path} -c #{certificate_path} -i #{input_file_path} -dl #{basedir_arg}")
+        call_jar("-dec -p #{private_key_path} -c #{certificate_path} -i #{input_file_path} -dl #{basedir_arg}")
       end
 
       # 2.1.2 RSA-PSS + 3.2.1
