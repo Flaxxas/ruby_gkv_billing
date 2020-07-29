@@ -7,7 +7,11 @@ module RubyGkvBilling
       require 'base64'
 
       def self.call_jar(params)
-        system("java -jar -Dfile.encoding=UTF-8 #{RubyGkvBilling.file_path("lib/ruby_gkv_billing/security/bin/Nebraska-1.0-SNAPSHOT.jar")} #{params}")
+        command = "java -jar -Dfile.encoding=UTF-8 #{RubyGkvBilling.file_path("lib/ruby_gkv_billing/security/bin/Nebraska-1.0-SNAPSHOT.jar")} #{params}"
+        
+        puts command
+
+        system(command)
       end
 
       def self.call_jar_help
