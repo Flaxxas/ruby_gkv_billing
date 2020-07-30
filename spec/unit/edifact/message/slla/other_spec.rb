@@ -78,7 +78,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
       "43",
       "34565",
       Time.new(2010,10,10),
-      "63445").to_edifact).to eq("ENF+123+01:35632+test+43+34565+20101010+63445'") }
+      "63445").to_edifact).to eq("ENF+123+01:35632+test+43,00+34565,00+20101010+63445,00'") }
 
     it { expect(subject.sut_segment(
       "234",
@@ -90,7 +90,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
 
     it { expect(subject.txt_segment("text").to_edifact).to eq("TXT+text'") }
 
-    it { expect(subject.mws_segment("1", "23454").to_edifact).to eq("MWS+1+23454'") }
+    it { expect(subject.mws_segment("1", "23454").to_edifact).to eq("MWS+1+23454,00'") }
   end
 
   it { expect(subject.dia_segment("01", "Test").to_edifact).to eq("DIA+01+Test'") }
@@ -99,7 +99,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
 
   it { expect(subject.skz_segment.to_edifact).to eq("SKZ+01+20100101+02'") }
 
-  it { expect(subject.bes_segment.to_edifact).to eq("BES+1234+765+45+7854+456'") }
+  it { expect(subject.bes_segment.to_edifact).to eq("BES+1234,00+765,00+45,00+7854,00+456,00'") }
 
   it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
 
@@ -116,13 +116,13 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Other do
     it { expect(subject.segments[1].to_edifact).to eq("URI+123456789+sammel:einzel+20200101+belegnum'") }
     it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
     it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+01+merkmal'") }
-    it { expect(subject.segments[4].to_edifact).to eq("ENF+123+01:35632+test+43+34565+20101010+63445'") }
+    it { expect(subject.segments[4].to_edifact).to eq("ENF+123+01:35632+test+43,00+34565,00+20101010+63445,00'") }
     it { expect(subject.segments[5].to_edifact).to eq("SUT+234+1010+1010+45+20101010+20101010'") }
     it { expect(subject.segments[6].to_edifact).to eq("TXT+text'") }
-    it { expect(subject.segments[7].to_edifact).to eq("MWS+1+23454'") }
+    it { expect(subject.segments[7].to_edifact).to eq("MWS+1+23454,00'") }
     it { expect(subject.segments[8].to_edifact).to eq("ZUV+999999999+999999999+20100101+1+1+1+1'") }
     it { expect(subject.segments[9].to_edifact).to eq("DIA+01+Test'") }
     it { expect(subject.segments[10].to_edifact).to eq("SKZ+01+20100101+02'") }
-    it { expect(subject.segments[11].to_edifact).to eq("BES+1234+765+45+7854+456'") }
+    it { expect(subject.segments[11].to_edifact).to eq("BES+1234,00+765,00+45,00+7854,00+456,00'") }
   end
 end
