@@ -107,7 +107,7 @@ module RubyGkvBilling
 
           def zuv_segement_block
             res = []
-            res << zuv_segment if @betriebsstaetten_nr
+            res << zuv_segment if @betriebsstaetten_nr.to_s != ""
 
             res
           end
@@ -115,7 +115,7 @@ module RubyGkvBilling
           def final_segments
             elements = []
 
-            elements << skz_segment if @genehmigungskennzeichen
+            elements << skz_segment if @genehmigungskennzeichen.to_s != ""
             elements << bes_segment
 
             elements
@@ -168,16 +168,16 @@ module RubyGkvBilling
               dauer,
               versorgung_von,
               versorgung_bis
-            ) if kilometer
+            ) if kilometer.to_s != ""
 
             @enfs << txt_segment(
               text
-            ) if text
+            ) if text.to_s != ""
 
             @enfs << mws_segment(
               kennzeichen_mws,
               betrag_mws
-            ) if kennzeichen_mws && betrag_mws
+            ) if kennzeichen_mws.to_s != "" && betrag_mws.to_s != ""
           end
 
           def enf_segment(
