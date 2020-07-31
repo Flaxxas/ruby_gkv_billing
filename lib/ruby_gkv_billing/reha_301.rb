@@ -1,6 +1,7 @@
 require 'ruby_gkv_billing/reha_301/xml'
 
 # https://www.gkv-datenaustausch.de/leistungserbringer/reha_einrichtungen/reha_einrichtungen.jsp
+# https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Infos-fuer-Reha-Einrichtungen/Klassifikationen-und-Dokumentationshilfen/klassifikationen_dokumentationshilfen.html
 
 module RubyGkvBilling
   module Reha301
