@@ -6,10 +6,11 @@ module RubyGkvBilling
 
         TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'.freeze
 
-        def initialize(nachrichten_typ, with_header: true, papieranlage: false, freitext: nil, drv: false)
+        def initialize(nachrichten_typ, with_header: true, papieranlage: false, freitext: nil, drv: false, without_empty: true)
           @nachrichten_typ = nachrichten_typ
 
           @with_header = with_header
+          @without_empty = without_empty
           @papieranlage = papieranlage
 
           @freitext = freitext
@@ -24,6 +25,13 @@ module RubyGkvBilling
         end
 
         def to_xml
+          if @without_empty
+            # entferne leere Knoten
+            xml_build.doc.traverse do |node|
+              node.remove if node.element? && node.text == ""
+            end
+          end
+
           if @with_header
             # ohne xml-tag
             xml_build.doc.root.to_xml
