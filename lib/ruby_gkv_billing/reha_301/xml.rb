@@ -7,6 +7,7 @@ module RubyGkvBilling
 
       ENCODING = 'ISO-8859-1'.freeze
       VERSION = "4.2.0".freeze
+      HEADER_VERSION = '4.1.0'.freeze
       MAIN_VERSION = '4.2'.freeze
 
       def self.base_attributes
