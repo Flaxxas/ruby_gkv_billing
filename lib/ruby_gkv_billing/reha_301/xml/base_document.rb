@@ -33,8 +33,8 @@ module RubyGkvBilling
           end
 
           if @with_header
-            # ohne xml-tag
-            xml_build.doc.root.to_xml
+            #xml_build.doc.root.to_xml
+            xml_build.to_xml
           else
             # fuer soap nur die Kind-Elemente
             xml_build.doc.root.children.to_xml
