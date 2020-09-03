@@ -20,7 +20,7 @@ module RubyGkvBilling
       FEH = "4.1"
       APW = "4.1"
       EBE = "4.1"
-      AAK = "4.2"
+      AAK = "4.1"
       ENTL = "4.1"
       ABK = "4.1"
       AAP = "4.1"
