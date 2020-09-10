@@ -28,7 +28,7 @@ module RubyGkvBilling
       AUFN = "4.1"
       REH = "4.2"
       BEW = "4.2"
-      AAV = "4.1"
+      AAV = "4.2"
       AVK = "4.1"
       UNT = "4.1"
       ERG = "4.1"
