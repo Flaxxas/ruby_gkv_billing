@@ -73,7 +73,9 @@ module RubyGkvBilling
       datum_empf_ende: Time.now,
       verfahren_kennung: VERFAHREN_KENNUNG,
       verfahren_kennung_spezifikation: "",
-      sequenz_nr: SEQUENZ_NR)
+      sequenz_nr: SEQUENZ_NR,
+      dateiname_nutzdaten: nil
+    )
 
       @transfer_nummer = transfer_nummer
       @absender_eigner = absender_eigner
@@ -97,6 +99,8 @@ module RubyGkvBilling
       @sequenz_nr = sequenz_nr
       @email_absender = email_absender
       @datei_bezeichnung = datei_bezeichnung #TODO Anzahl Gesamtpakete?
+
+      @dateiname_nutzdaten = dateiname_nutzdaten
     end
 
     # https://www.gkv-datenaustausch.de/media/dokumente/standards_und_normen/technische_spezifikationen/Anlage_4_-_Verfahrenskennungen.pdf
@@ -173,7 +177,11 @@ module RubyGkvBilling
     def payload_filename
       #RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
 
-      instruction_filename(suffix: false)
+      if @dateiname_nutzdaten.to_s != ""
+        @dateiname_nutzdaten
+      else
+        instruction_filename(suffix: false)
+      end
     end
 
     # 2.2 Bandverarbeitung
