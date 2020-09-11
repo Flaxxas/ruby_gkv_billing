@@ -3,6 +3,7 @@ module RubyGkvBilling
     module Xml
       require 'nokogiri'
 
+      require 'ruby_gkv_billing/reha_301/xml/schema_validator'
       require 'ruby_gkv_billing/reha_301/xml/attachment'
       require 'ruby_gkv_billing/reha_301/xml/base_document'
 
