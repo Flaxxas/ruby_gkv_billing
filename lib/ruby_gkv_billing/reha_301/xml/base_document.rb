@@ -20,8 +20,8 @@ module RubyGkvBilling
           @documents = []
         end
 
-        def add_documen(document)
-          @documents << document
+        def add_document(document_path, medical: false)
+          @documents << RubyGkvBilling::Reha301::Xml::Attachment.new(document_path, medical: medical)
         end
 
         def to_xml

@@ -1,5 +1,10 @@
 RSpec.describe RubyGkvBilling::Reha301::Xml::BaseDocument do
   subject { RubyGkvBilling::Reha301::Xml::BaseDocument.new(21, papieranlage: true, freitext: "XYZ", drv: true) }
+  let(:file) {  File.join(RubyGkvBilling.root, 'spec/examples/private_1234567_key.pem') }
+
+  before do
+    subject.add_document(file)
+  end
 
   it {
     expect(subject.to_xml).to include("<reh:Nachrichtentyp>21</reh:Nachrichtentyp>")
@@ -20,6 +25,22 @@ RSpec.describe RubyGkvBilling::Reha301::Xml::BaseDocument do
   it {
     expect(subject.rv_type).to eq("RV")
   }
+
+  describe "xml" do
+    let(:xml_doc) { subject.to_xml }
+
+    it {
+      expect(xml_doc).to include("<bty:medizinischesDokument>N</bty:medizinischesDokument>")
+    }
+
+    it {
+      expect(xml_doc).to include("<bty:Dateiart>PEM</bty:Dateiart>")
+    }
+
+    it {
+      expect(xml_doc).to include("<bty:Dateigroesse>3247</bty:Dateigroesse>")
+    }
+  end
 
   describe 'kopfdaten' do
     let(:xml) {
