@@ -20,7 +20,7 @@ module RubyGkvBilling
           @errors.empty?
         end
 
-        def errros
+        def errors
           @errors
         end
 
