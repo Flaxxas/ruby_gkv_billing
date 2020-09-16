@@ -44,8 +44,12 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     expect(subject.instruction_filename).to eq("TSOL0001.AUF")
   }
 
+  # it {
+  #   expect(subject.payload_filename).to eq("TSOL0001")
+  # }
+
   it {
-    expect(subject.payload_filename).to eq("TSOL0001")
+    expect(subject.payload_filename).to eq("SL030008S10")
   }
 
   it {

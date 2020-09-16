@@ -180,7 +180,8 @@ module RubyGkvBilling
       if @dateiname_nutzdaten.to_s != ""
         @dateiname_nutzdaten
       else
-        instruction_filename(suffix: false)
+        #instruction_filename(suffix: false)
+        RubyGkvBilling::Edifact.logical_filename(@absender_eigner, @abrechnungs_typ, @datum_erstellt.month)
       end
     end
 
