@@ -125,8 +125,11 @@ module RubyGkvBilling
       end
 
       def self.create_private_key(ik_number, path)
-        system("openssl genrsa -out #{path}/#{ik_number}.prv.key.pem #{KEY_LENGTH}")
-        return File.join(path, "#{ik_number}.prv.key.pem")
+        key_path = File.join(path, "#{ik_number}.pem")
+
+        system("openssl genrsa -out #{key_path} #{KEY_LENGTH}")
+
+        return key_path
       end
 
       def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))

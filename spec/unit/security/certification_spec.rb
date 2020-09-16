@@ -193,7 +193,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     end
 
     after(:all) do
-      File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.prv.key.pem"))
+      File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pem"))
       # Example Certificate: File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem"))
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pub.key.pem"))
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pkey"))
