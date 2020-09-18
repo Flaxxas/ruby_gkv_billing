@@ -10,8 +10,11 @@ module RubyGkvBilling
 
       KEY_LENGTH = 4096
 
+      # https://www.itsg.de/oeffentliche-services/trust-center/
       TRUST_CENTER_WORK = 'ITSG TrustCenter fuer Arbeitgeber'
       TRUST_CENTER_SERVICE = 'ITSG TrustCenter fuer sonstige Leistungserbringer'
+
+      # https://www.dktig.de/de/trustcenter/
       TRUST_CENTER_HOSPITAL = 'DKTIG TrustCenter fuer Krankenhaeuser und Leistungserbringer PKC'
 
       TRUST_CENTER_STATE = "Hessen"
