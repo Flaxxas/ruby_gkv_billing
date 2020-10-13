@@ -133,8 +133,45 @@ module RubyGkvBilling
       end
 
       def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))
-        system("openssl req -new -config #{config_file_path} -key #{private_key_path}/#{ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem")
-        return File.join(private_key_path, "#{ik_number}.p10.req.pem")
+        RubyGkvBilling::Security::Certification.create_config_file!(config_file_path)
+        if File.exists?(config_file_path)
+          system("openssl req -new -config #{config_file_path} -key #{private_key_path}/#{ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem")
+          File.delete(config_file_path)
+          return File.join(private_key_path, "#{ik_number}.p10.req.pem")
+        end
+      end
+
+      def self.create_config_file!(path, options = {country: "DE"})
+        str = <<-STR
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+prompt = no
+[req_distinguished_name]
+C = #{options[:country]}
+ST = #{options[:state]}
+L = #{options[:locality]}
+O = #{options[:organisation]}
+OU = #{options[:organisation_unit]}
+CN = #{options[:common_name]}
+[v3_req]
+keyUsage = keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[alt_names]
+        STR
+
+        alt_names = options[:alt_names]
+        if !alt_names.nil? && alt_names.is_a?(Array)
+          alt_names.each_with_index do |n, i|
+            str << "DNS.#{i+1} = #{n}"
+            str << "\n"
+          end
+        end
+
+        File.open(File.join(path), 'w') do |io|
+          io.write str
+        end
       end
 
       def self.create_public_key(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))

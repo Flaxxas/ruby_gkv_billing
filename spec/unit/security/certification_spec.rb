@@ -153,6 +153,20 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     end
 
     context "create_certificate" do
+      before do
+        subject.create_config_file!(config, organisation: "MyOrg", alt_names: ["www.my1.de","www.my2.de"])
+      end
+
+      it {expect(File.exist?(config)).to be_truthy}
+
+      it {expect(File.read(config)).to include("MyOrg")}
+
+      it {expect(File.read(config)).to include("www.my1.de","www.my2.de")}
+
+
+    end
+
+    context "create_config_file" do
       let(:certificate){ RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem") }
 
       it {expect(File.exist?(certificate)).to be_truthy}
@@ -197,6 +211,8 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       # Example Certificate: File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem"))
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pub.key.pem"))
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pkey"))
+
+      File.delete(RubyGkvBilling.file_path("spec/examples/ssl/itsg.config")) if File.exist?(RubyGkvBilling.file_path("spec/examples/ssl/itsg.config"))
     end
   end
 end
