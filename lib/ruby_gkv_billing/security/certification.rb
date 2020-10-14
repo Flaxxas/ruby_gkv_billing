@@ -140,7 +140,7 @@ module RubyGkvBilling
       # NOTE: "-nodes" Argument um output key encypt und Passphrase-Prompt zu verhindern
       def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG), nodes: true)
         if File.exists?(config_file_path)
-          cmd = "openssl req -new -config #{config_file_path} -key #{private_key_path} -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem"
+          cmd = "openssl req -new -config #{config_file_path} -key #{private_key_path} -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{File.dirname(private_key_path)}/#{ik_number}.p10.req.pem"
           cmd << " -nodes" if nodes
           puts cmd
           system(cmd)
