@@ -150,9 +150,12 @@ module RubyGkvBilling
       end
 
       def self.create_certificate_with_custom_config(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG_GENERATED))
-        RubyGkvBilling::Security::Certification.create_config_file_itsg!(config_file_path)
-        RubyGkvBilling::Security::Certification.create_certificate(ik_number, private_key_path, config_file_path: config_file_path)
-        File.delete(config_file_path)
+        begin
+          RubyGkvBilling::Security::Certification.create_config_file_itsg!(config_file_path)
+          RubyGkvBilling::Security::Certification.create_certificate(ik_number, private_key_path, config_file_path: config_file_path)
+        ensure
+          File.delete(config_file_path)
+        end
       end
 
       def self.create_config_file_itsg!(path, options = {})
