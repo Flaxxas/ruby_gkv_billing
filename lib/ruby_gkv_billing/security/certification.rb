@@ -6,12 +6,17 @@ module RubyGkvBilling
       require 'openssl'
 
       ITSG_CONFIG = 'lib/ruby_gkv_billing/security/ssl/itsg.config'
+      ITSG_CONFIG_GENERATED = 'lib/ruby_gkv_billing/security/ssl/itsg_gen.config'
 
       KEY_LENGTH = 4096
 
       TRUST_CENTER_WORK = 'ITSG TrustCenter fuer Arbeitgeber'
       TRUST_CENTER_SERVICE = 'ITSG TrustCenter fuer sonstige Leistungserbringer'
       TRUST_CENTER_HOSPITAL = 'DKTIG TrustCenter fuer Krankenhaeuser und Leistungserbringer PKC'
+
+      TRUST_CENTER_STATE = "Hessen"
+      TRUST_CENTER_LOCALITY = "Frankfurt am Main"
+
 
       # ersten 8 Stellen der IK
       def self.create_key!(ik_number, path)
@@ -134,15 +139,42 @@ module RubyGkvBilling
 
       # NOTE: "-nodes" Argument um output key encypt und Passphrase-Prompt zu verhindern
       def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG), nodes: true)
-        RubyGkvBilling::Security::Certification.create_config_file!(config_file_path)
         if File.exists?(config_file_path)
           cmd = "openssl req -new -config #{config_file_path} -key #{private_key_path}/#{ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem"
           cmd << " -nodes" if nodes
           puts cmd
           system(cmd)
-          # File.delete(config_file_path)
+
           return File.join(private_key_path, "#{ik_number}.p10.req.pem")
         end
+      end
+
+      def self.create_certificate_with_custom_config(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG_GENERATED))
+        RubyGkvBilling::Security::Certification.create_config_file_itsg!(config_file_path)
+        RubyGkvBilling::Security::Certification.create_certificate(ik_number, private_key_path, config_file_path: config_file_path)
+        File.delete(config_file_path)
+      end
+
+      def self.create_config_file_itsg!(path, options = {})
+        str = <<-STR
+[req]
+default_bits = #{KEY_LENGTH}
+distinguished_name = req_distinguished_name
+string_mask = nombstr
+prompt = no
+[req_distinguished_name]
+C = DE
+O = "#{TRUST_CENTER_SERVICE}"
+OU = "IK123456789"
+CN = "Max Muster"
+ST = "#{TRUST_CENTER_STATE}"
+L = "#{TRUST_CENTER_LOCALITY}"
+        STR
+
+        File.open(File.join(path), 'w') do |io|
+          io.write str
+        end
+
       end
 
       def self.create_config_file!(path, options = {country: "DE"})
@@ -153,11 +185,11 @@ req_extensions = v3_req
 prompt = no
 [req_distinguished_name]
 C = #{options[:country]}
-ST = #{options[:state]}
-L = #{options[:locality]}
-O = #{options[:organisation]}
-OU = #{options[:organisation_unit]}
-CN = #{options[:common_name]}
+ST = "#{options[:state]}"
+L = "#{options[:locality]}"
+O = "#{options[:organisation]}"
+OU = "#{options[:organisation_unit]}"
+CN = "#{options[:common_name]}"
         STR
 
         str << <<-STR

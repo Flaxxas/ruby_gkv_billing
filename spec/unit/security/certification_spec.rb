@@ -152,17 +152,31 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       it {expect(File.exist?(key)).to be_truthy}
     end
 
-    context "create_config_file" do
+    context "general create_config_file" do
+      skip "general config file" do
+        before do
+          subject.create_config_file!(config, organisation: "MyOrg", alt_names: ["www.my1.de","www.my2.de"])
+        end
+
+        it {expect(File.exist?(config)).to be_truthy}
+
+        it {expect(File.read(config)).to include("MyOrg")}
+
+        it {expect(File.read(config)).to include("www.my1.de","www.my2.de")}
+      end
+    end
+
+    context "create_config_file for itsg" do
       before do
-        subject.create_config_file!(config, organisation: "MyOrg", alt_names: ["www.my1.de","www.my2.de"])
+        subject.create_config_file_itsg!(config)
+
       end
 
       it {expect(File.exist?(config)).to be_truthy}
 
-      it {expect(File.read(config)).to include("MyOrg")}
+      it {expect(File.read(config)).to include("default_bits = 4096")}
 
-      it {expect(File.read(config)).to include("www.my1.de","www.my2.de")}
-
+      it {expect(File.read(config)).to include("ITSG TrustCenter fuer sonstige Leistungserbringer")}
 
     end
 
@@ -173,11 +187,18 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     end
 
     context "create_certificate with config file" do
+      skip "general config file" do
+        let(:key) { RubyGkvBilling::Security::Certification.create_key!("1234567", Dir.tmpdir)}
+        let(:private_key) { File.join(Dir.tmpdir, "private_1234567_key.pem") }
 
-      let(:key) { RubyGkvBilling::Security::Certification.create_key!("1234567", Dir.tmpdir)}
-      let(:private_key) { File.join(Dir.tmpdir, "private_1234567_key.pem") }
+        it { expect(subject.create_certificate("1234567", private_key)).not_to be_nil }
+      end
+    end
 
-      it { expect(subject.create_certificate("1234567", private_key)).not_to be_nil }
+    context "create_certificate with itsg config file" do
+      let(:private_key) { RubyGkvBilling.file_path("spec/examples/") }
+
+      it { expect(subject.create_certificate_with_custom_config("1234567", private_key)).not_to be_nil }
     end
 
     context "create_public_key" do
