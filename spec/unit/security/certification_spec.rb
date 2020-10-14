@@ -152,7 +152,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
       it {expect(File.exist?(key)).to be_truthy}
     end
 
-    context "create_certificate" do
+    context "create_config_file" do
       before do
         subject.create_config_file!(config, organisation: "MyOrg", alt_names: ["www.my1.de","www.my2.de"])
       end
@@ -166,10 +166,18 @@ RSpec.describe RubyGkvBilling::Security::Certification do
 
     end
 
-    context "create_config_file" do
+    context "create_certificate" do
       let(:certificate){ RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem") }
 
       it {expect(File.exist?(certificate)).to be_truthy}
+    end
+
+    context "create_certificate with config file" do
+
+      let(:key) { RubyGkvBilling::Security::Certification.create_key!("1234567", Dir.tmpdir)}
+      let(:private_key) { File.join(Dir.tmpdir, "private_1234567_key.pem") }
+
+      it { expect(subject.create_certificate("1234567", private_key)).not_to be_nil }
     end
 
     context "create_public_key" do

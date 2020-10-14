@@ -132,11 +132,15 @@ module RubyGkvBilling
         return key_path
       end
 
-      def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG))
+      # NOTE: "-nodes" Argument um output key encypt und Passphrase-Prompt zu verhindern
+      def self.create_certificate(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG), nodes: true)
         RubyGkvBilling::Security::Certification.create_config_file!(config_file_path)
         if File.exists?(config_file_path)
-          system("openssl req -new -config #{config_file_path} -key #{private_key_path}/#{ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem")
-          File.delete(config_file_path)
+          cmd = "openssl req -new -config #{config_file_path} -key #{private_key_path}/#{ik_number}.prv.key.pem -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -out #{private_key_path}/#{ik_number}.p10.req.pem"
+          cmd << " -nodes" if nodes
+          puts cmd
+          system(cmd)
+          # File.delete(config_file_path)
           return File.join(private_key_path, "#{ik_number}.p10.req.pem")
         end
       end
@@ -154,6 +158,9 @@ L = #{options[:locality]}
 O = #{options[:organisation]}
 OU = #{options[:organisation_unit]}
 CN = #{options[:common_name]}
+        STR
+
+        str << <<-STR
 [v3_req]
 keyUsage = keyEncipherment, dataEncipherment
 extendedKeyUsage = serverAuth
