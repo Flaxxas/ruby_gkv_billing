@@ -145,7 +145,7 @@ module RubyGkvBilling
           puts cmd
           system(cmd)
 
-          return File.join(private_key_path, "#{ik_number}.p10.req.pem")
+          return File.join(File.dirname(private_key_path), "#{ik_number}.p10.req.pem")
         end
       end
 
