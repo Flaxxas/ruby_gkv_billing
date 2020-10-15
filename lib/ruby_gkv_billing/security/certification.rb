@@ -152,29 +152,28 @@ module RubyGkvBilling
         end
       end
 
-      def self.create_certificate_with_custom_config(ik_number, private_key_path, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG_GENERATED))
+      def self.create_certificate_with_custom_config(ik_number, private_key_path, organisation_name, contact_person, config_file_path: RubyGkvBilling.file_path(ITSG_CONFIG_GENERATED))
         begin
-          RubyGkvBilling::Security::Certification.create_config_file_itsg!(config_file_path)
+          RubyGkvBilling::Security::Certification.create_config_file_itsg!(config_file_path, organisation_name, ik_number, contact_person)
           RubyGkvBilling::Security::Certification.create_certificate(ik_number, private_key_path, config_file_path: config_file_path)
         ensure
           File.delete(config_file_path)
         end
       end
 
-      def self.create_config_file_itsg!(path, options = {})
+      def self.create_config_file_itsg!(path, organisation_name, ik_number, contact_person, trust_center: TRUST_CENTER_SERVICE)
         str = <<-STR
 [req]
 default_bits = #{KEY_LENGTH}
-distinguished_name = req_distinguished_name
+distinguished_name = req_DN
 string_mask = nombstr
 prompt = no
-[req_distinguished_name]
-C = DE
-O = "#{TRUST_CENTER_SERVICE}"
-OU = "IK123456789"
-CN = "Max Muster"
-ST = "#{TRUST_CENTER_STATE}"
-L = "#{TRUST_CENTER_LOCALITY}"
+[req_DN]
+countryName = "DE"
+0.organizationName = "#{trust_center}"
+0.organizationalUnitName = "#{organisation_name}"
+1.organizationalUnitName = "IK#{ik_number}"
+commonName = "#{contact_person}"
         STR
 
         File.open(File.join(path), 'w') do |io|

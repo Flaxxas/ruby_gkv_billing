@@ -168,7 +168,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
 
     context "create_config_file for itsg" do
       before do
-        subject.create_config_file_itsg!(config)
+        subject.create_config_file_itsg!(config, "123456789", "Einrichtung", "Ansprechpartner")
 
       end
 
@@ -196,9 +196,9 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     end
 
     context "create_certificate with itsg config file" do
-      let(:private_key) { RubyGkvBilling.file_path("spec/examples/") }
+      let(:private_key) { RubyGkvBilling.file_path("spec/examples/private_1234567_key.pem") }
 
-      it { expect(subject.create_certificate_with_custom_config("1234567", private_key)).not_to be_nil }
+      it { expect(subject.create_certificate_with_custom_config("1234567", private_key, "Orga", "Ansprechpartner")).not_to be_nil }
     end
 
     context "create_public_key" do
@@ -237,7 +237,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
 
     after(:all) do
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pem"))
-      # Example Certificate: File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.p10.req.pem"))
+      File.delete(RubyGkvBilling.file_path("spec/examples/1234567.p10.req.pem"))
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pub.key.pem"))
       File.delete(RubyGkvBilling.file_path("spec/examples/ssl/123456.pkey"))
 
