@@ -238,7 +238,7 @@ RSpec.describe RubyGkvBilling::Security::Certification do
     context "expire date" do
       let(:p7c) { RubyGkvBilling.file_path("spec/examples/certificate_1234567.p7c") }
 
-      it {expect(subject.expire_date_for_p7c(p7c)).to eq(Date.civil(2020,7,18))}
+      it {expect(subject.expire_dates_for_p7c(p7c)).to eq([Date.civil(2019,7,19), Date.civil(2020,7,18)])}
     end
 
     after(:all) do

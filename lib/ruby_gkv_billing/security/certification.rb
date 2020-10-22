@@ -256,10 +256,13 @@ subjectAltName = @alt_names
         content.join("")
       end
 
-      def self.expire_date_for_p7c(p7c_file)
+      def self.expire_dates_for_p7c(p7c_file)
         cer = OpenSSL::PKCS7.new(File.read(p7c_file))
 
-        cer.certificates.map(&:not_after).compact.min.to_date
+        to = cer.certificates.map(&:not_after).compact.min.to_date
+        from = cer.certificates.map(&:not_before).compact.max.to_date
+
+        [from, to]
       end
     end
   end
