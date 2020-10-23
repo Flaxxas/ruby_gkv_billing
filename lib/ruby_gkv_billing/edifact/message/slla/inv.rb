@@ -29,7 +29,8 @@ module RubyGkvBilling
             #IMG_SEGMENT
             abrechnungsjahr,
             abrechnungsmonat,
-            identifikationsmerkmal
+            identifikationsmerkmal,
+            message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION
           )
             #INV_SEGMENT
             @versicherten_nummer = versicherten_nummer
@@ -55,6 +56,8 @@ module RubyGkvBilling
             @abrechnungsjahr = abrechnungsjahr
             @abrechnungsmonat = abrechnungsmonat
             @identifikationsmerkmal = identifikationsmerkmal
+
+            @message_version = message_version
 
             @segments = []
             @diagnoses = []

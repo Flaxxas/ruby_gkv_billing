@@ -18,7 +18,8 @@ module RubyGkvBilling
           #OPTIONAL
           nachrichten_ref_nummer: nil,
           #OPTIONAL => REC_SEGMENT
-          datum: Time.now
+          datum: Time.now,
+          message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION
         )
 
           #FKT_SEGMENT
@@ -33,7 +34,7 @@ module RubyGkvBilling
           @datum = datum
           @rechnungs_art = rechnungs_art
 
-          super(nachrichten_ref_nummer, "SLLA")
+          super(nachrichten_ref_nummer, "SLLA", message_version: message_version)
 
           self.<< fkt_segment
           self.<< rec_segment

@@ -55,7 +55,8 @@ module RubyGkvBilling
               #OPTIONAL SKZ_SEGMENT
               genehmigungskennzeichen: nil,
               genehmigungsart: nil,
-              datum_genehmigung: Time.now
+              datum_genehmigung: Time.now,
+              message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION
             )
 
             super(
@@ -82,7 +83,8 @@ module RubyGkvBilling
               #IMG_SEGMENT
               abrechnungsjahr,
               abrechnungsmonat,
-              identifikationsmerkmal
+              identifikationsmerkmal,
+              message_version: message_version
             )
 
             #ZHE_SEGMENT

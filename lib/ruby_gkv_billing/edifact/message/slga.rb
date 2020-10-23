@@ -32,7 +32,8 @@ module RubyGkvBilling
           zahlungsziel: nil,
           #OPTIONAL => NAM_SEGMENT
           name2: nil,
-          name3: nil
+          name3: nil,
+          message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION
         )
 
           #FKT_SEGMENT
@@ -59,7 +60,7 @@ module RubyGkvBilling
           @name3 = name3 #ggf. Ansprechpartner und Telefonnummer
           @name4 = name4 #E-Mail-Adresse;
 
-          super(nachrichten_ref_nummer, "SLGA")
+          super(nachrichten_ref_nummer, "SLGA", message_version: message_version)
 
           self.<< fkt_segment
           self.<< rec_segment

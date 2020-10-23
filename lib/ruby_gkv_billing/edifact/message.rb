@@ -9,10 +9,12 @@ module RubyGkvBilling
     class Message
       #nachrichten_ref_nummer: fortlaufende Nummer der UNH-segmente
       #zwischen UNB und UNZ
-      def initialize(nachrichten_ref_nummer, nachricht_kennung, segments: [])
+      def initialize(nachrichten_ref_nummer, nachricht_kennung, segments: [], message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION)
         @segments = segments
         self.nachrichten_ref_nummer = nachrichten_ref_nummer
         @nachricht_kennung = nachricht_kennung.to_s[0..3]
+
+        @message_version = message_version
       end
 
       def nachrichten_ref_nummer=(value)
@@ -33,7 +35,7 @@ module RubyGkvBilling
         header_segment.add_splitted_element(
           [
             @nachricht_kennung,
-            RubyGkvBilling::Edifact::MESSAGE_VERSION,
+            @message_version,
             0,
             0
           ]
