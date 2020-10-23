@@ -56,7 +56,8 @@ module RubyGkvBilling
               genehmigungskennzeichen: nil,
               genehmigungsart: nil,
               datum_genehmigung: Time.now,
-              message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION
+              message_version: RubyGkvBilling::Edifact::MESSAGE_VERSION,
+              pauschale_korrektur: nil
             )
 
             super(
@@ -128,6 +129,8 @@ module RubyGkvBilling
             @forderung_gesetzlich = forderung_gesetzlich
             @forderung_prozentual = forderung_prozentual
             @forderung_pauschal = forderung_pauschal
+
+            @pauschale_korrektur = pauschale_korrektur
 
             @ehes = []
           end
@@ -276,6 +279,10 @@ module RubyGkvBilling
             bes_segment.add_float(@ges_gesetzliche_zuzahlung)
             bes_segment.add_float(@ges_prozentuale_zuzahlung)
             bes_segment.add_float(@pauschale_zuzahlung)
+
+            unless @message_version.to_s == '13'
+              bes_segment.add_float(@pauschale_korrektur)
+            end
 
             bes_segment
           end
