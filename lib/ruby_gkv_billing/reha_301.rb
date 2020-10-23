@@ -5,6 +5,20 @@ require 'ruby_gkv_billing/reha_301/xml'
 
 module RubyGkvBilling
   module Reha301
+    FEHLERCODES = {
+      "00000" => "positive Quittung, kein Fehler",
+      "00001" => "positive Quittung mit Hinweis",
+      "01000" => "Validierungsfehler aufgetreten",
+      "01001" => "Die Schema -Version ist ungültig oder nicht bekannt",
+      "01002" => "Die Fall-ID ist für den RV-Träger gedacht / Die Fall-ID ist für den KV-Träger gedacht",
+      "01003" => "Der Geschäftsvorfall ist nicht erlaubt",
+      "01004" => "Erstellungstag und Uhrzeit der Datei > Tag und Uhrzeit der Verarbeitung",
+      "01005" => "IK Absender der Datei nicht als Kommunikationspartner bekannt",
+      "01006" => "IK Empfänger der Datei nicht annehmende Stelle",
+      "01007" => "Nutzdatendatei nicht lesbar",
+      "02000" => "Fehler aus Fachverfahren"
+    }
+
     FALLARTEN = {
       "01" => "Aufnahme",
       "03" => "Antrag auf Verlängerung des Aufenthaltes",
