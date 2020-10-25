@@ -34,7 +34,7 @@ module RubyGkvBilling
           )
             #INV_SEGMENT
             @versicherten_nummer = versicherten_nummer
-            @versicherten_status = versicherten_status.to_s.rjust(5, "0")[0..4]
+            @versicherten_status = versicherten_status.to_s.ljust(5, "0")[0..4]
             @beleg_info = beleg_info
             @beleg_nummer = beleg_nummer
             @besondere_versorgungsform = besondere_versorgungsform

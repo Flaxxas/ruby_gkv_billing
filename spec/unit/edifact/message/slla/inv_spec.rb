@@ -26,7 +26,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Inv do
     "merkmal"
     ) }
 
-  it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
+  it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+18000+0+beleg_nr+besondere_versorgung'") }
 
   it { expect(subject.uri_segment.to_edifact).to eq("URI+123456789+sammel:einzel+20101010+belegnum'") }
 

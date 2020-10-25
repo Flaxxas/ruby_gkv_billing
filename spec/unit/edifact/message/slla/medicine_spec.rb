@@ -98,7 +98,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
 
   it { expect(subject.gzf_segment.to_edifact).to eq("GZF+567,43+43,00+765,46'") }
 
-  it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
+  it { expect(subject.inv_segment.to_edifact).to eq("INV+versicherten_nr+18000+0+beleg_nr+besondere_versorgung'") }
 
   it { expect(subject.uri_segment.to_edifact).to eq("URI+123456789+sammel:einzel+20200101+belegnum'") }
 
@@ -109,7 +109,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
   it { expect(subject.segments.count).to eq(11) }
 
   describe "in sequence" do
-    it { expect(subject.segments[0].to_edifact).to eq("INV+versicherten_nr+00018+0+beleg_nr+besondere_versorgung'") }
+    it { expect(subject.segments[0].to_edifact).to eq("INV+versicherten_nr+18000+0+beleg_nr+besondere_versorgung'") }
     it { expect(subject.segments[1].to_edifact).to eq("URI+123456789+sammel:einzel+20200101+belegnum'") }
     it { expect(subject.segments[2].to_edifact).to eq("NAD+vers_nachname+vers_vorname+20101009+vers_strasse+vers_plz+vers_ort+vers_kennzeichen'") }
     it { expect(subject.segments[3].to_edifact).to eq("IMG+2010+10+merkmal'") }
