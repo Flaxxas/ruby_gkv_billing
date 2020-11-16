@@ -1,5 +1,5 @@
 # https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/technische_anlagen_aktuell_4/Anhang_03_Anlage_1_TP5_20200408.pdf
-require 'edifact_tools'
+# require 'edifact_tools'
 
 module RubyGkvBilling
   class Provider
