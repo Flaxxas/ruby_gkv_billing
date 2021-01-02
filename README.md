@@ -1,3 +1,7 @@
+# UNMAINTAINED
+
+I've "inherited" this repo as this was just a fork of the original one, which got set to private when I opened the first PR there. I'll leave it public and might commit some changes here and there, but it isn't activaley maintained. Keep this in mind if you want to use it. Feel free to contribute :)
+
 # RubyGkvBilling
 
 ruby_gkv_billing is a library to generate *EDIFACT*-files for the purpose of [electonic billing with "Gesetzlichen Krankenkassen (GKV)"](https://www.gkv-datenaustausch.de/)
