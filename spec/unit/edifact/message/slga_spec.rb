@@ -66,7 +66,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slga do
   ) }
 
   it { expect(subject.to_edifact).to eq(
-    ["UNH+00123+SLGA:13:0:0'",
+    ["UNH+00123+SLGA:14:0:0'",
     "FKT+01+N+IK5430684+IK8234568+IK8643456+IK5924783'",
     "REC+sammel_nummer:001+20101009+0'",
     "UST+steuernummer+J'",
