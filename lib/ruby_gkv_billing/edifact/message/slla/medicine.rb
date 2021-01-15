@@ -37,6 +37,11 @@ module RubyGkvBilling
               kennzeichen_bvg,
               therapie_bericht,
               hausbesuch,
+              leitsymptomatik,
+              individuelle_leitsymptomatik,
+              dringlich,
+              bereich,
+              frequenz,
               #BES_SEGMENT
               ges_brutto,
               ges_gesetzliche_zuzahlung,
@@ -48,7 +53,7 @@ module RubyGkvBilling
               forderung_pauschal,
               #OPTIONAL ZHE_SEGMENT
               behandlungsbeginn: Time.now,
-              indikationsschluessel: "9999",
+              diagnosegruppe: "9999",
               arztnummer: "999999999",
               betriebsstaetten_nr: "999999999",
               verordnungs_datum: Time.now,
@@ -101,7 +106,8 @@ module RubyGkvBilling
             end
             @verordnungs_datum = verordnungs_datum
             @zuzahlungskennzeichen = zuzahlungskennzeichen
-            @indikationsschluessel = indikationsschluessel
+            @diagnosegruppe = diagnosegruppe
+            @frequenz = frequenz
 
             @kennzeichen_verordnungsart =
               if kennzeichen_verordnungsart.to_s == ""
@@ -116,6 +122,10 @@ module RubyGkvBilling
             @behandlungsbeginn = behandlungsbeginn
             @therapie_bericht = therapie_bericht
             @hausbesuch = hausbesuch
+            @leitsymptomatik = leitsymptomatik
+            @individuelle_leitsymptomatik = individuelle_leitsymptomatik
+            @dringlich = dringlich
+            @bereich = bereich
             #SKZ_SEGMENT
             @genehmigungskennzeichen = genehmigungskennzeichen
             @datum_genehmigung = datum_genehmigung
@@ -246,7 +256,7 @@ module RubyGkvBilling
             zhe_segment << @arztnummer
             zhe_segment << @verordnungs_datum.strftime("%Y%m%d")
             zhe_segment << @zuzahlungskennzeichen
-            zhe_segment << @indikationsschluessel
+            zhe_segment << @diagnosegruppe
             zhe_segment << @kennzeichen_verordnungsart
             zhe_segment << @kennzeichen_verordnungsbesonderheiten
             zhe_segment << @unfallkennzeichen
@@ -258,6 +268,11 @@ module RubyGkvBilling
             end
             zhe_segment << @therapie_bericht
             zhe_segment << @hausbesuch
+            zhe_segment << @leitsymptomatik
+            zhe_segment << @individuelle_leitsymptomatik
+            zhe_segment << @dringlich
+            zhe_segment << @bereich
+            zhe_segment << @frequenz
 
             zhe_segment
           end
