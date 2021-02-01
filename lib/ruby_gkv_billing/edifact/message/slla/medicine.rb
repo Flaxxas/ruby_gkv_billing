@@ -295,10 +295,6 @@ module RubyGkvBilling
             bes_segment.add_float(@ges_prozentuale_zuzahlung)
             bes_segment.add_float(@pauschale_zuzahlung)
 
-            unless @message_version.to_s == '13'
-              bes_segment.add_float(@pauschale_korrektur)
-            end
-
             bes_segment
           end
 
