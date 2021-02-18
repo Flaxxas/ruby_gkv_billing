@@ -41,7 +41,6 @@ module RubyGkvBilling
               individuelle_leitsymptomatik,
               dringlich,
               bereich,
-              frequenz,
               #BES_SEGMENT
               ges_brutto,
               ges_gesetzliche_zuzahlung,
@@ -57,6 +56,7 @@ module RubyGkvBilling
               arztnummer: "999999999",
               betriebsstaetten_nr: "999999999",
               verordnungs_datum: Time.now,
+              frequenz: nil,
               #OPTIONAL SKZ_SEGMENT
               genehmigungskennzeichen: nil,
               genehmigungsart: nil,
@@ -272,7 +272,9 @@ module RubyGkvBilling
             zhe_segment << @individuelle_leitsymptomatik
             zhe_segment << @dringlich
             zhe_segment << @bereich
-            zhe_segment << @frequenz
+            if @frequenz != nil
+              zhe_segment << @frequenz
+            end
 
             zhe_segment
           end

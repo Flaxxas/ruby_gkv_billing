@@ -31,7 +31,6 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
     "1",
     "1",
     "1",
-    "1",
     #BES_SEGMENT
     "123,47",
     "432.39",
@@ -44,6 +43,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla::Medicine do
     #OPTIONAL ZHE_SEGMENT
     behandlungsbeginn: Time.new(2010,10,10),
     verordnungs_datum: Time.new(2011,11,11),
+    frequenz: "1",
     #OPTIONAL SKZ_SEGMENT
     genehmigungskennzeichen: "4567643",
     genehmigungsart: "01",
