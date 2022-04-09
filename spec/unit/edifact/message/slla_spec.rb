@@ -52,7 +52,7 @@ RSpec.describe RubyGkvBilling::Edifact::Message::Slla do
   ) }
 
   it { expect(subject.to_edifact).to eq(
-    ["UNH+00123+SLLA:15:0:0'",
+    ["UNH+00123+SLLA:16:0:0'",
     "FKT+01++IK5430684+IK8234568+IK8643456+'",
     "REC+sammel_nummer:001+20101010+0'",
     "INV+versicherten_nr+18000+0+beleg_nr+besondere_versorgung'",
