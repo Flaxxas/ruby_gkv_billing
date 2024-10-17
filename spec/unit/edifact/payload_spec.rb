@@ -33,7 +33,7 @@ RSpec.describe RubyGkvBilling::Edifact::Payload do
 
   it {
     expect(subject.to_edifact).to eq(["UNB+UNOC:3+sender_file+receiver_file+20101010:1212+00123+service_area+00456+0'",
-                                      "UNH+00001+SLGA:19:0:0'",
+                                      "UNH+00001+SLGA:20:0:0'",
                                       "UNB+Test 123+-3,14+D?'Angelo+Test??'",
                                       "UNT+000003+00001'",
                                       "UNZ+000001+00123'"].join("\n"))

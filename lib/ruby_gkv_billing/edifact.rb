@@ -12,7 +12,7 @@ module RubyGkvBilling
     REPLACE_CHAR = '?'
     SEGMENT_END_CHAR= "'"
 
-    MESSAGE_VERSION = 19
+    MESSAGE_VERSION = 20
     VERSION = 3
     ENCODING = 'UNOC'
     SEGMENT_JOIN = "\n"
