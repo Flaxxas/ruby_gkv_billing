@@ -64,7 +64,7 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     end
 
     it {
-      expect(File.exists?(file)).to be_truthy
+      expect(File.exist?(file)).to be_truthy
     }
 
     it {
@@ -76,7 +76,7 @@ RSpec.describe RubyGkvBilling::InstructionFile do
     }
 
     after do
-      File.delete(file) if File.exists?(file)
+      File.delete(file) if File.exist?(file)
     end
   end
 
